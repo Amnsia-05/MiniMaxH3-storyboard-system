@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>从这里开始 · H3 漫剧制作流程教程 v3</title>
+<style>
+  :root{
+    --bg:#0F0E0E;
+    --card:rgba(255,255,255,0.045);
+    --card2:rgba(255,255,255,0.07);
+    --line:rgba(255,255,255,0.12);
+    --line2:rgba(255,255,255,0.22);
+    --t1:#F2F2F2;
+    --t2:#A8A8A8;
+    --t3:#7A7A7A;
+    --gold:#E8C268;
+    --green:#7FC99A;
+    --red:#E8836B;
+    --blue:#7FA8D9;
+    --mono:"Space Mono","JetBrains Mono","Consolas",monospace;
+    --sans:"Inter","Noto Sans SC",system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--t1);font-family:var(--sans);
+       -webkit-font-smoothing:antialiased;line-height:1.65}
+
+  .topbar{position:sticky;top:0;z-index:50;background:rgba(15,14,14,.94);
+          backdrop-filter:blur(12px);border-bottom:1px solid var(--line);
+          padding:12px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .brand{font-size:13px;font-weight:600;letter-spacing:.02em;white-space:nowrap}
+  .brand b{color:var(--gold)}
+  .chips{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+  .chip{font-size:11px;font-family:var(--mono);color:var(--t2);
+        border:1px solid var(--line);background:transparent;padding:3px 9px;
+        cursor:pointer;text-decoration:none;white-space:nowrap;transition:.15s}
+  .chip:hover{color:var(--t1);border-color:var(--line2)}
+  .chip.on{color:var(--gold);border-color:rgba(232,194,104,.5);background:rgba(232,194,104,.1)}
+
+  .sp{display:flex;align-items:flex-start;gap:0}
+  aside{position:sticky;top:52px;height:calc(100vh - 52px);overflow-y:auto;
+        flex:0 0 232px;border-right:1px solid var(--line);padding:22px 0 60px}
+  aside .grp{padding:14px 18px 5px;font-size:10px;letter-spacing:.14em;color:var(--t3);font-weight:600}
+  aside a{display:block;padding:5px 18px;font-size:12.5px;color:var(--t2);
+          text-decoration:none;border-left:2px solid transparent;transition:.12s}
+  aside a:hover{color:var(--t1);background:rgba(255,255,255,.03)}
+  aside a.on{color:var(--gold);border-left-color:var(--gold);background:rgba(232,194,104,.06)}
+  aside a .n{font-family:var(--mono);font-size:10px;color:var(--t3);margin-right:6px}
+  aside a.on .n{color:var(--gold)}
+
+  main{flex:1;min-width:0;padding:0 44px 120px;max-width:1080px}
+  .lead{padding:56px 0 28px;border-bottom:1px solid var(--line);margin-bottom:40px}
+  h1{font-size:36px;font-weight:700;letter-spacing:-.01em;margin-bottom:14px;line-height:1.25}
+  .sub{font-size:15px;color:var(--t2);max-width:660px}
+  .meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+  .meta span{font-size:11px;font-family:var(--mono);color:var(--t2);
+             border:1px solid var(--line);padding:4px 10px}
+
+  h2{font-size:24px;font-weight:650;margin:64px 0 6px;letter-spacing:-.005em;scroll-margin-top:70px}
+  h2 .num{font-family:var(--mono);font-size:13px;color:var(--gold);margin-right:10px;
+          vertical-align:middle;opacity:.9}
+  h3{font-size:16.5px;font-weight:620;margin:32px 0 10px;scroll-margin-top:70px}
+  h4{font-size:14px;font-weight:600;margin:20px 0 8px;color:var(--t1)}
+  p{margin:10px 0;color:var(--t1);font-size:14px}
+  .desc{font-size:13.5px;color:var(--t2);margin-bottom:20px}
+  ul,ol{margin:10px 0 10px 20px}
+  li{font-size:13.5px;color:var(--t1);margin:5px 0;line-height:1.6}
+  li b{color:var(--gold);font-weight:600}
+  code{font-family:var(--mono);font-size:12.5px;background:rgba(255,255,255,.08);
+       padding:2px 6px;border-radius:3px;color:#E4D9C0}
+
+  table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13px}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:11px;letter-spacing:.1em;color:var(--t3);font-weight:600;
+     border-bottom:1px solid var(--line2);background:rgba(255,255,255,.02)}
+  td{color:var(--t1)}
+  td.c,th.c{font-family:var(--mono);font-size:12px;text-align:center}
+
+  .card{background:var(--card);border:1px solid var(--line);padding:20px 22px;margin:16px 0}
+  .card.hi{border-color:rgba(232,194,104,.4);background:rgba(232,194,104,.07)}
+  .card.warn{border-color:rgba(232,131,107,.35);background:rgba(232,131,107,.06)}
+  .card.danger{border-color:rgba(232,131,107,.55);background:rgba(232,131,107,.1)}
+  .card.ok{border-color:rgba(127,201,154,.35);background:rgba(127,201,154,.06)}
+
+  .note{font-size:12.5px;color:var(--t2);background:rgba(255,255,255,.035);
+        border-left:2px solid var(--line2);padding:10px 14px;margin:12px 0}
+  .note b{color:var(--t1)}
+  .note.gold{border-left-color:var(--gold)}
+  .note.red{border-left-color:var(--red)}
+  .note.green{border-left-color:var(--green)}
+
+  .kv{display:grid;grid-template-columns:96px 1fr;gap:2px 16px;margin:12px 0;font-size:13.5px}
+  .kv dt{color:var(--t3);font-size:12px;padding-top:2px}
+  .kv dd{color:var(--t1)}
+
+  .step{border:1px solid var(--line);background:var(--card);margin:22px 0}
+  .step .bar{display:flex;align-items:center;gap:12px;padding:14px 20px;
+             border-bottom:1px solid var(--line);background:rgba(255,255,255,.025);flex-wrap:wrap}
+  .step .n{font-family:var(--mono);font-size:11px;color:var(--gold);
+           border:1px solid rgba(232,194,104,.4);background:rgba(232,194,104,.12);
+           padding:3px 9px;white-space:nowrap}
+  .step .t{font-size:16px;font-weight:620}
+  .step .tag{font-size:11px;padding:3px 9px;border:1px solid;white-space:nowrap}
+  .tag.gold{color:var(--gold);border-color:rgba(232,194,104,.4)}
+  .tag.green{color:var(--green);border-color:rgba(127,201,154,.4)}
+  .tag.red{color:var(--red);border-color:rgba(232,131,107,.45)}
+  .tag.blue{color:var(--blue);border-color:rgba(127,168,217,.4)}
+  .step .body{padding:18px 22px 22px}
+
+  .fields{display:grid;grid-template-columns:repeat(2,1fr);gap:0 24px;margin:14px 0}
+  @media(max-width:900px){.fields{grid-template-columns:1fr}}
+  .field{border-top:1px solid var(--line);padding:12px 0}
+  .field .h{font-size:10.5px;letter-spacing:.12em;color:var(--t3);font-weight:600;margin-bottom:6px}
+
+  .checks{margin:14px 0}
+  .checks label{display:flex;gap:10px;align-items:flex-start;font-size:13px;
+                color:var(--t1);padding:5px 0;cursor:pointer}
+  .checks input{margin-top:5px;accent-color:var(--gold);flex:0 0 auto}
+  .checks label.done{color:var(--t3);text-decoration:line-through}
+
+  .codewrap{position:relative;margin:14px 0}
+  pre{background:rgba(0,0,0,.42);border:1px solid var(--line);padding:16px 18px;
+      font-family:var(--mono);font-size:12px;line-height:1.75;color:#DCDCDC;
+      overflow-x:auto;white-space:pre-wrap;word-break:break-word}
+  .copy{position:absolute;top:8px;right:8px;font-size:10.5px;font-family:var(--sans);
+        color:var(--t2);background:rgba(15,14,14,.9);border:1px solid var(--line2);
+        padding:3px 10px;cursor:pointer;opacity:0;transition:.15s;z-index:2}
+  .codewrap:hover .copy{opacity:1}
+  .copy:hover{color:var(--t1);border-color:var(--t1)}
+  .copy.ok{color:var(--green);border-color:var(--green)}
+
+  .flow{display:flex;gap:8px;margin:22px 0;flex-wrap:wrap}
+  .flow .ph{flex:1;min-width:130px;border:1px solid var(--line);background:var(--card);
+            padding:14px 16px}
+  .flow .ph .pn{font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:.1em}
+  .flow .ph .pt{font-size:14px;font-weight:600;margin:6px 0 4px}
+  .flow .ph .pd{font-size:11.5px;color:var(--t2);line-height:1.5}
+  .flow .ph.new{border-color:rgba(127,201,154,.45);background:rgba(127,201,154,.07)}
+  .flow .ph.new .pn{color:var(--green)}
+
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0}
+  @media(max-width:900px){.twocol{grid-template-columns:1fr}}
+
+  .topbtn{position:fixed;right:22px;bottom:22px;width:40px;height:40px;
+          border:1px solid var(--line2);background:rgba(15,14,14,.9);color:var(--t2);
+          cursor:pointer;font-size:16px;display:none;align-items:center;
+          justify-content:center;z-index:60}
+  .topbtn:hover{color:var(--t1);border-color:var(--t1)}
+
+  footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--line);
+         font-size:12px;color:var(--t3)}
+
+  @media(max-width:860px){
+    aside{display:none}
+    main{padding:0 20px 90px}
+    h1{font-size:27px}
+    h2{font-size:20px}
+    .topbar{padding:10px 14px}
+    .chips{display:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">H3 漫剧 · <b>从这里开始</b> · 六步流程 v3</div>
+  <div class="chips" id="chips"></div>
+</div>
+
+<div class="sp">
+<aside id="side">
+  <div class="grp">开始之前</div>
+  <a href="#contract"><span class="n">00</span>流程合约（先读）</a>
+  <div class="grp">六步流程</div>
+  <a href="#s1"><span class="n">01</span>Step1 · 定画风</a>
+  <a href="#s2"><span class="n">02</span>Step2 · 拆大纲</a>
+  <a href="#s3"><span class="n">03</span>Step3 · 长短镜头判定</a>
+  <a href="#s4"><span class="n">04</span>Step4 · 分镜编写</a>
+  <a href="#s5"><span class="n">05</span>Step5 · 提示词 5000–7000</a>
+  <a href="#s6"><span class="n">06</span>Step6 · skill 映射</a>
+  <div class="grp">参考</div>
+  <a href="#hard"><span class="n">07</span>硬参数速查</a>
+  <a href="#check"><span class="n">08</span>出片前检查</a>
+  <a href="#changes"><span class="n">09</span>v3 变更记录</a>
+</aside>
+
+<main>
+
+<div class="lead">
+  <h1>从小说到 H3 成片：六步流程</h1>
+  <p class="sub">这一版是按实际拍摄反馈重写的：固定 3 镜已废除，换成「长镜头叙述 + 短镜头快切」双模式；
+  提示词从"省着写"改成"填满 5000–7000 字符"；全本小说只拆大纲，章节内容逐章喂、逐章细做。</p>
+  <div class="meta">
+    <span>六步</span>
+    <span>画风已锁定：3D 次世代写实</span>
+    <span>每条提示词 5000–7000 字符</span>
+    <span>2026-08-30 v3</span>
+  </div>
+</div>
+
+<!-- ══════════ 00 合约 ══════════ -->
+<h2 id="contract"><span class="num">00</span>流程合约（开工前先读，三条不许破）</h2>
+<p class="desc">这套流程的核心是「谁在什么时机给什么」。AI 与你的分工用合约锁死，避免一上来把全本脚本写完、白耗字数还丢失细节。</p>
+
+<div class="card hi">
+  <h4 style="margin-top:0">合约一：全本进来，只出大纲</h4>
+  <p style="margin:0 0 6px">你丢完整的小说给 AI 时，AI <b>只做 Step 2（拆大纲）</b>：集级大纲 + 段级钩子 + 角色表 + 场景表。
+  <b>不出分镜、不出提示词、不写台词。</b></p>
+  <p style="margin:0;font-size:13px;color:var(--t2)">理由：大纲阶段对节奏的判断是全局的，脚本阶段对细节的发挥是局部的。
+  混在一起做，要么细节被压缩比牺牲（v2 版踩过的坑），要么全局节奏被局部细节带偏。</p>
+</div>
+
+<div class="card hi">
+  <h4 style="margin-top:0">合约二：章节内容逐章喂，逐章细做</h4>
+  <p style="margin:0">你按大纲指定的顺序，<b>一次给一章（或一集对应的原文）</b>；AI 对这一章做 Step 3–5：
+  长短镜头判定 → 分镜 → 5000–7000 字符的 H3 提示词。做完一章验收一章，再进下一章。</p>
+</div>
+
+<div class="card hi">
+  <h4 style="margin-top:0">合约三：每条 15s 提示词 5000–7000 字符</h4>
+  <p style="margin:0">字符口径：<b>每条 15 秒 clip 的提示词独立计数，含空格与换行</b>（Python <code>len()</code> 口径）。
+  低于 5000 = 细节不够，要补；高于 7000 = 超上限，必砍。这件事由 <a href="#s5" style="color:var(--gold)">Step 5</a> 的预算表保证。</p>
+</div>
+
+<div class="flow">
+  <div class="ph">
+    <div class="pn">STEP 1</div>
+    <div class="pt">定画风</div>
+    <div class="pd">全剧一次定死<br>产出：画风串 + 负面串</div>
+  </div>
+  <div class="ph">
+    <div class="pn">STEP 2</div>
+    <div class="pt">拆大纲</div>
+    <div class="pd">全本 → 只出大纲<br>产出：集级 / 段级 / 角色场景表</div>
+  </div>
+  <div class="ph new">
+    <div class="pn">STEP 3</div>
+    <div class="pt">长短镜头判定</div>
+    <div class="pd">逐章内容进来<br>产出：事件清单（长镜 / 短镜）</div>
+  </div>
+  <div class="ph new">
+    <div class="pn">STEP 4</div>
+    <div class="pt">分镜编写</div>
+    <div class="pd">双模式 + 硬切<br>产出：分镜表（含时间戳）</div>
+  </div>
+  <div class="ph">
+    <div class="pn">STEP 5</div>
+    <div class="pt">H3 提示词</div>
+    <div class="pd">5000–7000 字符 / 条<br>产出：可提交提示词 + 中文对照</div>
+  </div>
+  <div class="ph">
+    <div class="pn">STEP 6</div>
+    <div class="pt">检查出片</div>
+    <div class="pd">skill 全家桶按需加载<br>产出：成片</div>
+  </div>
+</div>
+
+<!-- ══════════ 01 Step1 ══════════ -->
+<h2 id="s1"><span class="num">01</span>Step 1 · 定画风（全剧一次定死）</h2>
+<p class="desc">画风决定参考图提示词、H3 视觉描述、角色一致性。<b>漏了会在铺开后整批返工</b>。本剧已确认，写死如下，全剧不换；换画风 = 重新出全套参考图。</p>
+
+<div class="step">
+  <div class="bar">
+    <span class="n">已锁定</span>
+    <span class="t">3D 次世代写实动漫</span>
+    <span class="tag green">2026-08-30 确认</span>
+  </div>
+  <div class="body">
+    <h4>画风串（逐字复用，一字不改）</h4>
+    <div class="codewrap"><button class="copy">复制</button>
+<pre>next-gen 3D anime rendering, thick painted CG texture, delicate material rendering, visible brush strokes, soft volumetric light, cinematic depth of field, ray tracing, rim lighting, 8K, ultra detailed, clear readable silhouette, limited palette of three colours, hand-painted feel</pre>
+    </div>
+
+    <h4>负面补充（塑料感三件套——本画风最高发翻车）</h4>
+    <div class="codewrap"><button class="copy">复制</button>
+<pre>plastic texture, 3d render look, excessive bloom
+【正向补丁】hand-painted feel（已含在画风串末尾）</pre>
+    </div>
+
+    <h4>使用规则</h4>
+    <ul>
+      <li>画风串放在<b>每条提示词第一行</b>，与参考图生图提示词用<b>同一套词</b>——图与文字说同一件事</li>
+      <li>换题材只换服装 / 场景 token，画风串<b>一个字不改</b></li>
+      <li>光位串独立于画风串，按场景写，同一场景内跨 clip 原样复述（匹配剪辑锚点）</li>
+    </ul>
+    <div class="checks">
+      <label><input type="checkbox"> 画风串已逐字写进锁定块，全剧不换</label>
+      <label><input type="checkbox"> 参考图生图提示词与画风串用词一致</label>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ 02 Step2 ══════════ -->
+<h2 id="s2"><span class="num">02</span>Step 2 · 拆大纲（全本进来，只出大纲）</h2>
+<p class="desc">对应合约一。这一步的产出是后面所有章节工作的<b>施工图</b>，但不做任何脚本级细节。</p>
+
+<div class="step">
+  <div class="bar">
+    <span class="n">做什么</span>
+    <span class="t">通读全本 → 四张表</span>
+    <span class="tag gold">s h3-novel-split</span>
+  </div>
+  <div class="body">
+    <h4>输入 / 输出</h4>
+    <div class="fields">
+      <div class="field">
+        <div class="h">输入</div>
+        <p style="font-size:13px;margin:0">完整小说全文。AI 通读一遍，标记情节线、人物关系、爽点 / 情绪转折位置。</p>
+      </div>
+      <div class="field">
+        <div class="h">明确不做</div>
+        <p style="font-size:13px;margin:0"><span style="color:var(--red)">分镜、提示词、台词、运镜——全都不做。</span>做了就是违约，返工。</p>
+      </div>
+    </div>
+
+    <h4>产出：四张表</h4>
+    <table>
+      <tr><th style="width:20%">表</th><th>字段</th></tr>
+      <tr><td><b>集级大纲</b></td><td>集号 / 叙事块数 / 集长（= 块数 × 15 秒）/ 本集核心冲突 / 卡点类型 / 出场人物</td></tr>
+      <tr><td><b>段级钩子</b></td><td>每集内逐段（15s 一段）列一行：段落任务 + 结尾钩子（动作 / 台词 / 揭示 / 视线 / 倒计时五选一）</td></tr>
+      <tr><td><b>角色表</b></td><td>主角 / 配角 / 路人分层；每人登记：身份、可辨识独有特征、固定穿搭、行为锚点（细节留给章节工作）</td></tr>
+      <tr><td><b>场景表</b></td><td>场景名 / 光位描述 / 出场集数（出图后立刻把光位记回本表——色彩锚点唯一来源）</td></tr>
+    </table>
+
+    <div class="note gold">
+      <b>集长算法：叙事块数 × 15。</b>不按字数硬套。
+      例：原文 12 个叙事块 → 180 秒/集。压缩比推断值误差可达 ±50%，必须先做样片实测再重排全剧。
+    </div>
+
+    <div class="note">
+      <b>大纲里同时排好「逐章喂」的顺序：</b>按叙事价值排序（最有戏的章节先做样片），
+      每章标注对应的集号 / 段号，你按单喂即可。
+    </div>
+
+    <h4>校验点</h4>
+    <div class="checks">
+      <label><input type="checkbox"> 集长 = 叙事块数 × 15，能被 15 整除</label>
+      <label><input type="checkbox"> 每段有结尾钩子，P1 前三秒有钩子</label>
+      <label><input type="checkbox"> 主角有一项可辨识独有特征，无"英俊 / 漂亮"抽象词</label>
+      <label><input type="checkbox"> 已排好逐章喂的顺序与对应关系</label>
+      <label><input type="checkbox"> 没有偷偷写任何分镜或台词</label>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ 03 Step3 ══════════ -->
+<h2 id="s3"><span class="num">03</span>Step 3 · 长短镜头判定（逐章内容进来后第一步）</h2>
+<p class="desc">你喂来一章内容后，AI 先把它切成「事件清单」，逐个事件判定用长镜头还是短镜头。<b>这一步定错，Step 4 全白做。</b></p>
+
+<div class="step">
+  <div class="bar">
+    <span class="n">做什么</span>
+    <span class="t">事件清单 + 长短判定</span>
+    <span class="tag gold">s h3-action-body</span>
+  </div>
+  <div class="body">
+
+    <h4>一句话判据</h4>
+    <div class="card hi">
+      <p style="margin:0 0 8px;font-size:14px"><b>这个动作的「过程」是不是看点？</b></p>
+      <p style="margin:0;font-size:13px;color:var(--t2)">
+      是 → <b>长镜头事件</b>：过程即剧情（怎么救的、怎么对峙的、怎么拉扯的），专注动作细节分解，用长镜头叙述。<br>
+      不是，只是过场 → <b>短镜头动作</b>：1–2 秒交代完，绝不占长镜头。</p>
+    </div>
+
+    <h4>判定表</h4>
+    <table>
+      <tr><th style="width:14%">类型</th><th style="width:34%">典型例子</th><th>拍法</th></tr>
+      <tr><td><b>长镜头事件</b></td><td>海里救人（游近→托起→拖拽→撞礁）、追逐、对峙拉扯、长时间劳作</td>
+          <td>长镜头叙述；动作按节拍分解（<code>then</code> 串联，每镜 ≤3 拍，动作有终点）；一件事 15s 讲不完就 2×15s</td></tr>
+      <tr><td><b>短镜头动作</b></td><td>开门、开窗、推门进来、站起来、坐下、转头、拿起杯子</td>
+          <td><b>1–2 秒短镜头</b>（≥1.5s 硬下限），静态机位或微推，动作单一有终点；密集时用硬切串联（见 Step 4 模式 B）</td></tr>
+      <tr><td><b>插片特写</b></td><td>手部细节、面部微表情、关键道具</td>
+          <td>2–3 秒，插进长镜头之间或之中，防止画面枯燥</td></tr>
+    </table>
+
+    <div class="note">
+      <b>边界情况怎么判：</b>「起身走向门口开门离开」——起身 / 走 / 开门三个都是短动作，
+      合计 4–6 秒，可以做成 3 个短镜硬切；但如果「走」的过程中有戏（犹豫、回头、偷听），
+      「走」就升格为长镜头事件。判定跟着<b>戏剧任务</b>走，不跟着动作字面走。
+    </div>
+
+    <h4>长镜头的硬规矩（动作细节怎么写才不崩）</h4>
+    <ul>
+      <li>动作按<b>节拍</b>写：<code>First ... then ... finally ...</code>，每镜 ≤3 拍</li>
+      <li>每个动作必须有<b>终点</b>（<code>then holds / settles against / freezes on</code>）</li>
+      <li>跟拍类运镜 <b>≤6 秒</b>且背景要简单；push-in 的落点设计成特写（免费的高级感）</li>
+      <li>长镜头里的人物状态要写<b>不变量</b>（如「昏迷瘫软、双腿拖行不踩地」），防止模型自作主张</li>
+    </ul>
+
+    <h4>校验点</h4>
+    <div class="checks">
+      <label><input type="checkbox"> 章节内容已切成事件清单，每个事件标了长镜 / 短镜 / 插片</label>
+      <label><input type="checkbox"> 长镜头事件都写了节拍分解，每个动作有终点</label>
+      <label><input type="checkbox"> 短镜头动作没有混进长镜头里灌时长</label>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ 04 Step4 ══════════ -->
+<h2 id="s4"><span class="num">04</span>Step 4 · 分镜编写（双模式 + 硬切）</h2>
+<p class="desc">v3 的核心改动：<b>固定 3 镜已废除</b>。按 Step 3 的判定结果选模式——长镜头事件用模式 A / C，短动作密集段用模式 B。</p>
+
+<div class="step">
+  <div class="bar">
+    <span class="n">做什么</span>
+    <span class="t">三选一：A 叙事长段 / B 快切段 / C 长镜插特写</span>
+    <span class="tag gold">s h3-camera-edit</span>
+  </div>
+  <div class="body">
+
+    <h3>模式 A · 叙事长段（一件事讲不完 → 2×15s）</h3>
+    <p style="font-size:13.5px;color:var(--t2)">适用：长镜头事件，15 秒装不下（如完整的海里救人）。两条 clip 拼成一件事，<b>动作匹配衔接</b>。</p>
+    <table>
+      <tr><th style="width:14%">Clip</th><th style="width:22%">内容</th><th>衔接要点</th></tr>
+      <tr><td><b>Clip 1</b></td><td>氛围铺垫短镜（2–4s，可无人空镜）+ 主长镜（11–12s，<b>结尾定格在关键接触帧</b>）</td>
+          <td rowspan="2">Clip 1 末帧 = Clip 2 首帧（同一姿态、同一手、同一物）；三锚点对齐：同色温 / 同运动方向 / 同构图重心，用 <code>the same ...</code> 正向复述</td></tr>
+      <tr><td><b>Clip 2</b></td><td>从同一接触帧续起：反应 / 后果 / 收尾（10–15s）</td></tr>
+    </table>
+    <div class="note gold">
+      <b>实例（海里救人，已实拍验证）：</b>Clip 1 = 浪拍黑礁空镜 4s + 蒋筱筱游泳托人主长镜 11s（末帧定格右臂撞礁接触帧）；
+      Clip 2 = 撞后伤口特写推近 8s + 僵住不松手收尾 7s。两 clip 之间动作匹配，观众读起来是连续的 30 秒。
+    </div>
+
+    <h3>模式 B · 快切段（短动作密集 → 5–7 镜硬切）</h3>
+    <p style="font-size:13.5px;color:var(--t2)">适用：开门、开窗、推门进来、站起、坐下这类 1–2 秒短动作连着来。<b>15 秒做 5–7 个短镜</b>，特殊运镜 + 硬切。</p>
+    <table>
+      <tr><th style="width:30%">15s 切法</th><th class="c">镜数</th><th>适用</th></tr>
+      <tr><td><code>3 + 3 + 3 + 3 + 3</code></td><td class="c">5</td><td>每个短动作带一点运镜（推 / 摇）</td></tr>
+      <tr><td><code>2.5 × 6</code></td><td class="c">6</td><td>均匀快切，节奏最稳</td></tr>
+      <tr><td><code>2 + 2 + 2 + 2 + 2 + 2 + 3</code></td><td class="c">7</td><td>最密；最后一镜 3s 留给收尾定格</td></tr>
+    </table>
+    <ul>
+      <li>每镜 <b>≥1.5s 硬下限</b>，设计值 2–3s；承载信息镜 ≥3s</li>
+      <li>切动词：<code>the camera cuts to</code> / <code>the shot cuts to</code> 等，<b>默认硬切</b>，不做溶解</li>
+      <li><b>每次切换必须引入新信息</b>（主体 / 空间 / 状态 / 视角至少变一项）；只是角度微调 → 用运镜，别切</li>
+      <li>快切段每镜动作必须<b>单一</b>——镜内只发生一件事，别把两个动作塞进 2 秒</li>
+      <li>运镜可以每镜换（这正是"特殊运镜效果"的用法）：推近开门的手 → 切 → 摇过窗 → 切 → 跟人进门</li>
+    </ul>
+    <div class="note green">
+      <b>快切段的一致性红利：</b>5–7 镜在<b>同一次请求</b>内生成，人物一致性由同请求保证，
+      比拆成多条跨请求生成稳得多。快切段的合法性正来自于此。
+    </div>
+
+    <h3>模式 C · 长镜插特写（防止长镜头枯燥）</h3>
+    <p style="font-size:13.5px;color:var(--t2)">适用：长镜头事件，但过程偏长、需要节奏变化。主长镜 + 1–2 个 2–3s 插片特写。</p>
+    <table>
+      <tr><th style="width:36%">15s 切法</th><th>说明</th></tr>
+      <tr><td><code>主长镜 11s + 插特写 2s + 插特写 2s</code></td><td>特写插在动作节拍之间（手部 / 表情 / 道具），切进切出都锚在动作上</td></tr>
+      <tr><td><code>主长镜 10s + 插特写 5s（push-in 落点即特写）</code></td><td>或者不切，直接在长镜内用 push-in 把落点推成特写——零剪辑成本拿特写</td></tr>
+    </table>
+
+    <h3>模式选择决策</h3>
+    <div class="codewrap"><button class="copy">复制</button>
+<pre>Step 3 的事件清单里——
+├─ 有 1 个长镜头事件，15s 装不下？        → 模式 A（2×15s）
+├─ 有 1 个长镜头事件，15s 装得下但偏长？  → 模式 C（长镜 + 插特写）
+├─ 全是短动作、没有长事件？               → 模式 B（5–7 镜快切）
+└─ 长事件 + 周围一堆短动作？              → 混合：A 或 C 为主，
+   短动作压成 1–2 个短镜塞在开头 / 结尾</pre>
+    </div>
+
+    <h4>时间戳与切镜红线（所有模式通用）</h4>
+    <ul>
+      <li>第一个镜头<b>不加时间戳</b>；后续镜头 <code>At 00:SS.mmm</code> 三位小数，严格递增且落在 15s 内</li>
+      <li>每镜一个主运镜（官方术语 + 幅度 + 速度），运镜句前置；一镜最多 2 个运镜</li>
+      <li>时长必须落在 <b>4–15 秒整数</b>（单次请求）；每镜 ≥1.5s</li>
+    </ul>
+
+    <h4>校验点</h4>
+    <div class="checks">
+      <label><input type="checkbox"> 每段选了明确的模式（A / B / C / 混合），依据来自 Step 3 判定</label>
+      <label><input type="checkbox"> 所有镜头时长 ≥1.5s，时间戳严格递增，总和 = 15s</label>
+      <label><input type="checkbox"> 快切段每镜动作单一，每次硬切引入新信息</label>
+      <label><input type="checkbox"> 模式 A 的两条 clip 三锚点齐备，接触帧对齐</label>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ 05 Step5 ══════════ -->
+<h2 id="s5"><span class="num">05</span>Step 5 · 写 H3 提示词（5000–7000 字符 / 条）</h2>
+<p class="desc">v3 第二个核心改动：不再省着写。<b>官方上限 7000 字符（按字符计，1 汉字 = 1 字符，不是 token）</b>；
+目标区间 <b>5000–7000</b>，省下的空间全部用来细致描写运镜、面部表情、动作分解、心理对白、人物对白、路人管理。</p>
+
+<div class="step">
+  <div class="bar">
+    <span class="n">做什么</span>
+    <span class="t">按预算表填满，不注水</span>
+    <span class="tag blue">6 个 skill 按需加载</span>
+  </div>
+  <div class="body">
+
+    <h4>字符预算分配表（单条 15s 提示词）</h4>
+    <table>
+      <tr><th>组成</th><th class="c">预算（字符）</th><th>写什么</th></tr>
+      <tr><td>画风串 + 光位串</td><td class="c">800–1000</td><td>画风串逐字复用；光位串写方向 / 色温 / 稳定性</td></tr>
+      <tr><td>人物身份串（逐字复述）</td><td class="c">800–1200</td><td>主角全套 + 配角简版；出现几次写几次，<b>不做跨句省略</b></td></tr>
+      <tr><td>运镜描写</td><td class="c">600–1000</td><td>每镜：类型 + 幅度 + 速度 + 目标 + <b>落点</b>（落点写成画面句，不只写术语）</td></tr>
+      <tr><td>动作分解细节</td><td class="c">800–1200</td><td>起点 → 路径 → 终点；节拍 <code>then</code> 串联；接触 / 发力 / 受力部位写明</td></tr>
+      <tr><td>面部表情</td><td class="c">500–800</td><td>写可见肌肉（眼睑 / 眉 / 唇角 / 呼吸），不写情绪名词</td></tr>
+      <tr><td>心理独白（画外音）</td><td class="c">300–500</td><td><code>says in an off-screen voiceover</code> + <code>while her lips remain completely closed</code> <b>成对出现</b></td></tr>
+      <tr><td>人物对白</td><td class="c">200–400</td><td><code>(S1)</code> + <code>&lt;d&gt;[Chinese] 台词&lt;/d&gt;</code>；说话人外观 + 音色写在标签外</td></tr>
+      <tr><td>路人管理</td><td class="c">300–500</td><td>数量写死（<code>exactly two figures</code>）+ 虚化处理 + 外观差异第一句拉开</td></tr>
+      <tr><td>声音层</td><td class="c">300–500</td><td>overall_soundscape 1–4 句 + non_diegetic_music 1–3 句或 N/A</td></tr>
+      <tr><td>Constraints (anti-failure)</td><td class="c">400–700</td><td>正向锚定收边（手部 / 人数 / 状态不变量 / 禁并发）</td></tr>
+      <tr><td><b>合计</b></td><td class="c"><b>≈ 5000–7800</b></td><td>超 7000 时按「后写的先砍」倒序回削，压进区间</td></tr>
+    </table>
+
+    <div class="note red">
+      <b>填满 ≠ 注水。反堆砌三规则：</b><br>
+      ① 每一句必须承载<b>新信息</b>——同义反复（把同一特征换个词再说一遍）不算细节，只占字符；<br>
+      ② <b>重复 ≠ 强调</b>——模型不吃重复，只吃冲突；同一句复制三遍不会更稳，还会稀释关键约束；<br>
+      ③ 宁可 5200 字符句句有效，不要 6900 字符里一半是水。<b>5000 是目标下限，不是硬凑指标。</b>
+    </div>
+
+    <div class="note gold">
+      <b>低于 5000 时的补写优先级（从最有杠杆的开始）：</b><br>
+      动作分解（把每个动作写出起点 / 路径 / 终点 / 受力）
+      → 面部表情（把每个情绪转折写成可见肌肉序列）
+      → 运镜落点（把每镜推 / 拉的终点写成具体画面）
+      → 环境反应（发丝 / 衣摆 / 水花 / 光影随动作的变化）
+      → 路人管理与状态不变量。
+      <b>禁止</b>靠复制粘贴锁定块凑字数。
+    </div>
+
+    <h4>字符计数（验收口径）</h4>
+    <div class="codewrap"><button class="copy">复制</button>
+<pre>Python:  len(prompt_text)        # 含空格与换行，即提交全文
+目标区间: 5000 ≤ len ≤ 7000
+低于 5000 → 按补写优先级加细节
+高于 7000 → 先砍 Constraints 里的冗余项，再砍与正向重复的描述</pre>
+    </div>
+
+    <h4>转官方格式（固定三字段）</h4>
+    <div class="codewrap"><button class="copy">复制</button>
+<pre>integrated_multimodal_description:  逐镜头展开视觉与剧情内音频（时间戳：首镜不加，后续 At 00:SS.mmm）
+overall_soundscape:                 环境音 / 物理动作音 / 画外音与对白
+non_diegetic_music:                 只有观众能听到的配乐（无配乐写 N/A）</pre>
+    </div>
+    <div class="note">
+      <b>判别：</b>画面里的人能听见 → soundscape；只有观众听得见 → non_diegetic_music。
+      音景里不得重复对白原文；配乐只写乐器 / 速度 / 节奏，不写抽象情绪词。
+    </div>
+
+    <h4>中文对照（每条提示词必附）</h4>
+    <p style="font-size:13.5px">每条英文提示词下面附一个<b>中文对照灰框</b>（标注「仅供阅读，不提交」），
+    逐句翻译，让你能直接审：动作写得对不对、心理有没有到位、限制词有没有踩线。复制按钮只复制英文正文。</p>
+
+    <h4>校验点</h4>
+    <div class="checks">
+      <label><input type="checkbox"> len() 落在 5000–7000，不是靠复制粘贴凑的</label>
+      <label><input type="checkbox"> 动作分解 / 表情 / 运镜三大项都达到了预算下限</label>
+      <label><input type="checkbox"> 画外音两句成对；对白在 &lt;d&gt; 内；说话人 ID 稳定</label>
+      <label><input type="checkbox"> 无 while 并联主体动作；无裸名词否定（no text / 无肢体畸形类）</label>
+      <label><input type="checkbox"> 路人数量写死 + 虚化；主角独有特征第一句出现</label>
+      <label><input type="checkbox"> 中文对照已附，且与英文逐句对应</label>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ 06 Step6 ══════════ -->
+<h2 id="s6"><span class="num">06</span>Step 6 · skill 映射（按需加载，不要一次全读）</h2>
+<p class="desc">六步各自由哪个 skill 支撑。写提示词时按本条提示词的内容<b>按需加载</b>，不要一次全读。</p>
+
+<table>
+  <tr><th style="width:14%">步骤</th><th style="width:26%">skill</th><th>管什么</th></tr>
+  <tr><td>Step 2 大纲</td><td><code>h3-novel-split</code></td><td>集数测算、叙事块、节奏骨架、卡点五型</td></tr>
+  <tr><td>Step 3 判定</td><td><code>h3-action-body</code></td><td>动作库、节拍分解、有界动作、手部专章、空间距离</td></tr>
+  <tr><td rowspan="2">Step 4 分镜</td><td><code>h3-camera-edit</code></td><td>运镜术语、时间戳、切分、衔接 / 匹配剪辑、硬切</td></tr>
+  <tr><td><code>h3-env-scene</code></td><td>场景、光影、天气、空间关系、声景</td></tr>
+  <tr><td rowspan="6">Step 5 提示词</td><td><code>h3-character-asset</code></td><td>角色卡、外貌皮肤伤口、资产锁定</td></tr>
+  <tr><td><code>h3-expression-psych</code></td><td>表情可见肌肉写法、眼神、心理外化</td></tr>
+  <tr><td><code>h3-action-body</code></td><td>动作分解细节（同 Step 3）</td></tr>
+  <tr><td><code>h3-dialogue-voice</code></td><td><code>&lt;d&gt;</code> 标签、说话人 ID、语速容量</td></tr>
+  <tr><td><code>h3-screen-text</code></td><td>手机屏 / 画面内文字三档方案</td></tr>
+  <tr><td><code>h3-refsheet-gen</code></td><td>参考图制作（三视图 / 场景图 / 道具图）</td></tr>
+  <tr><td>Step 6 检查</td><td><code>h3-antibug-check</code></td><td>否定句写法、采样步数、硬阻断、三层自检</td></tr>
+</table>
+
+<div class="note">
+  <b>恋爱 / 情感题材加载</b> <code>h3-romance-tension</code>（张力戏六大技法 + 合规判定表）。
+</div>
+
+<!-- ══════════ 07 硬参数 ══════════ -->
+<h2 id="hard"><span class="num">07</span>硬参数速查（官方已核实）</h2>
+
+<table>
+  <tr><th style="width:26%">项</th><th style="width:26%">官方值</th><th>备注</th></tr>
+  <tr><td><b>提示词上限</b></td><td><b>7,000 字符</b></td><td>按字符计，1 汉字 = 1 字符，不是 token。v3 目标区间 <b>5000–7000</b></td></tr>
+  <tr><td>时长 <code>duration</code></td><td><b>4–15 整数</b></td><td>必填。想拍 20–30s 的事件 → 拆 2×15s（模式 A），没有 20 / 25 档</td></tr>
+  <tr><td>每镜最短</td><td><b>1.5 秒</b></td><td>硬下限。1–2 秒短镜头合法；单独重生成 2s 镜 → 请求 4s 再裁</td></tr>
+  <tr><td>帧率 / 分辨率</td><td>24 FPS；768p / 2K</td><td>—</td></tr>
+  <tr><td>画幅</td><td>21:9 / 16:9 / 4:3 / 1:1 / 3:4 / 9:16</td><td><code>t2va</code> 必填且不能为 adaptive</td></tr>
+  <tr><td>音频</td><td>32 kHz 立体声</td><td>与画面同次推理生成</td></tr>
+  <tr><td>对白语言</td><td>11 种</td><td>中 / 英 / 日 / 韩 / 法 / 德 / 意 / 西 / 葡 / 俄 / 阿拉伯</td></tr>
+  <tr><td>参考素材</td><td><b>9 图 + 3 视频 + 3 音频 ≤ 12 文件</b></td><td>请求体 ≤ 64 MB；单图 ≤ 30 MB</td></tr>
+  <tr><td>单图规格</td><td>宽高 [256, 5760]px；宽高比 [0.4, 2.5]</td><td>—</td></tr>
+  <tr><td>采样步数</td><td>试拍 4；<b>出片 6–8</b></td><td>崩了先抬步数，别先改提示词</td></tr>
+</table>
+
+<div class="note red">
+  <b>图生视频与全能参考互斥：</b><code>first_frame</code>/<code>last_frame</code> 与 <code>reference_*</code> 不可同时出现。
+  锁角色脸（参考图）与锁首尾帧（FL2VA）只能二选一。
+</div>
+
+<div class="note">
+  <b>台词容量（15s 段）：</b>舒适值 38 字 / 安全线 45 字 / 硬上限 47 字；单句 ≤18 字。
+  量纲：官方 "20–25 words" 是 <b>10 秒</b>的值，换算必须走 <code>秒 × 字/秒 × ρ</code>。
+</div>
+
+<!-- ══════════ 08 检查 ══════════ -->
+<h2 id="check"><span class="num">08</span>出片前检查（三层，按序）</h2>
+
+<div class="step">
+  <div class="bar">
+    <span class="n">做什么</span>
+    <span class="t">结构 → 内容 → 看片</span>
+    <span class="tag gold">s h3-antibug-check</span>
+  </div>
+  <div class="body">
+
+    <h4>第一层 · 结构（提交前，可脚本化）</h4>
+    <div class="checks">
+      <label><input type="checkbox"> 时长 4–15 整数；每镜 ≥1.5s；时间戳递增（首镜不加）</label>
+      <label><input type="checkbox"> len() 在 5000–7000；预算表三大项达标</label>
+      <label><input type="checkbox"> 每镜一个主运镜，术语在官方表内，运镜句前置</label>
+      <label><input type="checkbox"> 锁定块跨镜逐字一致（字符串比对，不是人眼）</label>
+      <label><input type="checkbox"> 采样步数已标注（出片 ≥6）</label>
+    </div>
+
+    <h4>第二层 · 内容（生成前，人工对照）</h4>
+    <div class="checks">
+      <label><input type="checkbox"> 无 <code>while</code> 并联主体动作；动作全有终点</label>
+      <label><input type="checkbox"> 无裸名词否定；Do not ≤1 句/镜且不重复正向</label>
+      <label><input type="checkbox"> 人数写死；昏迷 / 无意识等状态有不变量声明</label>
+      <label><input type="checkbox"> 手部：无精细持物，或已用降级 / 锚定句</label>
+      <label><input type="checkbox"> 模式 A 的两条 clip 三锚点齐备</label>
+    </div>
+
+    <h4>第三层 · 看片（生成后）</h4>
+    <div class="checks">
+      <label><input type="checkbox"> 手：五指、无融合穿模；脸：跨镜同一人</label>
+      <label><input type="checkbox"> 人物没多出来（重点查：有没有冒出第二个人影）</label>
+      <label><input type="checkbox"> 光照方向一致；运镜无反向 / 末帧抖动</label>
+      <label><input type="checkbox"> 口型对上；画面无乱码文字；收尾帧稳定</label>
+    </div>
+
+    <h4>崩了的第一反应（决策树）</h4>
+    <div class="codewrap"><button class="copy">复制</button>
+<pre>画面崩了
+① 采样步数是 4？ → 抬到 6–8 重生成
+② 换种子重试 2–3 次，看是不是偶发
+③ 是硬阻断清单项（可读文字 / 跨生成方位 / 物理接触 / 小物件纯文本）？ → 改分镜绕开
+④ 以上都不是 → 最后才改提示词</pre>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ 09 变更 ══════════ -->
+<h2 id="changes"><span class="num">09</span>v3 变更记录（相对 v2 五阶段九步版）</h2>
+
+<table>
+  <tr><th style="width:20%">项</th><th style="width:36%">v2（旧）</th><th>v3（本版）</th></tr>
+  <tr><td><b>镜头体系</b></td><td>15s 固定 3 镜（2/11/2），衔接镜 1–2s 靠裁切</td>
+      <td><b>双模式</b>：长镜头事件专注动作细节（可 2×15s）；短动作 1–2s 快切，15s 可 5–7 镜硬切；长镜内插短特写防枯燥。<b>固定 3 镜废除</b></td></tr>
+  <tr><td><b>提示词字数</b></td><td>预算 1100–1850 汉字（用上限 ~26%）</td>
+      <td><b>目标 5000–7000 字符 / 条</b>（含空白），按预算表分配到运镜 / 表情 / 动作分解 / 心理 / 对白 / 路人管理</td></tr>
+  <tr><td><b>工作流</b></td><td>一本书全流程一口气跑</td>
+      <td><b>合约制</b>：全本只拆大纲 → 用户逐章喂内容 → 逐章细做（Step 3–5），做完一章验收一章</td></tr>
+  <tr><td><b>画风</b></td><td>开工前确认（未定）</td><td>已锁定 <b>3D 次世代写实动漫</b>，画风串写死</td></tr>
+</table>
+
+<div class="note gold">
+  本教程为<b>活文档</b>：后续新增 / 删改教程条目时，直接改本文件并更新本表（加一行变更记录）。
+</div>
+
+<footer>
+  H3 漫剧制作流程教程 v3（六步版）· 2026-08-30<br>
+  官方规范来源：MiniMax-AI/MiniMax-H3 → skills/h3-prompt-writing/references/（base-en.txt / ref-en.txt）、
+  platform.minimax.io API 文档、huggingface.co/MiniMaxAI/MiniMax-H3 模型卡<br>
+  v3 变更依据：实际拍摄反馈（救人戏 2×15s 动作匹配、快切段 5–7 镜、字数目标上调）
+</footer>
+
+</main>
+</div>
+
+<button class="topbtn" id="topbtn">↑</button>
+
+<script>
+// ---------- 复制按钮 ----------
+document.querySelectorAll('.codewrap').forEach(function(w){
+  var pre = w.querySelector('pre');
+  if(!pre) return;
+  var btn = document.createElement('button');
+  btn.className = 'copy';
+  btn.textContent = '复制';
+  w.appendChild(btn);
+  btn.addEventListener('click', function(){
+    var txt = pre.innerText;
+    var done = function(){
+      btn.textContent = '已复制';
+      btn.classList.add('ok');
+      setTimeout(function(){ btn.textContent='复制'; btn.classList.remove('ok'); }, 1400);
+    };
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(done, function(){ fallback(txt, done); });
+    } else { fallback(txt, done); }
+  });
+});
+function fallback(txt, cb){
+  var ta = document.createElement('textarea');
+  ta.value = txt;
+  ta.style.position='fixed'; ta.style.opacity='0';
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand('copy'); cb(); } catch(e){}
+  document.body.removeChild(ta);
+}
+
+// ---------- 顶部 chips ----------
+var secs = Array.prototype.slice.call(document.querySelectorAll('main h2[id]'));
+var chipsBox = document.getElementById('chips');
+secs.forEach(function(h){
+  var a = document.createElement('a');
+  a.className = 'chip';
+  a.href = '#' + h.id;
+  var num = h.querySelector('.num');
+  a.textContent = (num ? num.textContent.trim() + ' ' : '') +
+                  h.textContent.replace(num ? num.textContent : '', '').trim();
+  if(a.textContent.length > 14) a.textContent = a.textContent.slice(0,13) + '…';
+  chipsBox.appendChild(a);
+});
+
+// ---------- 滚动高亮 ----------
+var links = Array.prototype.slice.call(document.querySelectorAll('aside a'));
+var chipLinks = Array.prototype.slice.call(document.querySelectorAll('.chip'));
+var secArr = secs.map(function(h){ return h; });
+function onScroll(){
+  var y = window.scrollY + 100;
+  var cur = null;
+  secArr.forEach(function(h){ if(h.offsetTop <= y) cur = h; });
+  links.forEach(function(a){ a.classList.toggle('on', cur && a.getAttribute('href') === '#'+cur.id); });
+  chipLinks.forEach(function(a){ a.classList.toggle('on', cur && a.getAttribute('href') === '#'+cur.id); });
+  document.getElementById('topbtn').style.display = window.scrollY > 600 ? 'flex' : 'none';
+}
+window.addEventListener('scroll', onScroll, {passive:true});
+onScroll();
+
+document.getElementById('topbtn').addEventListener('click', function(){
+  window.scrollTo({top:0, behavior:'smooth'});
+});
+
+// ---------- 清单进度存本地 ----------
+var KEY = 'h3-tutorial-checks-v3';
+var saved = {};
+try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e){}
+var boxes = Array.prototype.slice.call(document.querySelectorAll('.checks input[type=checkbox]'));
+boxes.forEach(function(b, i){
+  var id = 'c' + i;
+  if(saved[id]) { b.checked = true; b.parentNode.classList.add('done'); }
+  b.addEventListener('change', function(){
+    saved[id] = b.checked;
+    b.parentNode.classList.toggle('done', b.checked);
+    try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch(e){}
+  });
+});
+</script>
+</body>
+</html>

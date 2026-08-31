@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>《老婆的白月光回国后》· 拆解交付</title>
+<style>
+  :root{
+    --bg:#0F0E0E; --bg2:#161514; --panel:rgba(255,255,255,0.045);
+    --line:rgba(255,255,255,0.12); --line2:rgba(255,255,255,0.22);
+    --t1:#F2F2F2; --t2:#A8A8A8; --t3:#7A7A7A;
+    --gold:#E8C268; --gold-dim:rgba(232,194,104,0.14);
+    --green:#7FC99A; --red:#E8836B; --blue:#7FB3D9;
+    --mono:"Space Mono","JetBrains Mono","Consolas",monospace;
+    --sans:"Inter","Noto Sans SC",system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--t1);font-family:var(--sans);
+       -webkit-font-smoothing:antialiased;line-height:1.72;font-size:14.5px}
+  .topbar{position:fixed;top:0;left:0;right:0;height:56px;z-index:50;
+    background:rgba(15,14,14,0.92);backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:0 20px}
+  .brand{font-weight:700;font-size:15px;white-space:nowrap}
+  .brand span{color:var(--gold)}
+  .topbar .sp{flex:1}
+  .chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{flex:0 0 auto;font-size:11.5px;color:var(--t2);border:1px solid var(--line);
+    background:transparent;padding:4px 10px;cursor:pointer;white-space:nowrap;border-radius:2px}
+  .chip:hover{color:var(--t1);border-color:var(--line2)}
+  .chip.on{color:var(--gold);border-color:var(--gold);background:var(--gold-dim)}
+  .wrap{display:flex;margin-top:56px}
+  aside{width:236px;flex:0 0 236px;position:sticky;top:56px;height:calc(100vh - 56px);
+    overflow-y:auto;border-right:1px solid var(--line);padding:20px 14px 60px}
+  aside h4{font-size:10.5px;letter-spacing:.14em;color:var(--t3);font-weight:600;margin:16px 0 8px;padding-left:8px}
+  aside h4:first-child{margin-top:0}
+  aside a{display:block;font-size:13px;color:var(--t2);text-decoration:none;padding:5px 8px;
+    border-left:2px solid transparent;line-height:1.45}
+  aside a:hover{color:var(--t1)}
+  aside a.on{color:var(--gold);border-left-color:var(--gold);background:rgba(255,255,255,0.03)}
+  main{flex:1;min-width:0;padding:36px 44px 100px;max-width:1040px}
+  h1{font-size:28px;font-weight:700;margin-bottom:8px}
+  h2{font-size:21px;font-weight:700;margin:52px 0 6px;padding-top:14px;
+     border-top:1px solid var(--line);scroll-margin-top:76px}
+  h2:first-child{border-top:0;margin-top:0}
+  h3{font-size:16.5px;font-weight:600;margin:28px 0 10px;scroll-margin-top:76px}
+  h4{font-size:14px;font-weight:600;margin:18px 0 8px}
+  p{margin:10px 0;color:#DCDCDC}
+  .lead{font-size:15px;color:var(--t2)}
+  ul,ol{margin:10px 0 10px 22px;color:#DCDCDC}
+  li{margin:5px 0}
+  code{font-family:var(--mono);font-size:12.5px;background:rgba(255,255,255,0.07);
+    padding:1px 5px;border-radius:2px;color:#E8DCC0}
+  strong{color:#fff;font-weight:600}
+  hr{border:0;border-top:1px solid var(--line);margin:36px 0}
+  .card{border:1px solid var(--line);background:var(--panel);padding:18px 20px;margin:14px 0;border-radius:3px}
+  .card.hi{border-color:rgba(232,194,104,0.4);background:rgba(232,194,104,0.05)}
+  .card.warn{border-color:rgba(232,131,107,0.4);background:rgba(232,131,107,0.06)}
+  .note{border-left:2px solid var(--gold);padding:10px 14px;margin:14px 0;
+    background:rgba(232,194,104,0.05);font-size:13.5px;color:var(--t2)}
+  .note b{color:var(--gold)}
+  .danger{border-left:2px solid var(--red);padding:10px 14px;margin:14px 0;
+    background:rgba(232,131,107,0.06);font-size:13.5px;color:var(--t2)}
+  .danger b{color:var(--red)}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.2px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:11px;letter-spacing:.1em;color:var(--t3);font-weight:600;text-transform:uppercase}
+  tbody tr:hover{background:rgba(255,255,255,0.02)}
+  .codewrap{position:relative;margin:12px 0;border:1px solid var(--line);border-radius:3px;background:#0B0A0A}
+  .codewrap .bar{display:flex;justify-content:space-between;align-items:center;padding:6px 10px;
+    border-bottom:1px solid var(--line);font-size:11px;color:var(--t3);letter-spacing:.08em;text-transform:uppercase}
+  pre{white-space:pre-wrap;word-break:break-word;font-family:var(--mono);font-size:12.2px;
+    line-height:1.72;color:#DCDCDC;padding:14px 16px;margin:0;overflow-x:auto}
+  .copy{font-size:11px;color:var(--t2);border:1px solid var(--line2);background:transparent;
+    padding:3px 10px;cursor:pointer;font-family:var(--sans);border-radius:2px}
+  .copy:hover{color:var(--gold);border-color:var(--gold)}
+  .copy.done{color:var(--green);border-color:var(--green)}
+  .tag{display:inline-block;font-size:11px;padding:2px 8px;border:1px solid var(--line2);
+    color:var(--t2);border-radius:2px;margin-right:6px}
+  .tag.gold{color:var(--gold);border-color:var(--gold);background:var(--gold-dim)}
+  .tag.green{color:var(--green);border-color:var(--green)}
+  .kv{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-size:13.3px;margin:10px 0}
+  .kv dt{color:var(--t3);white-space:nowrap}
+  .kv dd{color:#DCDCDC}
+  .seg{border:1px solid var(--line);background:var(--panel);padding:0;margin:12px 0;border-radius:3px;overflow:hidden}
+  .seg .hd{display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid var(--line);
+    background:rgba(255,255,255,0.02)}
+  .seg .hd .no{font-family:var(--mono);font-size:12px;color:var(--gold);font-weight:700}
+  .seg .hd .ttl{font-weight:600;font-size:14.5px;flex:1}
+  .seg .hd .tc{font-family:var(--mono);font-size:11.5px;color:var(--t3)}
+  .seg .bd{padding:12px 16px}
+  .seg .bd .kv{margin:6px 0}
+  .topbtn{position:fixed;right:22px;bottom:22px;width:40px;height:40px;border-radius:50%;
+    border:1px solid var(--line2);background:rgba(15,14,14,.9);color:var(--t2);cursor:pointer;
+    font-size:16px;display:none;align-items:center;justify-content:center;z-index:60}
+  .topbtn:hover{color:var(--gold);border-color:var(--gold)}
+  .mono{font-family:var(--mono)}
+  @media(max-width:900px){ aside{display:none} main{padding:24px 20px 80px} h1{font-size:23px} }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">《老婆的白月光回国后》· <span>拆解交付</span></div>
+  <div class="sp"></div>
+  <div class="chips" id="chips"></div>
+</div>
+
+<div class="wrap">
+<aside id="side">
+  <h4>拆解</h4>
+  <a href="#overview">概览</a>
+  <a href="#count">1 · 集数拆解</a>
+  <a href="#cast">2 · 角色卡与资产表</a>
+  <a href="#outline">3 · 集级大纲</a>
+  <a href="#segs">4 · 段级大纲（9 段）</a>
+  <a href="#shots">5 · 分镜表（27 镜）</a>
+  <h4>完整提示词</h4>
+  <a href="#p1">P1 · 夜话试探</a>
+  <a href="#p6">P6 · 当众官宣</a>
+  <h4>检查</h4>
+  <a href="#audit">自查报告</a>
+  <a href="#risk">风险与建议</a>
+</aside>
+
+<main>
+
+<h1 id="overview">《老婆的白月光回国后，我哭着求他接盘》</h1>
+<p class="lead">短篇 · 都市情感 · 8,870 汉字 · 9 章正文 + 简介<br>
+用 MiniMax H3 分镜体系拆解的完整产出。</p>
+
+<div class="card hi">
+<table style="margin:0">
+<tbody>
+<tr><th style="width:130px">建议集长</th><td><strong>135 秒</strong>（= 9 段 × 15 秒）</td></tr>
+<tr><th>总镜数</th><td><strong>27 镜</strong>（9 段 × 3 镜）</td></tr>
+<tr><th>集数</th><td><strong>1 集</strong>（8,870 字落在「每集 8,000–12,000 字原文」区间内）</td></tr>
+<tr><th>题材类型</th><td>都市情感 / 追妻火葬场反转型 / 甜爽</td></tr>
+<tr><th>核心爽点</th><td>第 5–7 章：女主当众官宣男主、当众怼白月光</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="note"><b>为什么是 135 秒而不是 120 秒。</b>本文有 9 章，每章一个完整节拍。135 ÷ 15 = 9，
+<strong>章与段 1:1 对应，零合并损耗</strong>。若平台要求 120 秒（8 段），需把第 7、8 章压进一段——
+而那两章正是情感高潮（回家对峙 + 真相大白），压了会糊。<strong>建议按 135 秒走。</strong></div>
+
+<hr>
+
+<h2 id="count">1 · 集数拆解</h2>
+
+<h3>测算过程</h3>
+<div class="codewrap">
+  <div class="bar"><span>公式</span><button class="copy">复制</button></div>
+<pre>原文汉字数            W_src = 8,870
+推断压缩比            r ≈ 3–6%（网文口径，±50% 误差，未校准）
+按每集 8,000–12,000 字原文  → 集数 M = 1
+
+单集时长     T = 135s（须被 15 整除）
+每集段落数   S = T ÷ 15 = 9
+每集镜数     N = S × 3 = 27
+总时长       135s = 2 分 15 秒</pre>
+</div>
+
+<div class="danger"><b>压缩比未经校准，这是推断值。</b>
+「3–6%」来自网文口径，短篇的密度通常高于网文，实际压缩比可能落在 7–10%。
+<strong>本集台词容量 = 135 × 4.5 × 0.70 ≈ 425 字</strong>，下方大纲按此分配。
+实拍前建议先做 3 段样片，用 <code>r = 剧本字数 ÷ 原文字数</code> 反算真实压缩比。</div>
+
+<h3>段落与章节映射</h3>
+<table>
+<thead><tr><th>段</th><th>来源</th><th>时间码</th></tr></thead>
+<tbody>
+<tr><td>P1</td><td>简介 + 第 1 章前半</td><td>00:00 – 00:15</td></tr>
+<tr><td>P2</td><td>第 1 章后半（搬家）</td><td>00:15 – 00:30</td></tr>
+<tr><td>P3</td><td>第 2 章（同学群 + 往事）</td><td>00:30 – 00:45</td></tr>
+<tr><td>P4</td><td>第 3 章（电话提分手）</td><td>00:45 – 01:00</td></tr>
+<tr><td>P5</td><td>第 4 章（同学会，压轴出场）</td><td>01:00 – 01:15</td></tr>
+<tr><td>P6</td><td>第 5 章（当众官宣）</td><td>01:15 – 01:30</td></tr>
+<tr><td>P7</td><td>第 6 章（怼徐杰 + 私募伏笔）</td><td>01:30 – 01:45</td></tr>
+<tr><td>P8</td><td>第 7 + 8 章（回家对峙 + 真相）</td><td>01:45 – 02:00</td></tr>
+<tr><td>P9</td><td>第 9 章（和好 + 结婚 + 诈骗收网）</td><td>02:00 – 02:15</td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2 id="cast">2 · 角色卡与资产表</h2>
+
+<h3>CH_01 · 程岩（男主 / 叙述者）</h3>
+<div class="card">
+<dl class="kv">
+<dt>年龄 / 身份</dt><dd>29 岁，互联网大厂部门负责人，佛系、嘴硬心软</dd>
+<dt>脸型 / 发型</dt><dd>圆脸略带婴儿肥，寸头略长，浓眉</dd>
+<dt>眼睛 / 皮肤</dt><dd>黑褐色眼睛，<strong>明显黑眼圈与疲惫感</strong>，皮肤偏白</dd>
+<dt>体型变化</dt><dd>八年前 170 斤 → 现在 140 斤（重要设定，须在 P9 前后保持一致）</dd>
+<dt>标志性特征</dt><dd>右眉尾一道长约 1cm 的浅色旧疤</dd>
+<dt>服装版本</dt><dd><code>CH_01_OUT_A</code> 深灰纯棉圆领家居 T 恤 + 藏青家居长裤（P1–P3）<br>
+<code>CH_01_OUT_B</code> 米白衬衫 + 深灰休闲西装 + 黑色皮鞋（P4–P7）<br>
+<code>CH_01_OUT_C</code> 黑色礼服西装 + 白衬衫 + 暗红领带（P9 婚礼）</dd>
+<dt>行为锚点</dt><dd>心虚时摸后颈；说狠话前先深吸一口气</dd>
+<dt>声音</dt><dd>音色偏哑，语速中速偏慢，情绪激动时会破音</dd>
+</dl>
+</div>
+
+<h3>CH_02 · 苏心妍（女主）</h3>
+<div class="card">
+<dl class="kv">
+<dt>年龄 / 身份</dt><dd>28 岁，上市公司副总裁，对外高冷，对内反差</dd>
+<dt>脸型 / 发型</dt><dd>鹅蛋脸，黑色长直发及肩，发尾微内扣</dd>
+<dt>眼睛</dt><dd><strong>桃花眼，眼尾微挑</strong>——最重要的辨识特征</dd>
+<dt>皮肤</dt><dd>白皙，鼻梁挺直，唇形偏薄，唇色偏淡</dd>
+<dt>体型</dt><dd>170cm，纤细，肩线平直</dd>
+<dt>标志性特征</dt><dd>左耳垂一颗 3mm 珍珠耳钉（全剧不变）</dd>
+<dt>服装版本</dt><dd><code>CH_02_OUT_A</code> 米白真丝吊带睡裙（P1）<br>
+<code>CH_02_OUT_B</code> 藏青职业套装 + 白色衬衫（P2–P4、P7）<br>
+<code>CH_02_OUT_C</code> 酒红色一字肩晚礼服 + 同色系高跟鞋（P5–P6 宴会）<br>
+<code>CH_02_OUT_D</code> 米白蕾丝婚纱（P9 婚礼）</dd>
+<dt>行为锚点</dt><dd>情绪压抑时走向阳台抬头看夜空；说谎或心虚时睫毛颤动</dd>
+<dt>声音</dt><dd>音色清冷偏薄，对外语速平稳偏慢，对男主时会变软</dd>
+</dl>
+</div>
+
+<h3>CH_03 · 徐杰（白月光 / 反派）</h3>
+<div class="card">
+<dl class="kv">
+<dt>年龄 / 身份</dt><dd>29 岁，海归，自称私募基金管理人（实为诈骗）</dd>
+<dt>外形</dt><dd>方下颌，背头短发，深棕色眼睛，小麦色皮肤，183cm 宽肩</dd>
+<dt>标志性特征</dt><dd>左手腕戴一块<strong>银色金属表带的机械表</strong>（表面朝掌心外侧）</dd>
+<dt>行为锚点</dt><dd>被激怒时手指会轻微颤抖；维持风度时会先笑再说话</dd>
+<dt>服装</dt><dd><code>CH_03_OUT_A</code> 深灰定制西装 + 浅蓝衬衫（不系领带）</dd>
+</dl>
+</div>
+
+<h3>CH_04 · 田恬（配角）· CH_05 · 高铭（配角）</h3>
+<div class="card">
+<dl class="kv">
+<dt>CH_04 田恬</dt><dd>28 岁女，齐刘海波波头，圆脸，目光崇拜徐杰；穿亮黄色连衣裙。功能：起哄、捧徐杰</dd>
+<dt>CH_05 高铭</dt><dd>29 岁男，微胖，圆脸，短发，富二代班长；穿藏青休闲西装。功能：圆场、串联</dd>
+<dt>路人</dt><dd>P5–P7 宴会厅同学 <strong>只写「虚化背景人群，无清晰五官」</strong>，不给数量以外细节</dd>
+</dl>
+</div>
+
+<h3>资产表</h3>
+<table>
+<thead><tr><th>资产 ID</th><th>物件</th><th>所属</th><th>风险</th><th>出现段</th></tr></thead>
+<tbody>
+<tr><td>AS_01</td><td>珍珠耳钉（3mm，左耳垂）</td><td>CH_02</td><td><span class="tag">中高</span></td><td>P1–P9</td></tr>
+<tr><td>AS_02</td><td>银色机械表（左手腕，表盘朝外）</td><td>CH_03</td><td><span class="tag">中</span></td><td>P5–P7、P9</td></tr>
+<tr><td>AS_03</td><td>暗红领带（婚礼）</td><td>CH_01</td><td><span class="tag">中</span></td><td>P9</td></tr>
+<tr><td>AS_04</td><td>鱼骨拼成的树叶纹样（桌上的摆盘）</td><td>场景</td><td><span class="tag">低</span></td><td>P1（可作伏笔空镜）</td></tr>
+</tbody>
+</table>
+<div class="note"><b>一镜内需稳住的小物件 ≤ 2 件。</b>P6 同时出现耳钉（CH_02）+ 手表（CH_03），刚好 2 件，不要再加。
+其余资产在该镜提示词里<strong>不提</strong>——不提就不会被当作噪声丢掉，也不会挤占描述位。</div>
+
+<hr>
+
+<h2 id="outline">3 · 集级大纲</h2>
+
+<table>
+<thead><tr><th>节拍</th><th>段</th><th>时间码</th><th>内容</th><th>情绪</th></tr></thead>
+<tbody>
+<tr><td><strong>钩子</strong></td><td>P1</td><td>00:00–00:15</td><td>深夜事后，男主试探「徐杰回来了」，女主冷脸背身</td><td>疲惫 → 期待 → 被泼冷水</td></tr>
+<tr><td>建矛盾</td><td>P2</td><td>00:15–00:30</td><td>男主趁女主上班搬空八年公寓，回头看最后一眼</td><td>决绝里带酸涩</td></tr>
+<tr><td>建矛盾</td><td>P3</td><td>00:30–00:45</td><td>班级群炸锅：白月光接风宴。闪回高中「神仙眷侣」往事</td><td>自卑、酸</td></tr>
+<tr><td><strong>第一次爆发</strong></td><td>P4</td><td>00:45–01:00</td><td>电话里正式提分手，女主语气第一次软下来</td><td>疼 → 硬撑</td></tr>
+<tr><td>反转前夜</td><td>P5</td><td>01:00–01:15</td><td>男主精心打扮赴宴，女主压轴出场——但没看白月光，在看他</td><td>意外、错愕</td></tr>
+<tr><td><strong>爽点</strong></td><td>P6</td><td>01:15–01:30</td><td>女主当众解领带、官宣「这是我老公程岩」</td><td>爽、扬眉吐气</td></tr>
+<tr><td>爽点升级</td><td>P7</td><td>01:30–01:45</td><td>女主逼徐杰签合同，反将一军；埋下私募骗局伏笔</td><td>爽 → 警觉</td></tr>
+<tr><td><strong>情感高潮</strong></td><td>P8</td><td>01:45–02:00</td><td>回家对峙。真相：阳台是想工作，不是想前任</td><td>崩溃 → 释然</td></tr>
+<tr><td>收尾</td><td>P9</td><td>02:00–02:15</td><td>解开「七次」误会 → 一年后结婚 → 徐杰诈骗入狱七年</td><td>甜 + 报应</td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2 id="segs">4 · 段级大纲（9 段）</h2>
+<p>每段严格 15 秒，只承载 <strong>1 个信息点 + 1 个情绪转折</strong>。</p>
+
+<div class="seg"><div class="hd"><span class="no">P1</span><span class="ttl">夜话试探</span><span class="tc">00:00 – 00:15</span></div><div class="bd">
+<dl class="kv">
+<dt>信息点</dt><dd>白月光徐杰回国了，男主想「让位」</dd>
+<dt>情绪转折</dt><dd>疲惫满足 → 试探的期待 → 被冷脸泼冷水</dd>
+<dt>场景</dt><dd>SC_01 主卧 · 夜 · 左前上方暖黄床头灯，单一主光</dd>
+<dt>台词</dt><dd>1 句，14 字（容量 47）</dd>
+<dt>入点衔接</dt><dd>—（开场）</dd>
+<dt>出点衔接</dt><dd><strong>视线卡点</strong>——女主目光定在画外，下一段接她「不在」的空房</dd>
+</dl></div></div>
+
+<div class="seg"><div class="hd"><span class="no">P2</span><span class="ttl">搬空八年</span><span class="tc">00:15 – 00:30</span></div><div class="bd">
+<dl class="kv">
+<dt>信息点</dt><dd>他真的走了，八年的家搬空了</dd>
+<dt>情绪转折</dt><dd>决绝 → 回头那一眼的酸涩</dd>
+<dt>场景</dt><dd>SC_02 老公寓客厅 · 日 · 右侧窗户自然光，冷白</dd>
+<dt>台词</dt><dd>无台词（纯画面 + 环境音）</dd>
+<dt>入点衔接</dt><dd>动作延续：从 P1 的「背身」接「空荡的床」</dd>
+<dt>出点衔接</dt><dd><strong>动作卡点</strong>——关门手停在门把上，未落下</dd>
+</dl></div></div>
+
+<div class="seg"><div class="hd"><span class="no">P3</span><span class="ttl">群里的白月光</span><span class="tc">00:30 – 00:45</span></div><div class="bd">
+<dl class="kv">
+<dt>信息点</dt><dd>接风宴明晚八点；高中时她曾为徐杰倾尽温柔</dd>
+<dt>情绪转折</dt><dd>平静刷手机 → 心被揪了一下</dd>
+<dt>场景</dt><dd>SC_03 新家客厅 · 夜 · 屏幕冷白光为次级补光</dd>
+<dt>台词</dt><dd>群消息走<strong>画面文字</strong>，不改台词容量（干净底板 + 后期贴图）</dd>
+<dt>入点衔接</dt><dd>空镜过渡：新家窗明几净</dd>
+<dt>出点衔接</dt><dd><strong>台词卡点</strong>——「是不是想挽回某人」悬在半空</dd>
+</dl></div></div>
+
+<div class="seg"><div class="hd"><span class="no">P4</span><span class="ttl">电话里说分手</span><span class="tc">00:45 – 01:00</span></div><div class="bd">
+<dl class="kv">
+<dt>信息点</dt><dd>男主正式提分手；女主第一次软下来</dd>
+<dt>情绪转折</dt><dd>硬撑的冷 → 听见呜咽后的动摇（但他没信）</dd>
+<dt>场景</dt><dd>SC_03 新家 · 夜</dd>
+<dt>台词</dt><dd>2 句，约 30 字</dd>
+<dt>入点衔接</dt><dd>声音先导：铃声先入，画面后切</dd>
+<dt>出点衔接</dt><dd><strong>台词卡点</strong>——「见鬼了，她会为我哭？」</dd>
+</dl></div></div>
+
+<div class="seg"><div class="hd"><span class="no">P5</span><span class="ttl">压轴出场</span><span class="tc">01:00 – 01:15</span></div><div class="bd">
+<dl class="kv">
+<dt>信息点</dt><dd>她来了——但目光越过徐杰，落在男主身上</dd>
+<dt>情绪转折</dt><dd>不屑 → 错愕（她看的是我？）</dd>
+<dt>场景</dt><dd>SC_04 酒店宴会厅 · 夜 · 顶光暖黄 + 背景虚化</dd>
+<dt>台词</dt><dd>1 句，12 字</dd>
+<dt>入点衔接</dt><dd>遮挡黑场：大门缓缓推开</dd>
+<dt>出点衔接</dt><dd><strong>视线卡点</strong>——她的目光直直落在他身上</dd>
+</dl></div></div>
+
+<div class="seg"><div class="hd"><span class="no">P6</span><span class="ttl">当众官宣</span><span class="tc">01:15 – 01:30</span></div><div class="bd">
+<dl class="kv">
+<dt>信息点</dt><dd>她当众叫他老公，正式官宣</dd>
+<dt>情绪转折</dt><dd>错愕 → 爽爆</dd>
+<dt>场景</dt><dd>SC_04 酒店宴会厅 · 夜</dd>
+<dt>台词</dt><dd>2 句，29 字（单句最长 17 字，未超 18 上限）</dd>
+<dt>入点衔接</dt><dd>同构图匹配：接 P5 末帧她的正面</dd>
+<dt>出点衔接</dt><dd><strong>揭示卡点</strong>——徐杰僵住的笑，青筋暴起</dd>
+</dl></div></div>
+
+<div class="seg"><div class="hd"><span class="no">P7</span><span class="ttl">反将一军</span><span class="tc">01:30 – 01:45</span></div><div class="bd">
+<dl class="kv">
+<dt>信息点</dt><dd>她逼徐杰签合同，当场拆穿；私募骗局埋伏笔</dd>
+<dt>情绪转折</dt><dd>爽 → 一丝警觉</dd>
+<dt>场景</dt><dd>SC_04 宴会厅 → SC_05 地下停车场</dd>
+<dt>台词</dt><dd>3 句，约 38 字</dd>
+<dt>入点衔接</dt><dd>动作延续：他的手还在抖</dd>
+<dt>出点衔接</dt><dd><strong>动作卡点</strong>——他拉开她的副驾门，一言不发</dd>
+</dl></div></div>
+
+<div class="seg"><div class="hd"><span class="no">P8</span><span class="ttl">阳台的真相</span><span class="tc">01:45 – 02:00</span></div><div class="bd">
+<dl class="kv">
+<dt>信息点</dt><dd>她站在阳台是在想工作，不是怀念前任</dd>
+<dt>情绪转折</dt><dd>崩溃质问 → 释然的笑</dd>
+<dt>场景</dt><dd>SC_06 老宅阳台 + 卧室 · 夜</dd>
+<dt>台词</dt><dd>4 句，约 42 字（接近上限，已压）</dd>
+<dt>入点衔接</dt><dd>空镜：她习惯性走向阳台</dd>
+<dt>出点衔接</dt><dd><strong>揭示卡点</strong>——她凑过来，他却在下一刻推开</dd>
+</dl></div></div>
+
+<div class="seg"><div class="hd"><span class="no">P9</span><span class="ttl">七次与七年</span><span class="tc">02:00 – 02:15</span></div><div class="bd">
+<dl class="kv">
+<dt>信息点</dt><dd>「七次」是吹牛；一年后结婚；徐杰诈骗判七年</dd>
+<dt>情绪转折</dt><dd>荒唐 → 甜 → 报应的痛快</dd>
+<dt>场景</dt><dd>SC_06 卧室 → SC_07 婚礼现场 → SC_08 手机屏幕</dd>
+<dt>台词</dt><dd>4 句，约 40 字</dd>
+<dt>入点衔接</dt><dd>反向动作：她凑近，他推开</dd>
+<dt>出点衔接</dt><dd>闭环收尾，点题</dd>
+</dl></div></div>
+
+<hr>
+
+<h2 id="shots">5 · 分镜表（27 镜）</h2>
+<p>统一采用 <strong>主镜优先 2 / 11 / 2</strong> 范式（悬殊比 5.5，合法；衔接镜任务轻，只摆状态）。
+主镜 11 秒一律用 <strong>Static Shot</strong>——按体系建议，推/拉类运镜超过 8 秒末帧构图漂移明显，固定机位可占满。</p>
+
+<table>
+<thead><tr><th>段</th><th>镜</th><th>时长</th><th>景别</th><th>运镜</th><th>内容</th><th>生成</th><th>风险</th></tr></thead>
+<tbody>
+<tr><td rowspan="3">P1</td><td>A</td><td>2.0s</td><td>大特写</td><td>Static</td><td>床单上一只手松开、垂落</td><td>FL2VA</td><td>低</td></tr>
+<tr><td>B</td><td>11.0s</td><td>中近景双人</td><td>Static</td><td>程岩试探开口，苏心妍肩线绷紧</td><td>T2VA</td><td>中</td></tr>
+<tr><td>C</td><td>2.0s</td><td>大特写</td><td>Static</td><td>苏心妍眼神由涣散转清冷</td><td>FL2VA</td><td>低</td></tr>
+
+<tr><td rowspan="3">P2</td><td>A</td><td>2.0s</td><td>空镜</td><td>Static</td><td>空荡的衣柜，一枚衣架在晃</td><td>FL2VA</td><td>低</td></tr>
+<tr><td>B</td><td>11.0s</td><td>中景</td><td>Static</td><td>程岩搬箱、环视八年公寓</td><td>T2VA</td><td>中</td></tr>
+<tr><td>C</td><td>2.0s</td><td>手部特写</td><td>Static</td><td>手停在门把上，未按下</td><td>FL2VA</td><td>中</td></tr>
+
+<tr><td rowspan="3">P3</td><td>A</td><td>2.0s</td><td>空镜</td><td>Static</td><td>新家窗明几净，阳光斜入</td><td>FL2VA</td><td>低</td></tr>
+<tr><td>B</td><td>11.0s</td><td>近景</td><td>Static</td><td>程岩刷手机，屏幕光映脸；闪回高中片段</td><td>T2VA</td><td><strong>高</strong></td></tr>
+<tr><td>C</td><td>2.0s</td><td>眼部特写</td><td>Static</td><td>他眼神暗了一下</td><td>FL2VA</td><td>低</td></tr>
+
+<tr><td rowspan="3">P4</td><td>A</td><td>2.0s</td><td>道具特写</td><td>Static</td><td>手机屏幕亮起，来电显示区留白</td><td>FL2VA</td><td>低</td></tr>
+<tr><td>B</td><td>11.0s</td><td>近景</td><td>Static</td><td>程岩说出「分手吧」，表情硬撑</td><td>T2VA</td><td>中</td></tr>
+<tr><td>C</td><td>2.0s</td><td>侧脸特写</td><td>Static</td><td>他挂断，喉结滚动一次</td><td>FL2VA</td><td>低</td></tr>
+
+<tr><td rowspan="3">P5</td><td>A</td><td>2.0s</td><td>局部</td><td>Static</td><td>宴会厅大门缓缓推开一道缝</td><td>FL2VA</td><td>低</td></tr>
+<tr><td>B</td><td>11.0s</td><td>中景→近景</td><td>Static</td><td>苏心妍入场，越过徐杰看向程岩</td><td>T2VA</td><td><strong>高</strong>（多人）</td></tr>
+<tr><td>C</td><td>2.0s</td><td>眼部特写</td><td>Static</td><td>她哭肿的桃花眼，目光定住</td><td>FL2VA</td><td>低</td></tr>
+
+<tr><td rowspan="3">P6</td><td>A</td><td>2.0s</td><td>中景</td><td>Static</td><td>她穿过人群走向他</td><td>FL2VA</td><td>中</td></tr>
+<tr><td>B</td><td>11.0s</td><td>中近景双人</td><td>Static</td><td>解领带、叫老公、当众官宣</td><td>T2VA</td><td><strong>高</strong>（手部）</td></tr>
+<tr><td>C</td><td>2.0s</td><td>近景</td><td>Static</td><td>徐杰笑容僵住，手在抖</td><td>FL2VA</td><td>中</td></tr>
+
+<tr><td rowspan="3">P7</td><td>A</td><td>2.0s</td><td>手部特写</td><td>Static</td><td>徐杰颤抖的手放下酒杯</td><td>FL2VA</td><td>中</td></tr>
+<tr><td>B</td><td>11.0s</td><td>中景</td><td>Static</td><td>苏心妍逼问「敢签合同吗」</td><td>T2VA</td><td>中</td></tr>
+<tr><td>C</td><td>2.0s</td><td>中景</td><td>Static</td><td>她牵他离席，全场安静</td><td>FL2VA</td><td>中</td></tr>
+
+<tr><td rowspan="3">P8</td><td>A</td><td>2.0s</td><td>空镜</td><td>Static</td><td>阳台夜色，她背影抬头</td><td>FL2VA</td><td>低</td></tr>
+<tr><td>B</td><td>11.0s</td><td>近景双人</td><td>Static</td><td>崩溃质问 → 真相大白</td><td>T2VA</td><td>中</td></tr>
+<tr><td>C</td><td>2.0s</td><td>近景</td><td>Static</td><td>她破涕为笑，凑近</td><td>FL2VA</td><td>低</td></tr>
+
+<tr><td rowspan="3">P9</td><td>A</td><td>2.0s</td><td>近景</td><td>Static</td><td>他一把推开她</td><td>FL2VA</td><td>中</td></tr>
+<tr><td>B</td><td>11.0s</td><td>中景</td><td>Static</td><td>「七次」误会解开 + 婚礼 + 判决（三段式跳转）</td><td>T2VA</td><td><strong>高</strong>（时空跳转）</td></tr>
+<tr><td>C</td><td>2.0s</td><td>近景</td><td>Static</td><td>两人相视而笑，画面定住</td><td>FL2VA</td><td>低</td></tr>
+</tbody>
+</table>
+
+<div class="danger"><b>三个高风险镜头必须先试拍：</b>
+P3-B（闪回 + 屏幕光）、P5-B 与 P6-B（宴会厅多人 + 领带手部动作）、P9-B（三段时空跳转）。
+按体系规则，<strong>这三镜各自都要有备选方案</strong>，见下方提示词示例。</div>
+
+<hr>
+
+<h2 id="p1">P1 · 完整提示词（夜话试探）</h2>
+<p><span class="tag gold">T2VA</span> <span class="tag">15s</span> <span class="tag">2 / 11 / 2</span> <span class="tag">台词 14 字</span></p>
+
+<h3>共用锁定块（三镜逐字复制，禁止改写）</h3>
+<div class="codewrap">
+  <div class="bar"><span>锁定块 · 约 430 汉字</span><button class="copy">复制</button></div>
+<pre>【角色身份串】
+程岩，29 岁男性，圆脸带婴儿肥，寸头略长，浓眉，黑褐色眼睛，眼下有明显的疲惫与黑眼圈，
+皮肤偏白，体型偏瘦，右眉尾有一道约 1cm 的浅色旧疤。
+苏心妍，28 岁女性，鹅蛋脸，黑色长直发及肩发尾微内扣，桃花眼眼尾微挑，白皙皮肤，
+鼻梁挺直，唇形偏薄，170cm 纤细，肩线平直。
+
+【服装与随身资产串】
+程岩身穿深灰色无标识纯棉圆领家居 T 恤与藏青色家居长裤。
+苏心妍身穿米白色无标识真丝吊带睡裙；左耳垂佩戴一颗 3mm 珍珠耳钉，
+该耳钉全程在左耳垂上，大小与光泽不变，不被摘下或替换。
+
+【场景与光位串】
+室内主卧，夜景。唯一可见光源为画面左侧的床头灯，单一柔和暖黄主光自画面左前方 45° 打来；
+背景为深灰色床头软包、米白色床品与一只素面白色水杯，画面内所有可能承载文字的表面
+都是素面无标记的，只呈现颜色、材质与反光。
+
+【画风串】
+实拍电影感，写实风格，35mm 镜头，浅景深，背景轻微虚化，青绿与琥珀色调，中等反差，
+自然皮肤质感，轻微胶片颗粒，无风格化滤镜，色温与反差在三镜内完全一致。</pre>
+</div>
+
+<h3>每镜六段</h3>
+<div class="codewrap">
+  <div class="bar"><span>三镜新增指令</span><button class="copy">复制</button></div>
+<pre>【Shot 1 · A 入镜 2s】
+① A close-up frames a hand lying open on the crumpled sheet at the lower-left of frame,
+   fingers relaxed, palm up.
+② First one finger twitches, then the fingers slowly uncurl, then the hand slips off the
+   edge of the bed and hangs still.
+③ No one speaks.
+④ The sheet creases shift in the warm light; a thin line of cool blue leaks through the
+   gap in the curtain at the back of frame.
+⑤ The camera holds a static shot.
+⑥ Lighting matches the lock block exactly.
+⑦ By the end of the shot the hand hangs motionless below the mattress edge and the frame
+   is filled by the deep grey headboard panel.
+   Do not let the bedside lamp flicker at any point in the shot.
+
+【Shot 2 · B 主镜 11s】
+① A medium close-up frames Cheng Yan propped against the headboard on the right third of
+   frame and Su Xinyan lying with her back to him on the left third, their shoulders about
+   one fist apart.
+② First Cheng Yan's Adam's apple moves once, then he turns his head toward her back,
+   then he speaks.
+③ The man with a raspy, tired voice (S1) says: &lt;d&gt;[Chinese] 亲爱的，听说徐杰从国外回来了？&lt;/d&gt;
+④ Her shoulder line tightens; the sheet rises and falls once with her breathing.
+⑤ The camera holds a static shot.
+⑥ Lighting matches the lock block exactly.
+⑦ By the end of the shot Cheng Yan is still turned toward her, waiting; her shoulder line
+   stays tight and she gives no answer.
+   Do not let her turn around at any point in the shot.
+
+【Shot 3 · C 出镜 2s】
+① A large close-up frames Su Xinyan's face in profile centred in frame, eyes open, lashes
+   casting a shadow in the warm light.
+② First her lashes tremble once, then her gaze sharpens from unfocused to cold.
+③ She does not speak; her lips remain closed.
+④ The bedside lamp holds a small still highlight in her pupil.
+⑤ The camera holds a static shot.
+⑥ Lighting matches the lock block exactly.
+⑦ By the end of the shot her gaze is fixed on a point beyond the lens and her expression
+   has gone cold.
+   Do not let her expression soften at any point in the shot.</pre>
+</div>
+
+<h3>官方格式（可直接提交）</h3>
+<div class="codewrap">
+  <div class="bar"><span>H3 · integrated_multimodal_description</span><button class="copy">复制</button></div>
+<pre>integrated_multimodal_description: [Shot 1] Live-action, cinematic, 35mm lens, shallow depth of field. A close-up frames a man's hand lying open on a crumpled bed sheet in the lower-left of frame, fingers relaxed, palm up. First one finger twitches, then the fingers slowly uncurl, then the hand slips off the edge of the bed and hangs still. A thin line of cool blue leaks through the gap in the curtain at the back of frame while the sheet creases shift in the warm light. The camera holds a static shot. By the end of the shot the hand hangs motionless below the mattress edge. Do not let the bedside lamp flicker at any point in the shot. [Shot 2] At 00:02.000, the camera cuts to a medium close-up of the same 29-year-old man propped against the headboard on the right third of frame and the same 28-year-old woman lying with her back to him on the left third, their shoulders about one fist apart. First his Adam's apple moves once, then he turns his head toward her back, then the man with a raspy, tired voice (S1) says: &lt;d&gt;[Chinese] 亲爱的，听说徐杰从国外回来了？&lt;/d&gt; Her shoulder line tightens; the sheet rises and falls once with her breathing. The camera holds a static shot. By the end of the shot he is still turned toward her, waiting, and her shoulder line stays tight. Do not let her turn around at any point in the shot. [Shot 3] At 00:13.000, the shot switches to a large close-up of her face in profile centred in frame, eyes open. First her lashes tremble once, then her gaze sharpens from unfocused to cold. She does not speak; her lips remain closed. The camera holds a static shot. By the end of the shot her gaze is fixed on a point beyond the lens. Do not let her expression soften at any point in the shot.
+
+overall_soundscape: A quiet bedroom at night, slow breathing, fabric shifting against skin, the faint hum of an air conditioner, one soft creak of the bed frame.
+
+non_diegetic_music: N/A</pre>
+</div>
+
+<div class="note"><b>为什么三句 Do not 都是 B 类且不冗余。</b>
+「灯不闪」「她不转身」「表情不软化」——正向句只给了<strong>起点与终点状态</strong>，
+没覆盖「中途会不会变」这个帧间维度。而 A 类名词（如"不要出现杂物"）在这里全部走正向锚定，
+一个都没写进 Do not。</div>
+
+<hr>
+
+<h2 id="p6">P6 · 完整提示词（当众官宣 · 爽点段）</h2>
+<p><span class="tag gold">T2VA</span> <span class="tag">15s</span> <span class="tag">2 / 11 / 2</span> <span class="tag">台词 29 字</span> <span class="tag">多人镜</span></p>
+
+<div class="danger"><b>这一镜是全套风险最高的。</b>三个风险叠加：多人（5 个有名有姓 + 路人）、
+手部精细动作（解领带）、强情绪。
+<strong>备选方案</strong>：若手部崩，把 B 主镜的「解领带」改成<strong>已完成态</strong>——
+开场领带就已经松着，她只做「抬手整理领口」这一个动作，不做解开的过程。</div>
+
+<h3>共用锁定块（增量部分）</h3>
+<div class="codewrap">
+  <div class="bar"><span>宴会厅锁定块</span><button class="copy">复制</button></div>
+<pre>【服装与随身资产串 · 本段版本】
+苏心妍身穿酒红色一字肩晚礼服，左耳垂佩戴一颗 3mm 珍珠耳钉，全程在左耳垂上不变。
+程岩身穿米白色衬衫、深灰色休闲西装与暗红色领带，领带在开场时打得很歪。
+徐杰身穿深灰色定制西装与浅蓝色衬衫，未系领带；左手腕佩戴一块银色金属表带的机械表，
+表盘朝掌心外侧，全程在同一只手腕上不变。
+田恬身穿亮黄色及膝连衣裙；高铭身穿藏青色休闲西装。
+画面内其余人物为远处被虚化的人群，无清晰五官，不给具体数量以外的细节。
+
+【场景与光位串】
+酒店宴会厅，夜景。唯一主光源为画面正上方的暖黄顶灯，柔和主光自上方 60° 打来；
+背景为虚化的圆桌、白色桌布与暖色壁灯，画面内所有可能承载文字的表面都是素面无标记的。</pre>
+</div>
+
+<h3>每镜六段</h3>
+<div class="codewrap">
+  <div class="bar"><span>三镜新增指令</span><button class="copy">复制</button></div>
+<pre>【Shot 1 · A 入镜 2s】
+① A medium shot frames the woman in the wine-red dress walking through the blurred crowd
+   toward the right of frame, her shoulders squared.
+② First her heel lands, then she passes a seated guest, then she slows to a stop.
+③ She does not speak.
+④ Her dress hem sways once; the warm ceiling light slides across her bare shoulder.
+⑤ The camera holds a static shot.
+⑥ Lighting matches the lock block exactly.
+⑦ By the end of the shot she has stopped one pace in front of him, framed from the waist up.
+   Do not let the ceiling light flicker at any point in the shot.
+
+【Shot 2 · B 主镜 11s】
+① A medium close-up frames her on the left and him on the right, face to face, one arm's
+   length apart, the blurred crowd filling the background.
+② First she raises both hands to his collar, then she loosens the crooked tie and reties it
+   slowly, then she turns her head toward the crowd and speaks.
+③ The woman with a clear, soft voice (S2) says: &lt;d&gt;[Chinese] 老公，领带不是这么打的。&lt;/d&gt;
+   Then, turning to the crowd, she says: &lt;d&gt;[Chinese] 这是我老公，程岩。&lt;/d&gt;
+④ Her earring catches the ceiling light; his throat moves once; the crowd behind them
+   holds still.
+⑤ The camera holds a static shot.
+⑥ Lighting matches the lock block exactly.
+⑦ By the end of the shot her hands rest on his chest and the tie sits straight and centred.
+   Do not let her hands leave his collar at any point in the shot.
+
+【Shot 3 · C 出镜 2s】
+① A close-up frames the man in the dark grey suit centred in frame, his smile already fixed.
+② First his jaw tightens, then the fingers of his left hand begin to tremble, then his
+   smile holds while his eyes go cold.
+③ He does not speak; his lips remain closed.
+④ The watch on his left wrist catches one steady highlight.
+⑤ The camera holds a static shot.
+⑥ Lighting matches the lock block exactly.
+⑦ By the end of the shot his smile is still fixed and his hand is still trembling.
+   Do not let his expression relax at any point in the shot.</pre>
+</div>
+
+<h3>官方格式</h3>
+<div class="codewrap">
+  <div class="bar"><span>H3 · integrated_multimodal_description</span><button class="copy">复制</button></div>
+<pre>integrated_multimodal_description: [Shot 1] Live-action, cinematic, 35mm lens, shallow depth of field. A medium shot frames the woman in the wine-red off-shoulder gown walking through a blurred dinner crowd toward the right of frame, her shoulders squared. First her heel lands, then she passes a seated guest, then she slows to a stop. Her dress hem sways once and the warm ceiling light slides across her bare shoulder. The camera holds a static shot. By the end of the shot she has stopped one pace in front of him. Do not let the ceiling light flicker at any point in the shot. [Shot 2] At 00:02.000, the camera cuts to a medium close-up of her on the left and the man in the grey suit on the right, face to face, one arm's length apart, the blurred crowd filling the background. First she raises both hands to his collar, then she loosens the crooked tie and reties it slowly, then she turns her head toward the crowd. The woman with a clear, soft voice (S2) says: &lt;d&gt;[Chinese] 老公，领带不是这么打的。&lt;/d&gt; Then, turning to the crowd, she says: &lt;d&gt;[Chinese] 这是我老公，程岩。&lt;/d&gt; Her earring catches the ceiling light; his throat moves once; the crowd behind them holds still. The camera holds a static shot. By the end of the shot her hands rest on his chest and the tie sits straight and centred. Do not let her hands leave his collar at any point in the shot. [Shot 3] At 00:13.000, the shot switches to a close-up of the man in the dark grey suit centred in frame, his smile already fixed. First his jaw tightens, then the fingers of his left hand begin to tremble, then his smile holds while his eyes go cold. He does not speak; his lips remain closed. The watch on his left wrist catches one steady highlight. The camera holds a static shot. Do not let his expression relax at any point in the shot.
+
+overall_soundscape: A hushed hotel banquet hall, the low murmur of a crowd settling, the soft scuff of a heel on carpet, fabric sliding against fabric, one held breath.
+
+non_diegetic_music: A single sustained cello note at a slow tempo, entering on her first line and swelling gently to the end of the shot.</pre>
+</div>
+
+<hr>
+
+<h2 id="audit">自查报告</h2>
+
+<h3>结构层（9 条，逐条过）</h3>
+<table>
+<thead><tr><th>#</th><th>校验项</th><th>结果</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>三镜时长和 = 15.0s，0.5s 网格</td><td><span class="tag green">✅</span> 2 + 11 + 2</td></tr>
+<tr><td>2</td><td>每镜 ≥ 1.5s（硬下限）</td><td><span class="tag green">✅</span> 最短 2.0s</td></tr>
+<tr><td>3</td><td>承载信息镜 ≥ 3.0s</td><td><span class="tag green">✅</span> 主镜 11s</td></tr>
+<tr><td>4</td><td>悬殊比 ≤ 2.5（量产）</td><td><span class="tag gold">⚠️ 5.5</span> 超出建议值——衔接镜任务轻（只摆状态），可接受；量产前先试拍</td></tr>
+<tr><td>5</td><td>台词 ≤ 47 字</td><td><span class="tag green">✅</span> P1 = 14 字，P6 = 29 字</td></tr>
+<tr><td>6</td><td>锁定块三镜逐字一致</td><td><span class="tag green">✅</span> 已按复制粘贴处理</td></tr>
+<tr><td>7</td><td>每镜 1 个运镜，官方术语</td><td><span class="tag green">✅</span> 全 Static Shot</td></tr>
+<tr><td>8</td><td>每镜 ≤1 句 Do not，内容 B 类</td><td><span class="tag green">✅</span> 各 1 句，均为帧间变化类</td></tr>
+<tr><td>9</td><td>每镜有备选方案</td><td><span class="tag green">✅</span> P6-B 已给（改已完成态）</td></tr>
+</tbody>
+</table>
+
+<h3>内容层</h3>
+<table>
+<thead><tr><th>检查项</th><th>结果</th></tr></thead>
+<tbody>
+<tr><td>手部</td><td><span class="tag gold">⚠️</span> P6-B 解领带属「中」风险。备选：改已完成态，只做整理领口</td></tr>
+<tr><td>动作连接词</td><td><span class="tag green">✅</span> 全 <code>First → then → then</code>，无 <code>while</code></td></tr>
+<tr><td>人数写死</td><td><span class="tag green">✅</span> 有名人物 5 人，路人写「虚化、无五官」</td></tr>
+<tr><td>光位一致</td><td><span class="tag green">✅</span> 三镜同一主光，末句均为「光位与锁定块一致」</td></tr>
+<tr><td>画面文字</td><td><span class="tag green">✅</span> 锁定块已声明所有可承载文字的表面为素面无标记</td></tr>
+<tr><td>资产</td><td><span class="tag green">✅</span> 每镜 ≤2 件（P6：耳钉 + 手表）</td></tr>
+<tr><td>说话人 ID</td><td><span class="tag green">✅</span> 程岩 (S1)、苏心妍 (S2)，跨镜不变</td></tr>
+<tr><td>台词双引号</td><td><span class="tag green">✅</span> <code>&lt;d&gt;</code> 内无双引号</td></tr>
+<tr><td>无配乐写法</td><td><span class="tag green">✅</span> P1 写 <code>N/A</code></td></tr>
+</tbody>
+</table>
+
+<h3>硬阻断命中情况</h3>
+<table>
+<thead><tr><th>硬阻断项</th><th>本片是否命中</th><th>处置</th></tr></thead>
+<tbody>
+<tr><td>屏幕内容（P3 班级群消息）</td><td><span class="tag gold">命中</span></td><td>干净底板 + 后期贴图。提示词只写「屏幕冷白光映在脸上」，不写消息内容</td></tr>
+<tr><td>小物件纯文本复现（耳钉 / 手表）</td><td><span class="tag gold">命中</span></td><td>量产前走 Ref2VA 参考图，或按资产复现测试法测 ≥20 次</td></tr>
+<tr><td>跨生成左右方位</td><td><span class="tag gold">命中</span></td><td>P5–P7 三人站位，须在同一请求内完成，或后期统一镜像</td></tr>
+<tr><td>物理接触 / 布料</td><td>未命中</td><td>—</td></tr>
+</tbody>
+</table>
+
+<h2 id="risk">风险与建议</h2>
+
+<div class="card warn">
+<h4>先做哪三段样片</h4>
+<ol>
+<li><strong>P6-B</strong>（最高风险：多人 + 手部 + 强情绪）—— 崩了直接影响爽点</li>
+<li><strong>P3-B</strong>（闪回 + 屏幕光）—— 验证闪回衔接与干净底板方案</li>
+<li><strong>P1-B</strong>（双人静态对话）—— 验证锁定块与人物一致性基线</li>
+</ol>
+<p style="margin-top:10px">三段跑完，用 <code>r = 剧本字数 ÷ 原文字数</code> 反算真实压缩比，再回过头校准集数。</p>
+</div>
+
+<div class="card">
+<h4>内容取舍建议</h4>
+<ul>
+<li><strong>必须留</strong>：第 5–7 章的三次「当众」（官宣 / 怼人 / 逼签合同）——这是全部爽点所在</li>
+<li><strong>可压</strong>：第 2 章高中往事闪回，压到 15 秒内只留 2 个画面（递水杯、拨菜）</li>
+<li><strong>可删</strong>：私募骗局的细节金额（六十万 / 五十万 / 七八年收益），P7 只留「敢签合同吗」这一句就够立住伏笔</li>
+<li><strong>需注意</strong>：原文含成人暗示（「七次」「X瘾症」）。成片建议全部改写为<strong>可过审的含蓄表达</strong>——P9 的「七次」误会保留荒诞感即可，不出现具体描述</li>
+</ul>
+</div>
+
+<div class="note"><b>一个提醒。</b>本文的爽点密度很高，但 135 秒只有 9 个段落位。
+如果目标平台是 60 秒一集（4 段），就必须砍到「钩子 + 官宣 + 真相 + 结婚」四段，
+中段伏笔全丢——那样「追妻火葬场」的反转会很突兀。
+<strong>建议至少按 135 秒做；若要分上下集，切点在 P5 与 P6 之间（男主赴宴 / 她入场）。</strong></div>
+
+<hr>
+<p style="color:var(--t3);font-size:13px">
+本拆解使用 MiniMax H3 分镜体系生成（主模板 + h3-novel-split / h3-character-asset / h3-camera-edit / h3-dialogue-voice / h3-expression-psych / h3-antibug-check）。
+压缩比未经样片校准，属推断值。</p>
+
+</main>
+</div>
+
+<button class="topbtn" id="topbtn">↑</button>
+
+<script>
+document.querySelectorAll('.codewrap').forEach(function(w){
+  var pre = w.querySelector('pre');
+  if(!pre) return;
+  var btn = document.createElement('button');
+  btn.className='copy'; btn.textContent='复制';
+  var bar=w.querySelector('.bar');
+  if(bar){ var o=bar.querySelector('.copy'); if(o)o.remove(); bar.appendChild(btn); }
+  else w.insertBefore(btn,w.firstChild);
+  btn.addEventListener('click',function(){
+    var txt=pre.innerText;
+    var done=function(){ btn.textContent='已复制'; btn.classList.add('done');
+      setTimeout(function(){btn.textContent='复制';btn.classList.remove('done');},1400); };
+    if(navigator.clipboard&&navigator.clipboard.writeText)
+      navigator.clipboard.writeText(txt).then(done,function(){fb(txt,done);});
+    else fb(txt,done);
+  });
+});
+function fb(txt,cb){ var ta=document.createElement('textarea'); ta.value=txt;
+  ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select();
+  try{document.execCommand('copy');cb();}catch(e){} document.body.removeChild(ta); }
+
+var links=Array.prototype.slice.call(document.querySelectorAll('#side a'));
+var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
+var cb=document.getElementById('chips');
+links.forEach(function(a){ var b=document.createElement('button'); b.className='chip';
+  b.textContent=a.textContent;
+  b.addEventListener('click',function(){document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'});});
+  cb.appendChild(b); });
+var chips=Array.prototype.slice.call(cb.children);
+function sync(){ var y=window.scrollY+120,idx=0;
+  for(var i=0;i<secs.length;i++){ if(secs[i]&&secs[i].offsetTop<=y) idx=i; }
+  links.forEach(function(a,i){a.classList.toggle('on',i===idx);});
+  chips.forEach(function(c,i){c.classList.toggle('on',i===idx);});
+  var on=chips[idx];
+  if(on){var r=on.getBoundingClientRect(),p=cb.getBoundingClientRect();
+    if(r.left<p.left||r.right>p.right) on.scrollIntoView({inline:'center',block:'nearest'});}
+  document.getElementById('topbtn').style.display=window.scrollY>600?'flex':'none';
+}
+window.addEventListener('scroll',sync,{passive:true});
+window.addEventListener('resize',sync); sync();
+document.getElementById('topbtn').addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+</script>
+</body>
+</html>

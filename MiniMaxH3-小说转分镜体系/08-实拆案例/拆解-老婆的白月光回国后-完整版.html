@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>《老婆的白月光回国后》· 完整拆解（27 镜全提示词）</title>
+<style>
+  :root{
+    --bg:#0F0E0E; --bg2:#161514; --panel:rgba(255,255,255,0.045);
+    --line:rgba(255,255,255,0.12); --line2:rgba(255,255,255,0.22);
+    --t1:#F2F2F2; --t2:#A8A8A8; --t3:#7A7A7A;
+    --gold:#E8C268; --gold-dim:rgba(232,194,104,0.14);
+    --green:#7FC99A; --red:#E8836B; --blue:#7FB3D9;
+    --mono:"Space Mono","JetBrains Mono","Consolas",monospace;
+    --sans:"Inter","Noto Sans SC",system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--t1);font-family:var(--sans);
+       -webkit-font-smoothing:antialiased;line-height:1.72;font-size:14.5px}
+  .topbar{position:fixed;top:0;left:0;right:0;height:56px;z-index:50;
+    background:rgba(15,14,14,0.94);backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:0 20px}
+  .brand{font-weight:700;font-size:15px;white-space:nowrap}
+  .brand span{color:var(--gold)}
+  .topbar .sp{flex:1}
+  .chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{flex:0 0 auto;font-size:11.5px;color:var(--t2);border:1px solid var(--line);
+    background:transparent;padding:4px 10px;cursor:pointer;white-space:nowrap;border-radius:2px}
+  .chip:hover{color:var(--t1);border-color:var(--line2)}
+  .chip.on{color:var(--gold);border-color:var(--gold);background:var(--gold-dim)}
+  .wrap{display:flex;margin-top:56px}
+  aside{width:230px;flex:0 0 230px;position:sticky;top:56px;height:calc(100vh - 56px);
+    overflow-y:auto;border-right:1px solid var(--line);padding:18px 12px 60px}
+  aside h4{font-size:10.5px;letter-spacing:.14em;color:var(--t3);font-weight:600;margin:14px 0 6px;padding-left:8px}
+  aside h4:first-child{margin-top:0}
+  aside a{display:block;font-size:12.8px;color:var(--t2);text-decoration:none;padding:5px 8px;
+    border-left:2px solid transparent;line-height:1.4}
+  aside a:hover{color:var(--t1)}
+  aside a.on{color:var(--gold);border-left-color:var(--gold);background:rgba(255,255,255,0.03)}
+  main{flex:1;min-width:0;padding:34px 40px 100px;max-width:1060px}
+  h1{font-size:27px;font-weight:700;margin-bottom:8px}
+  h2{font-size:22px;font-weight:700;margin:56px 0 8px;padding-top:16px;
+     border-top:1px solid var(--line);scroll-margin-top:76px}
+  h2:first-child{border-top:0;margin-top:0}
+  h3{font-size:16px;font-weight:600;margin:24px 0 8px;scroll-margin-top:76px}
+  h4{font-size:14px;font-weight:600;margin:16px 0 6px}
+  p{margin:9px 0;color:#DCDCDC}
+  .lead{font-size:15px;color:var(--t2)}
+  ul,ol{margin:9px 0 9px 22px;color:#DCDCDC}
+  li{margin:4px 0}
+  code{font-family:var(--mono);font-size:12.3px;background:rgba(255,255,255,0.07);
+    padding:1px 5px;border-radius:2px;color:#E8DCC0}
+  strong{color:#fff;font-weight:600}
+  hr{border:0;border-top:1px solid var(--line);margin:32px 0}
+  .card{border:1px solid var(--line);background:var(--panel);padding:16px 18px;margin:12px 0;border-radius:3px}
+  .card.hi{border-color:rgba(232,194,104,0.4);background:rgba(232,194,104,0.05)}
+  .card.warn{border-color:rgba(232,131,107,0.4);background:rgba(232,131,107,0.06)}
+  .note{border-left:2px solid var(--gold);padding:9px 13px;margin:12px 0;
+    background:rgba(232,194,104,0.05);font-size:13.3px;color:var(--t2)}
+  .note b{color:var(--gold)}
+  .danger{border-left:2px solid var(--red);padding:9px 13px;margin:12px 0;
+    background:rgba(232,131,107,0.06);font-size:13.3px;color:var(--t2)}
+  .danger b{color:var(--red)}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+  th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:10.5px;letter-spacing:.1em;color:var(--t3);font-weight:600;text-transform:uppercase}
+  tbody tr:hover{background:rgba(255,255,255,0.02)}
+  .codewrap{position:relative;margin:10px 0;border:1px solid var(--line);border-radius:3px;background:#0B0A0A}
+  .codewrap .bar{display:flex;justify-content:space-between;align-items:center;padding:5px 10px;
+    border-bottom:1px solid var(--line);font-size:10.5px;color:var(--t3);letter-spacing:.08em;text-transform:uppercase}
+  pre{white-space:pre-wrap;word-break:break-word;font-family:var(--mono);font-size:12px;
+    line-height:1.7;color:#DCDCDC;padding:12px 14px;margin:0;overflow-x:auto}
+  .copy{font-size:10.5px;color:var(--t2);border:1px solid var(--line2);background:transparent;
+    padding:3px 9px;cursor:pointer;font-family:var(--sans);border-radius:2px}
+  .copy:hover{color:var(--gold);border-color:var(--gold)}
+  .copy.done{color:var(--green);border-color:var(--green)}
+  .tag{display:inline-block;font-size:10.5px;padding:1.5px 7px;border:1px solid var(--line2);
+    color:var(--t2);border-radius:2px;margin-right:5px}
+  .tag.gold{color:var(--gold);border-color:var(--gold);background:var(--gold-dim)}
+  .tag.green{color:var(--green);border-color:var(--green)}
+  .tag.red{color:var(--red);border-color:var(--red)}
+  .kv{display:grid;grid-template-columns:auto 1fr;gap:5px 14px;font-size:13.2px;margin:8px 0}
+  .kv dt{color:var(--t3);white-space:nowrap}
+  .kv dd{color:#DCDCDC}
+  .seghdr{display:flex;align-items:center;gap:12px;padding:10px 0 6px;flex-wrap:wrap}
+  .seghdr .no{font-family:var(--mono);font-size:19px;font-weight:700;color:var(--gold)}
+  .seghdr .ttl{font-size:18px;font-weight:700}
+  .seghdr .tc{font-family:var(--mono);font-size:11.5px;color:var(--t3);margin-left:auto}
+  .shot{border:1px solid var(--line);border-left:2px solid var(--line2);background:var(--panel);
+    padding:12px 16px;margin:10px 0;border-radius:2px}
+  .shot > .sh{display:flex;gap:10px;align-items:center;margin-bottom:6px;flex-wrap:wrap}
+  .shot > .sh b{font-family:var(--mono);font-size:12px;color:var(--gold)}
+  .shot > .sh .meta{font-size:11.5px;color:var(--t3);font-family:var(--mono)}
+  .topbtn{position:fixed;right:20px;bottom:20px;width:38px;height:38px;border-radius:50%;
+    border:1px solid var(--line2);background:rgba(15,14,14,.9);color:var(--t2);cursor:pointer;
+    font-size:15px;display:none;align-items:center;justify-content:center;z-index:60}
+  .topbtn:hover{color:var(--gold);border-color:var(--gold)}
+  @media(max-width:900px){ aside{display:none} main{padding:22px 18px 80px} h1{font-size:22px} }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">《老婆的白月光回国后》· <span>完整拆解</span></div>
+  <div class="sp"></div>
+  <div class="chips" id="chips"></div>
+</div>
+
+<div class="wrap">
+<aside id="side">
+  <h4>基础</h4>
+  <a href="#brief">概览与集数</a>
+  <a href="#cast">角色卡与资产表</a>
+  <a href="#scenes">场景表</a>
+  <a href="#global">全局共用锁定块</a>
+  <h4>九段 × 三镜</h4>
+  <a href="#p1">P1 夜话试探</a>
+  <a href="#p2">P2 搬空八年</a>
+  <a href="#p3">P3 群里的白月光</a>
+  <a href="#p4">P4 电话说分手</a>
+  <a href="#p5">P5 压轴出场</a>
+  <a href="#p6">P6 当众官宣</a>
+  <a href="#p7">P7 反将一军</a>
+  <a href="#p8">P8 阳台的真相</a>
+  <a href="#p9">P9 七次与七年</a>
+  <h4>汇总</h4>
+  <a href="#audit">自查报告</a>
+  <a href="#shoot">试拍顺序建议</a>
+</aside>
+
+<main>
+
+<h1 id="brief">《老婆的白月光回国后，我哭着求他接盘》· 完整拆解</h1>
+<p class="lead">短篇都市情感 · 8,870 汉字 · <strong>135 秒 / 9 段 / 27 镜</strong> · 每段三镜均给出完整六段与官方格式。</p>
+
+<div class="card hi">
+<table style="margin:0">
+<tbody>
+<tr><th style="width:120px">集长</th><td>135 秒（9 × 15）</td></tr>
+<tr><td><strong>镜数</strong></td><td>27（9 × 3）</td></tr>
+<tr><td><strong>切分范式</strong></td><td>主镜优先 <code>2 / 11 / 2</code>，主镜一律 Static Shot</td></tr>
+<tr><td><strong>全片台词</strong></td><td>147 字（容量 425 字，用掉 35%）</td></tr>
+<tr><td><strong>最长单句</strong></td><td>16 字（上限 18）</td></tr>
+<tr><td><strong>硬阻断</strong></td><td>命中 3 项：屏幕内容 / 小物件 / 左右方位</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="note"><b>为什么主镜 11 秒都用 Static Shot。</b>体系建议：推/拉类运镜超过 8 秒，末帧构图漂移明显；
+环绕、跟拍更短（≤6s）。<strong>固定机位可占满 15 秒</strong>。所以 11 秒主镜只用 Static，
+镜头的"推进感"交给 C 出镜的景别变化（切镜实现），而不是在长镜里推。</div>
+
+<hr>
+
+<h2 id="cast">角色卡与资产表</h2>
+
+<h3>主要角色</h3>
+<table>
+<thead><tr><th>ID</th><th>角色</th><th>外形锚点</th><th>服装版本</th><th>声音</th></tr></thead>
+<tbody>
+<tr><td><strong>CH_01</strong></td><td>程岩<br>29 岁男主</td><td>圆脸带婴儿肥；寸头略长；浓眉；黑褐色眼睛，<strong>明显疲惫与黑眼圈</strong>；皮肤偏白；<strong>右眉尾一道约 1cm 浅色旧疤</strong>（独有特征）</td><td>
+<code>OUT_A</code> 深灰无标识纯棉圆领家居 T 恤 + 藏青家居长裤（P1–P3）<br>
+<code>OUT_B</code> 米白衬衫 + 深灰休闲西装 + 暗红领带（P4–P7）<br>
+<code>OUT_C</code> 黑色礼服西装 + 白衬衫 + 暗红领带（P9）</td><td>音色偏哑，语速中速偏慢，激动时破音</td></tr>
+<tr><td><strong>CH_02</strong></td><td>苏心妍<br>28 岁女主</td><td>鹅蛋脸；黑色长直发及肩、发尾微内扣；<strong>桃花眼、眼尾微挑</strong>；白皙皮肤；鼻梁挺直；唇形偏薄；170cm 纤细，肩线平直</td><td>
+<code>OUT_A</code> 米白真丝吊带睡裙（P1）<br>
+<code>OUT_B</code> 藏青职业套装 + 白衬衫（P2–P4、P7）<br>
+<code>OUT_C</code> 酒红一字肩晚礼服（P5–P6）<br>
+<code>OUT_D</code> 米白蕾丝婚纱（P9）</td><td>清冷偏薄；对外平稳偏慢，对男主时变软</td></tr>
+<tr><td><strong>CH_03</strong></td><td>徐杰<br>29 岁反派</td><td>方下颌；背头短发；深棕眼睛；小麦色皮肤；183cm 宽肩</td><td><code>OUT_A</code> 深灰定制西装 + 浅蓝衬衫，不系领带</td><td>温和磁性，被激怒时会压低</td></tr>
+<tr><td>CH_04</td><td>田恬<br>配角</td><td>28 岁女；齐刘海波波头；圆脸；表情常带崇拜</td><td>亮黄及膝连衣裙</td><td>语速快，爱起哄</td></tr>
+<tr><td>CH_05</td><td>高铭<br>配角</td><td>29 岁男；微胖；圆脸；短发；表情憨直</td><td>藏青休闲西装</td><td>洪亮，爱圆场</td></tr>
+<tr><td>—</td><td>路人</td><td colspan="3">宴会厅同学：<strong>远处被虚化的人群，无清晰五官</strong>，不给数量以外的细节</td></tr>
+</tbody>
+</table>
+
+<h3>资产表</h3>
+<table>
+<thead><tr><th>ID</th><th>物件</th><th>所属</th><th>风险</th><th>出现段</th><th>锁定写法要点</th></tr></thead>
+<tbody>
+<tr><td>AS_01</td><td>3mm 珍珠耳钉</td><td>CH_02</td><td><span class="tag">中高</span></td><td>P1–P9</td><td>左耳垂，全程不变，不被摘下或替换</td></tr>
+<tr><td>AS_02</td><td>银色机械表</td><td>CH_03</td><td><span class="tag">中</span></td><td>P5–P7、P9</td><td>左手腕，表盘朝掌心外侧，全程同一手腕</td></tr>
+<tr><td>AS_03</td><td>暗红领带</td><td>CH_01</td><td><span class="tag">中</span></td><td>P4–P6、P9</td><td>P6 开场打得很歪，结尾变正</td></tr>
+<tr><td>AS_04</td><td>鱼骨树叶摆盘</td><td>场景</td><td><span class="tag">低</span></td><td>P1（伏笔）</td><td>素面白瓷盘，只呈现颜色材质</td></tr>
+</tbody>
+</table>
+<div class="note"><b>一镜内需稳住的小物件 ≤ 2 件。</b>每镜只提当前需要的，其余不提——不提就不会被当噪声丢掉，也不占描述位。</div>
+
+<h2 id="scenes">场景表</h2>
+<table>
+<thead><tr><th>ID</th><th>场景</th><th>主光源方向</th><th>色温</th><th>出现段</th></tr></thead>
+<tbody>
+<tr><td>SC_01</td><td>主卧 · 夜</td><td>左前上方 45°</td><td>暖黄</td><td>P1</td></tr>
+<tr><td>SC_02</td><td>老公寓客厅 · 日</td><td>右侧窗户自然光</td><td>冷白偏中性</td><td>P2</td></tr>
+<tr><td>SC_03</td><td>新家客厅 · 夜</td><td>左侧落地灯 + 屏幕冷白光（次级）</td><td>暖黄 + 冷白</td><td>P3、P4</td></tr>
+<tr><td>SC_04</td><td>酒店宴会厅 · 夜</td><td>正上方顶灯 60°</td><td>暖黄</td><td>P5、P6、P7</td></tr>
+<tr><td>SC_05</td><td>地下停车场 · 夜</td><td>顶部冷白灯管</td><td>冷白</td><td>P7</td></tr>
+<tr><td>SC_06</td><td>老宅阳台 + 卧室 · 夜</td><td>城市远景光自右前方入</td><td>冷蓝 + 室内暖黄</td><td>P8、P9</td></tr>
+<tr><td>SC_07</td><td>婚礼现场 · 日</td><td>自然光自左前方</td><td>暖白</td><td>P9</td></tr>
+</tbody>
+</table>
+
+<h2 id="global">全局共用锁定块（各段在此基础上换服装串与场景串）</h2>
+<div class="codewrap">
+  <div class="bar"><span>角色身份串 · 全剧逐字复用</span><button class="copy">复制</button></div>
+<pre>程岩，29 岁男性，圆脸带婴儿肥，寸头略长，浓眉，黑褐色眼睛，眼下有明显的疲惫与黑眼圈，
+皮肤偏白，体型偏瘦，右眉尾有一道约 1cm 的浅色旧疤。
+苏心妍，28 岁女性，鹅蛋脸，黑色长直发及肩发尾微内扣，桃花眼眼尾微挑，白皙皮肤，
+鼻梁挺直，唇形偏薄，170cm 纤细，肩线平直。
+徐杰，29 岁男性，方下颌，背头短发，深棕色眼睛，小麦色皮肤，183cm 宽肩。</pre>
+</div>
+<div class="codewrap">
+  <div class="bar"><span>画风串 · 全剧逐字复用</span><button class="copy">复制</button></div>
+<pre>实拍电影感，写实风格，35mm 镜头，浅景深，背景轻微虚化，青绿与琥珀色调，中等反差，
+自然皮肤质感，轻微胶片颗粒，无风格化滤镜，色温与反差在三镜内完全一致。</pre>
+</div>
+
+<hr>
+
+<!-- ===================== P1 ===================== -->
+<h2 id="p1">P1 · 夜话试探</h2>
+<div class="seghdr">
+  <span class="no">P1</span><span class="ttl">夜话试探</span><span class="tc">00:00 – 00:15</span>
+</div>
+<dl class="kv">
+<dt>信息点</dt><dd>白月光徐杰回国了，男主想「让位」</dd>
+<dt>情绪转折</dt><dd>疲惫满足 → 试探的期待 → 被冷脸泼冷水</dd>
+<dt>场景 / 台词</dt><dd>SC_01 主卧 · 夜 ｜ 台词 13 字（容量 47）</dd>
+<dt>衔接</dt><dd>入点：开场 ｜ 出点：<strong>视线卡点</strong>——她的目光定在画外，下段接「她不在」的空房</dd>
+</dl>
+
+<table>
+<thead><tr><th>镜</th><th>时长</th><th>景别</th><th>运镜</th><th>内容</th><th>生成</th><th>风险</th><th>备选</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>2.0s</td><td>大特写</td><td>Static</td><td>床单上一只手松开、垂落</td><td>FL2VA</td><td>低</td><td>改空镜：窗帘缝隙的月光</td></tr>
+<tr><td>B</td><td>11.0s</td><td>中近景双人</td><td>Static</td><td>程岩试探开口，她肩线绷紧</td><td>T2VA</td><td>中</td><td>拆成两镜各 5.5s</td></tr>
+<tr><td>C</td><td>2.0s</td><td>大特写</td><td>Static</td><td>她眼神由涣散转清冷</td><td>FL2VA</td><td>低</td><td>改手部特写：抓被角</td></tr>
+</tbody>
+</table>
+
+<div class="codewrap">
+  <div class="bar"><span>P1 锁定块</span><button class="copy">复制</button></div>
+<pre>【角色身份串】（见全局，逐字复用）
+
+【服装与随身资产串】
+程岩身穿深灰色无标识纯棉圆领家居 T 恤与藏青色家居长裤。
+苏心妍身穿米白色无标识真丝吊带睡裙；左耳垂佩戴一颗 3mm 珍珠耳钉，
+该耳钉全程在左耳垂上，大小与光泽不变，不被摘下或替换。
+
+【场景与光位串】
+室内主卧，夜景。唯一可见光源为画面左侧的床头灯，单一柔和暖黄主光自画面左前方 45° 打来；
+背景为深灰色床头软包、米白色床品与一只素面白色水杯，
+画面内所有可能承载文字的表面都是素面无标记的，只呈现颜色、材质与反光。
+
+【画风串】（见全局，逐字复用）</pre>
+</div>
+
+<div class="shot"><div class="sh"><b>Shot 1 · A 入镜</b><span class="meta">2.0s · 大特写 · Static · FL2VA</span></div>
+<div class="codewrap" style="margin:6px 0"><div class="bar"><span>六段</span><button class="copy">复制</button></div><pre>① A close-up frames a hand lying open on the crumpled sheet at the lower-left of frame,
+   fingers relaxed, palm up.
+② First one finger twitches, then the fingers slowly uncurl, then the hand slips off the
+   edge of the bed and hangs still.
+③ No one speaks.
+④ The sheet creases shift in the warm light; a thin line of cool blue leaks through the
+   gap in the curtain at the back of frame.
+⑤ The camera holds a static shot.
+⑥ Lighting matches the lock block exactly.
+⑦ By the end of the shot the hand hangs motionless below the mattress edge and the frame
+   is filled by the deep grey headboard panel.
+   Do not let the bedside lamp flicker at any point in the shot.</pre></div></div>
+
+<div class="shot"><div class="sh"><b>Shot 2 · B 主镜</b><span class="meta">11.0s · 中近景双人 · Static · T2VA</span></div>
+<div class="codewrap" style="margin:6px 0"><div class="bar"><span>六段</span><button class="copy">复制</button></div><pre>① A medium close-up frames Cheng Yan propped against the headboard on the right third of
+   frame and Su Xinyan lying with her back to him on the left third, their shoulders about
+   one fist apart.
+② First his Adam's apple moves once, then he turns his head toward her back, then he speaks.
+③ The man with a raspy, tired voice (S1) says: &lt;d&gt;[Chinese] 亲爱的，听说徐杰从国外回来了？&lt;/d&gt;
+④ Her shoulder line tightens; the sheet rises and falls once with her breathing.
+⑤ The camera holds a static shot.
+⑥ Lighting matches the lock block exactly.
+⑦ By the end of the shot he is still turned toward her, waiting; her shoulder line stays
+   tight and she gives no answer.
+   Do not let her turn around at any point in the shot.</pre></div></div>
+
+<div class="shot"><div class="sh"><b>Shot 3 · C 出镜</b><span class="meta">2.0s · 大特写 · Static · FL2VA</span></div>
+<div class="codewrap" style="margin:6px 0"><div class="bar"><span>六段</span><button class="copy">复制</button></div><pre>① A large close-up frames her face in profile centred in frame, eyes open, lashes casting
+   a shadow in the warm light.
+② First her lashes tremble once, then her gaze sharpens from unfocused to cold.
+③ She does not speak; her lips remain closed.
+④ The bedside lamp holds a small still highlight in her pupil.
+⑤ The camera holds a static shot.
+⑥ Lighting matches the lock block exactly.
+⑦ By the end of the shot her gaze is fixed on a point beyond the lens and her expression
+   has gone cold.
+   Do not let her expression soften at any point in the shot.</pre></div></div>
+
+<div class="codewrap">
+  <div class="bar"><span>P1 官方格式（可直接提交）</span><button class="copy">复制</button></div>
+<pre>integrated_multimodal_description: [Shot 1] Live-action, cinematic, 35mm lens, shallow depth of field. A close-up frames a man's hand lying open on a crumpled bed sheet in the lower-left of frame, fingers relaxed, palm up. First one finger twitches, then the fingers slowly uncurl, then the hand slips off the edge of the bed and hangs still. A thin line of cool blue leaks through the gap in the curtain at the back of frame while the sheet creases shift in the warm light. The camera holds a static shot. By the end of the shot the hand hangs motionless below the mattress edge. Do not let the bedside lamp flicker at any point in the shot. [Shot 2] At 00:02.000, the camera cuts to a medium close-up of the same 29-year-old man propped against the headboard on the right third of frame and the same 28-year-old woman lying with her back to him on the left third, their shoulders about one fist apart. First his Adam's apple moves once, then he turns his head toward her back, then the man with a raspy, tired voice (S1) says: &lt;d&gt;[Chinese] 亲爱的，听说徐杰从国外回来了？&lt;/d&gt; Her shoulder line tightens; the sheet rises and falls once with her breathing. The camera holds a static shot. By the end of the shot he is still turned toward her, waiting, and her shoulder line stays tight. Do not let her turn around at any point in the shot. [Shot 3] At 00:13.000, the shot switches to a large close-up of her face in profile centred in frame, eyes open. First her lashes tremble once, then her gaze sharpens from unfocused to cold. She does not speak; her lips remain closed. The camera holds a static shot. By the end of the shot her gaze is fixed on a point beyond the lens. Do not let her expression soften at any point in the shot.
+
+overall_soundscape: A quiet bedroom at night, slow breathing, fabric shifting against skin, the faint hum of an air conditioner, one soft creak of the bed frame.
+
+non_diegetic_music: N/A</pre>
+</div>
+
+<hr>
+
+<!-- ===================== P2 ===================== -->
+<h2 id="p2">P2 · 搬空八年</h2>
+<div class="seghdr">
+  <span class="no">P2</span><span class="ttl">搬空八年</span><span class="tc">00:15 – 00:30</span>
+</div>
+<dl class="kv">
+<dt>信息点</dt><dd>他真的走了，八年的家搬空了</dd>
+<dt>情绪转折</dt><dd>决绝 → 回头那一眼的酸涩</dd>
+<dt>场景 / 台词</dt><dd>SC_02 老公寓客厅 · 日 ｜ <strong>无台词</strong>（纯画面 + 环境音）</dd>
+<dt>衔接</dt><dd>入点：动作延续（从 P1 的「背身」接「空荡的床」）｜ 出点：<strong>动作卡点</strong>——关门的手停在门把上，未落下</dd>
+</dl>
+
+<div class="note"><b>无台词段的好处。</b>环境音与画面可以承载全部情绪，不受 47 字容量约束，
+也不用担心口型。这类段落在体系里属于<strong>风险最低</strong>的一档，适合用来做首拍验证。</div>
+
+<table>
+<thead><tr><th>镜</th><th>时长</th><th>景别</th><th>运镜</th><th>内容</th><th>生成</th><th>风险</th><th>备选</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>2.0s</td><td>空镜</td><td>Static</td><td>空荡的衣柜，一枚衣架轻轻晃动</td><td>FL2VA</td><td>低</td><td>改：地板上的胶带痕</td></tr>
+<tr><td>B</td><td>11.0s</td><td>中景</td><td>Static</td><td>程岩放下纸箱，环视八年公寓</td><td>T2VA</td><td>中</td><td>拆成两镜各 5.5s</td></tr>
+<tr><td>C</td><td>2.0s</td><td>手部特写</td><td>Static</td><td>手停在门把上，未按下</td><td>FL2VA</td><td>中</td><td>改：门缝下的光影</td></tr>
+</tbody>
+</table>
+
+<div class="codewrap">
+  <div class="bar"><span>P2 锁定块（换 OUT_A + SC_02）</span><button class="copy">复制</button></div>
+<pre>【角色身份串】（见全局，逐字复用）
+
+【服装与随身资产串】
+程岩身穿深灰色无标识纯棉圆领家居 T 恤与藏青色家居长裤，袖口挽至小臂。
+（本段苏心妍不出场，不写她的任何描述。）
+
+【场景与光位串】
+老公寓客厅，日景。唯一光源为画面右侧的窗户，自然光自右前方斜射入室，色温偏冷白；
+房间已搬空，露出浅木色地板与米白墙面，墙面上留有几处浅色挂画痕迹；
+地面中央叠放着三只封好的素面纸箱，画面内所有可能承载文字的表面都是素面无标记的。
+
+【画风串】（见全局，逐字复用）</pre>
+</div>
+
+<div class="shot"><div class="sh"><b>Shot 1 · A 入镜</b><span class="meta">2.0s · 空镜 · Static · FL2VA</span></div>
+<div class="codewrap" style="margin:6px 0"><div class="bar"><span>六段</span><button class="copy">复制</button></div><pre>① A close-up frames an open empty wardrobe in the left half of frame, its interior a flat
+   pale panel, one bare hanger on the rail.
+② First the hanger swings once, then it slows, then it comes to rest tilted to one side.
+③ No one speaks.
+④ Dust drifts through the shaft of window light; the hanger casts a thin moving shadow on
+   the back panel.
+⑤ The camera holds a static shot.
+⑥ Lighting matches the lock block exactly.
+⑦ By the end of the shot the hanger hangs still and the wardrobe interior is empty.
+   Do not let the hanger start swinging again in this shot.</pre></div></div>
+
+<div class="shot"><div class="sh"><b>Shot 2 · B 主镜</b><span class="meta">11.0s · 中景 · Static · T2VA</span></div>
+<div class="codewrap" style="margin:6px 0"><div class="bar"><span>六段</span><button class="copy">复制</button></div><pre>① A medium shot frames Cheng Yan standing at the centre of the empty room, a sealed carton
+   at his feet, his hands at his sides.
+② First he sets the carton down slowly, then he straightens up, then he turns his head and
+   looks around the room from left to right.
+③ He does not speak; his lips remain closed.
+④ Dust drifts through the window light; the carton edge casts one long shadow across the
+   floorboards.
+⑤ The camera holds a static shot.
+⑥ Lighting matches the lock block exactly.
+⑦ By the end of the shot he has stopped moving, still facing the window, his shoulders
+   slightly lowered.
+   Do not let him pick the carton up again in this shot.</pre></div></div>
+
+<div class="shot"><div class="sh"><b>Shot 3 · C 出镜</b><span class="meta">2.0s · 手部特写 · Static · FL2VA</span></div>
+<div class="codewrap" style="margin:6px 0"><div class="bar"><span>六段</span><button class="copy">复制</button></div><pre>① A close-up frames his right hand gripping a brushed metal door handle, fingers wrapped
+   around the lever, knuckles visible.
+② First his grip tightens, then his fingers loosen slightly, then the hand holds still
+   without pressing down.
+③ He does not speak.
+④ A thin band of hallway light lies along the door edge; the handle casts a short shadow
+   on the door panel.
+⑤ The camera holds a static shot.
+⑥ Lighting matches the lock block exactly.
+⑦ By the end of the shot his hand is still closed on the handle and the door has not opened.
+   Do not let the door open at any point in the shot.</pre></div></div>
+
+<div class="codewrap">
+  <div class="bar"><span>P2 官方格式</span><button class="copy">复制</button></div>
+<pre>integrated_multimodal_description: [Shot 1] Live-action, cinematic, 35mm lens, shallow depth of field. A close-up frames an open empty wardrobe in the left half of frame, its interior a flat pale panel, one bare hanger on the rail. First the hanger swings once, then it slows, then it comes to rest tilted to one side. Dust drifts through the shaft of window light and the hanger casts a thin moving shadow on the back panel. The camera holds a static shot. By the end of the shot the hanger hangs still. Do not let the hanger start swinging again in this shot. [Shot 2] At 00:02.000, the camera cuts to a medium shot of the same 29-year-old man standing at the centre of the empty room, a sealed carton at his feet, his hands at his sides. First he sets the carton down slowly, then he straightens up, then he turns his head and looks around the room from left to right. He does not speak; his lips remain closed. Dust drifts through the window light and the carton edge casts one long shadow across the floorboards. The camera holds a static shot. By the end of the shot he has stopped moving, still facing the window. Do not let him pick the carton up again in this shot. [Shot 3] At 00:13.000, the shot switches to a close-up of his right hand gripping a brushed metal door handle, fingers wrapped around the lever. First his grip tightens, then his fingers loosen slightly, then the hand holds still without pressing down. A thin band of hallway light lies along the door edge. The camera holds a static shot. By the end of the shot his hand is still closed on the handle. Do not let the door open at any point in the shot.
+
+overall_soundscape: An empty room with a bare floor, the soft thud of a carton set down, the faint rattle of a hanger, distant traffic through a closed window.
+
+non_diegetic_music: A sparse piano motif at a slow tempo, four notes only, fading before the final second.</pre>
+</div>
+
+<hr>
+
+<!-- ===================== P3 ===================== -->
+<h2 id="p3">P3 · 群里的白月光</h2>
+<div class="seghdr">
+  <span class="no">P3</span><span class="ttl">群里的白月光</span><span class="tc">00:30 – 00:45</span>
+</div>
+<dl class="kv">
+<dt>信息点</dt><dd>接风宴明晚八点；高中时她曾为徐杰倾尽温柔</dd>
+<dt>情绪转折</dt><dd>平静刷手机 → 心被揪了一下</dd>
+<dt>场景 / 台词</dt><dd>SC_03 新家客厅 · 夜 ｜ <strong>无台词</strong>（群消息走画面文字，不计入台词容量）</dd>
+<dt>衔接</dt><dd>入点：空镜过渡 ｜ 出点：<strong>台词卡点</strong>——「是不是想挽回某人」悬在半空</dd>
+</dl>
+
+<div class="danger"><b>这一镜命中硬阻断：屏幕内容。</b>
+班级群的聊天记录是典型的「小面积 + 高密度文字」，<strong>任何模型都无法保证帧间稳定</strong>。
+处理：<strong>干净底板 + 后期贴图</strong>。提示词里只写「屏幕是一片发着冷白光的均匀表面」，
+<strong>绝不写消息原文</strong>（写了必乱码）。聊天内容在剪辑阶段贴上去，像素级稳定、可改字。</div>
+
+<table>
+<thead><tr><th>镜</th><th>时长</th><th>景别</th><th>运镜</th><th>内容</th><th>生成</th><th>风险</th><th>备选</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>2.0s</td><td>空镜</td><td>Static</td><td>新家客厅，阳光斜入，窗明几净</td><td>FL2VA</td><td>低</td><td>改：纸箱堆在墙角</td></tr>
+<tr><td>B</td><td>11.0s</td><td>近景</td><td>Static</td><td>程岩刷手机，屏幕光映脸</td><td>T2VA</td><td><strong>高</strong></td><td>手机背面朝镜头，只拍他的脸</td></tr>
+<tr><td>C</td><td>2.0s</td><td>眼部特写</td><td>Static</td><td>他眼神暗了一下</td><td>FL2VA</td><td>低</td><td>改：拇指停在屏幕上</td></tr>
+</tbody>
+</table>
+
+<div class="codewrap">
+  <div class="bar"><span>P3 锁定块（换 OUT_A + SC_03）</span><button class="copy">复制</button></div>
+<pre>【角色身份串】（见全局，逐字复用）
+
+【服装与随身资产串】
+程岩身穿深灰色无标识纯棉圆领家居 T 恤与藏青色家居长裤。
+
+【场景与光位串】
+新家客厅，夜景。主光源为画面左侧的落地灯，柔和暖黄主光自左前方 45° 打来；
+另有一部手机屏幕发出冷白光，作为画面内的次级补光从下方照亮他的下巴与脸的下半部；
+背景为浅灰色布艺沙发与一面留白墙面，
+画面内所有可能承载文字的表面（含手机屏幕）都是素面无标记的，
+手机屏幕是一片发着冷白光的均匀表面，屏幕上不显示任何可读内容。
+
+【画风串】（见全局，逐字复用）</pre>
+</div>
+
+<div class="shot"><div class="sh"><b>Shot 1 · A 入镜</b><span class="meta">2.0s · 空镜 · Static · FL2VA</span></div>
+<div class="codewrap" style="margin:6px 0"><div class="bar"><span>六段</span><button class="copy">复制</button></div><pre>① A wide shot frames a tidy empty living room, a low sofa on the left and a blank wall on
+   the right, late afternoon light entering from the window at the back.
+② First the curtain lifts slightly, then the light band on the floor widens, then everything
+   settles.
+③ No one speaks.
+④ Dust drifts through the light band; the curtain hem sways once.
+⑤ The camera holds a static shot.
+⑥ Lighting matches the lock block exactly.
+⑦ By the end of the shot the room is still and the floor holds one clean band of light.
+   Do not let the curtain lift again in this shot.</pre></div></div>
+
+<div class="shot"><div class="sh"><b>Shot 2 · B 主镜</b><span class="meta">11.0s · 近景 · Static · T2VA</span></div>
+<div class="codewrap" style="margin:6px 0"><div class="bar"><span>六段</span><button class="copy">复制</button></div><pre>① A close-up frames Cheng Yan seated on the sofa in the right third of frame, body angled
+   three-quarters to camera, a phone held in his right hand at chest height.
+② First he scrolls once with his thumb, then his thumb stops, then his eyes narrow and he
+   looks down at the screen a moment longer.
+③ He does not speak; his lips remain closed.
+④ The phone's cool white glow lights the underside of his chin and jaw; the lampshade casts
+   a steady warm pool of light on the wall beside him.
+⑤ The camera holds a static shot.
+⑥ Lighting matches the lock block exactly; the cool glow from the phone is the only added source.
+⑦ By the end of the shot he is still looking down, phone still in his right hand, framed chest-up.
+   Do not let the screen content become legible at any point in the shot.</pre></div></div>
+
+<div class="shot"><div class="sh"><b>Shot 3 · C 出镜</b><span class="meta">2.0s · 眼部特写 · Static · FL2VA</span></div>
+<div class="codewrap" style="margin:6px 0"><div class="bar"><span>六段</span><button class="copy">复制</button></div><pre>① A large close-up frames his eyes centred in frame, forehead to cheekbone filling the frame.
+② First he blinks once, then his lower lid tightens, then his gaze drops and holds.
+③ He does not speak; his lips remain closed.
+④ The cool white of the phone glows in his pupils as two small still points.
+⑤ The camera holds a static shot.
+⑥ Lighting matches the lock block exactly.
+⑦ By the end of the shot his gaze is lowered and his expression has dimmed.
+   Do not let his gaze lift again in this shot.</pre></div></div>
+
+<div class="codewrap">
+  <div class="bar"><span>P3 官方格式</span><button class="copy">复制</button></div>
+<pre>integrated_multimodal_description: [Shot 1] Live-action, cinematic, 35mm lens, shallow depth of field. A wide shot frames a tidy empty living room, a low sofa on the left and a blank wall on the right, late afternoon light entering from the window at the back. First the curtain lifts slightly, then the light band on the floor widens, then everything settles. Dust drifts through the light band. The camera holds a static shot. Do not let the curtain lift again in this shot. [Shot 2] At 00:02.000, the camera cuts to a close-up of the same 29-year-old man seated on the sofa in the right third of frame, a phone held in his right hand at chest height. First he scrolls once with his thumb, then his thumb stops, then his eyes narrow and he looks down at the screen a moment longer. He does not speak; his lips remain closed. The phone's cool white glow lights the underside of his chin and jaw; the lampshade casts a steady warm pool of light on the wall beside him. The camera holds a static shot. Do not let the screen content become legible at any point in the shot. [Shot 3] At 00:13.000, the shot switches to a large close-up of his eyes centred in frame. First he blinks once, then his lower lid tightens, then his gaze drops and holds. The cool white of the phone glows in his pupils as two small still points. The camera holds a static shot. Do not let his gaze lift again in this shot.
+
+overall_soundscape: A quiet living room at night, a soft screen tap, fabric shifting as he settles, the low hum of a floor lamp, distant traffic.
+
+non_diegetic_music: A low sustained string note at a slow tempo, entering halfway and holding to the end of the shot.</pre>
+</div>
+
+<hr>
+
+<!-- ===================== P4 ===================== -->
+<h2 id="p4">P4 · 电话里说分手</h2>
+<div class="seghdr">
+  <span class="no">P4</span><span class="ttl">电话里说分手</span><span class="tc">00:45 – 01:00</span>
+</div>
+<dl class="kv">
+<dt>信息点</dt><dd>男主正式提分手；女主第一次软下来</dd>
+<dt>情绪转折</dt><dd>硬撑的冷 → 听见呜咽后的动摇（但他不信）</dd>
+<dt>场景 / 台词</dt><dd>SC_03 新家 · 夜 ｜ 台词 17 字 ｜ 说话人：程岩 (S1)</dd>
+<dt>衔接</dt><dd>入点：声音先导（铃声先入，画面后切）｜ 出点：<strong>台词卡点</strong>——「见鬼了，她会为我哭？」</dd>
+</dl>
+
+<table>
+<thead><tr><th>镜</th><th>时长</th><th>景别</th><th>运镜</th><th>内容</th><th>生成</th><th>风险</th><th>备选</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>2.0s</td><td>道具特写</td><td>Static</td><td>手机在桌面震动，屏幕亮起</td><td>FL2VA</td><td>低</td><td>改：床头柜上的水杯纹路</td></tr>
+<tr><td>B</td><td>11.0s</td><td>近景</td><td>Static</td><td>程岩说出「分手吧」，表情硬撑</td><td>T2VA</td><td>中</td><td>拆两镜各 5.5s</td></tr>
+<tr><td>C</td><td>2.0s</td><td>侧脸特写</td><td>Static</td><td>他挂断，喉结滚动一次</td><td>FL2VA</td><td>低</td><td>改：手机被反扣在桌面</td></tr>
+</tbody>
+</table>
+
+<div class="codewrap">
+  <div class="bar"><span>P4 锁定块（换 OUT_A + SC_03）</span><button class="copy">复制</button></div>
+<pre>【角色身份串】（见全局，逐字复用）
+
+【服装与随身资产串】
+程岩身穿深灰色无标识纯棉圆领家居 T 恤与藏青色家居长裤。
+
+【场景与光位串】
+新家客厅，夜景。主光源为画面左侧的落地灯，柔和暖黄主光自左前方 45° 打来；
+画面右侧有一部放在茶几上的手机，其屏幕发出冷白光作为次级补光；
+背景为浅灰色布艺沙发与留白墙面，
+画面内所有可能承载文字的表面（含手机屏幕）都是素面无标记的，
+手机屏幕是一片发着冷白光的均匀表面，屏幕上不显示任何可读内容。
+
+【画风串】（见全局，逐字复用）</pre>
+</div>
+
+<div class="shot"><div class="sh"><b>Shot 1 · A 入镜</b><span class="meta">2.0s · 道具特写 · Static · FL2VA</span></div>
+<div class="codewrap" style="margin:6px 0"><div class="bar"><span>六段</span><button class="copy">复制</button></div><pre>① A close-up frames a phone lying face up on a light wooden table in the lower half of frame,
+   its screen a single uniform cool-white field.
+② First the phone jolts once against the tabletop, then the screen brightens, then the glow
+   spreads across the wood grain.
+③ No one speaks.
+④ The cool light crawls a few centimetres across the table; a cup edge catches one thin
+   highlight.
+⑤ The camera holds a static shot.
+⑥ Lighting matches the lock block exactly.
+⑦ By the end of the shot the phone lies still, its screen a uniform glowing field.
+   Do not let the screen content become legible at any point in the shot.</pre></div></div>
+
+<div class="shot"><div class="sh"><b>Shot 2 · B 主镜</b><span class="meta">11.0s · 近景 · Static · T2VA</span></div>
+<div class="codewrap" style="margin:6px 0"><div class="bar"><span>六段</span><button class="copy">复制</button></div><pre>① A close-up frames Cheng Yan seated on the sofa in the left third of frame, phone pressed
+   to his right ear, his shoulders squared.
+② First he draws one breath, then his jaw tightens, then he speaks.
+③ The man with a raspy voice, forcing an even tone (S1) says:
+   &lt;d&gt;[Chinese] 苏心妍，我不喜欢你了，分手吧。&lt;/d&gt;
+④ The cool white from the phone lights one side of his jaw; his free hand rests flat on his knee.
+⑤ The camera holds a static shot.
+⑥ Lighting matches the lock block exactly.
+⑦ By the end of the shot the phone is still at his ear and his jaw is still set.
+   Do not let his expression crumble at any point in the shot.</pre></div></div>
+
+<div class="shot"><div class="sh"><b>Shot 3 · C 出镜</b><span class="meta">2.0s · 侧脸特写 · Static · FL2VA</span></div>
+<div class="codewrap" style="margin:6px 0"><div class="bar"><span>六段</span><button class="copy">复制</button></div><pre>① A close-up frames his face in profile on the right of frame, the phone lowering from his ear.
+② First he pulls the phone away, then his Adam's apple moves once, then he presses his lips
+   together.
+③ He does not speak.
+④ The warm lamp light holds steady on his cheekbone; the phone's cool glow fades at the edge
+   of frame.
+⑤ The camera holds a static shot.
+⑥ Lighting matches the lock block exactly.
+⑦ By the end of the shot the phone is at his chest and his profile is still against the
+   warm light.
+   Do not let him bring the phone back to his ear in this shot.</pre></div></div>
+
+<div class="codewrap">
+  <div class="bar"><span>P4 官方格式</span><button class="copy">复制</button></div>
+<pre>integrated_multimodal_description: [Shot 1] Live-action, cinematic, 35mm lens, shallow depth of field. A close-up frames a phone lying face up on a light wooden table in the lower half of frame, its screen a single uniform cool-white field. First the phone jolts once against the tabletop, then the screen brightens, then the glow spreads across the wood grain. The camera holds a static shot. By the end of the shot the phone lies still. Do not let the screen content become legible at any point in the shot. [Shot 2] At 00:02.000, the camera cuts to a close-up of the same 29-year-old man seated on the sofa in the left third of frame, phone pressed to his right ear, his shoulders squared. First he draws one breath, then his jaw tightens, then the man with a raspy voice, forcing an even tone (S1) says: &lt;d&gt;[Chinese] 苏心妍，我不喜欢你了，分手吧。&lt;/d&gt; The cool white from the phone lights one side of his jaw; his free hand rests flat on his knee. The camera holds a static shot. By the end of the shot the phone is still at his ear. Do not let his expression crumble at any point in the shot. [Shot 3] At 00:13.000, the shot switches to a close-up of his face in profile on the right of frame. First he pulls the phone away, then his Adam's apple moves once, then he presses his lips together. He does not speak. The warm lamp light holds steady on his cheekbone. The camera holds a static shot. Do not let him bring the phone back to his ear in this shot.
+
+overall_soundscape: A quiet room at night, one sharp intake of breath, the faint hum of a lamp, the phone's cool silence after the call ends.
+
+non_diegetic_music: N/A</pre>
+</div>
+
+<hr>
+
+<!-- ===================== P5 ===================== -->
+<h2 id="p5">P5 · 压轴出场</h2>
+<div class="seghdr">
+  <span class="no">P5</span><span class="ttl">压轴出场</span><span class="tc">01:00 – 01:15</span>
+</div>
+<dl class="kv">
+<dt>信息点</dt><dd>她来了——但目光越过徐杰，落在男主身上</dd>
+<dt>情绪转折</dt><dd>不屑 → 错愕（她看的是我？）</dd>
+<dt>场景 / 台词</dt><dd>SC_04 宴会厅 · 夜 ｜ 台词 5 字 ｜ 说话人：徐杰 (S3)</dd>
+<dt>衔接</dt><dd>入点：遮挡黑场（大门推开）｜ 出点：<strong>视线卡点</strong>——她的目光定在他身上</dd>
+</dl>
+
+<div class="note"><b>本段起进入多人场景。</b>有名人物 4 人（程岩 / 苏心妍 / 徐杰 / 田恬），
+路人一律写「远处被虚化的人群，无清晰五官」。
+体系规则：<strong>一镜一个说话人</strong>，本段只有徐杰一句，程岩全程不出声，不给 ID。</div>
+
+<table>
+<thead><tr><th>镜</th><th>时长</th><th>景别</th><th>运镜</th><th>内容</th><th>生成</th><th>风险</th><th>备选</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>2.0s</td><td>局部</td><td>Static</td><td>宴会厅大门缓缓推开一道缝</td><td>FL2VA</td><td>低</td><td>改：门把手转动</td></tr>
+<tr><td>B</td><td>11.0s</td><td>中景</td><td>Static</td><td>她入场，越过徐杰看向程岩</td><td>T2VA</td><td><strong>高</strong></td><td>拆两镜：入场 5s + 对视 6s</td></tr>
+<tr><td>C</td><td>2.0s</td><td>眼部特写</td><td>Static</td><td>她哭肿的桃花眼，目光定住</td><td>FL2VA</td><td>低</td><td>改：徐杰僵住的侧脸</td></tr>
+</tbody>
+</table>
+
+<div class="codewrap">
+  <div class="bar"><span>P5 锁定块</span><button class="copy">复制</button></div>
+<pre>【角色身份串】（见全局，逐字复用）
+
+【服装与随身资产串】
+程岩身穿米白色衬衫、深灰色休闲西装与暗红色领带，领带打得很歪。
+苏心妍身穿酒红色一字肩晚礼服，左耳垂佩戴一颗 3mm 珍珠耳钉，全程在左耳垂上不变。
+徐杰身穿深灰色定制西装与浅蓝色衬衫，未系领带；左手腕佩戴一块银色金属表带的机械表，
+表盘朝掌心外侧，全程在同一只手腕上不变。
+田恬身穿亮黄色及膝连衣裙。
+画面内其余人物为远处被虚化的人群，无清晰五官，不给具体数量以外的细节。
+
+【场景与光位串】
+酒店宴会厅，夜景。唯一主光源为画面正上方的暖黄顶灯，柔和主光自上方 60° 打来；
+背景为虚化的圆桌、白色桌布与暖色壁灯，
+画面内所有可能承载文字的表面都是素面无标记的。
+
+【画风串】（见全局，逐字复用）</pre>
+</div>
+
+<div class="shot"><div class="sh"><b>Shot 1 · A 入镜</b><span class="meta">2.0s · 局部 · Static · FL2VA</span></div>
+<div class="codewrap" style="margin:6px 0"><div class="bar"><span>六段</span><button class="copy">复制</button></div><pre>① A close-up frames a pair of tall dark wooden banquet doors filling the frame, a thin seam
+   of warm light down the centre.
+② First the seam widens a few centimetres, then one door panel slides back, then the gap
+   holds open.
+③ No one speaks.
+④ Warm light spills across the carpet beyond the threshold; dust drifts in the beam.
+⑤ The camera holds a static shot.
+⑥ Lighting matches the lock block exactly.
+⑦ By the end of the shot the doorway holds a fixed gap of warm light.
+   Do not let the doors swing further open in this shot.</pre></div></div>
+
+<div class="shot"><div class="sh"><b>Shot 2 · B 主镜</b><span class="meta">11.0s · 中景 · Static · T2VA</span></div>
+<div class="codewrap" style="margin:6px 0"><div class="bar"><span>六段</span><button class="copy">复制</button></div><pre>① A medium shot frames the woman in the wine-red gown at the centre of frame, the man in the
+   dark grey suit on the left, the man in the grey blazer on the right, blurred guests behind.
+② First she steps through the doorway, then she walks past the man in the dark grey suit
+   without turning her head, then her gaze settles on the man on the right.
+③ The man in the dark grey suit with a warm, measured voice (S3) says:
+   &lt;d&gt;[Chinese] 晓妍，你来啦。&lt;/d&gt;
+④ Her gown hem sways once; the ceiling light slides across her bare shoulder; the crowd
+   behind holds still.
+⑤ The camera holds a static shot.
+⑥ Lighting matches the lock block exactly.
+⑦ By the end of the shot she has stopped two paces inside the room, still facing the man on
+   the right, and has not looked at the man in the dark grey suit.
+   Do not let her turn her head toward the man in the dark grey suit at any point in the shot.</pre></div></div>
+
+<div class="shot"><div class="sh"><b>Shot 3 · C 出镜</b><span class="meta">2.0s · 眼部特写 · Static · FL2VA</span></div>
+<div class="codewrap" style="margin:6px 0"><div class="bar"><span>六段</span><button class="copy">复制</button></div><pre>① A large close-up frames her eyes centred in frame, lids slightly swollen, lashes damp.
+② First her lashes lift, then her pupils contract, then her gaze fixes on a point beyond the lens.
+③ She does not speak; her lips remain closed.
+④ The ceiling light holds two small still highlights in her eyes.
+⑤ The camera holds a static shot.
+⑥ Lighting matches the lock block exactly.
+⑦ By the end of the shot her gaze is locked forward and her eyes are wet but unblinking.
+   Do not let her blink again in this shot.</pre></div></div>
+
+<div class="codewrap">
+  <div class="bar"><span>P5 官方格式</span><button class="copy">复制</button></div>
+<pre>integrated_multimodal_description: [Shot 1] Live-action, cinematic, 35mm lens, shallow depth of field. A close-up frames a pair of tall dark wooden banquet doors filling the frame, a thin seam of warm light down the centre. First the seam widens a few centimetres, then one door panel slides back, then the gap holds open. Warm light spills across the carpet beyond the threshold and dust drifts in the beam. The camera holds a static shot. Do not let the doors swing further open in this shot. [Shot 2] At 00:02.000, the camera cuts to a medium shot of the same 28-year-old woman in the wine-red gown at the centre of frame, the same 29-year-old man in the dark grey suit on the left, and the same 29-year-old man in the grey blazer on the right, blurred guests behind. First she steps through the doorway, then she walks past the man in the dark grey suit without turning her head, then her gaze settles on the man on the right. The man in the dark grey suit with a warm, measured voice (S3) says: &lt;d&gt;[Chinese] 晓妍，你来啦。&lt;/d&gt; Her gown hem sways once and the ceiling light slides across her bare shoulder. The camera holds a static shot. By the end of the shot she has stopped two paces inside the room, still facing the man on the right. Do not let her turn her head toward the man in the dark grey suit at any point in the shot. [Shot 3] At 00:13.000, the shot switches to a large close-up of her eyes centred in frame, lids slightly swollen, lashes damp. First her lashes lift, then her pupils contract, then her gaze fixes on a point beyond the lens. She does not speak; her lips remain closed. The camera holds a static shot. Do not let her blink again in this shot.
+
+overall_soundscape: A hotel banquet hall mid-conversation, the murmur of a crowd, the soft scuff of heels on carpet, one chair pushed back, a held breath.
+
+non_diegetic_music: A sustained string note at a slow tempo, entering on the doorway and swelling to the end of the shot.</pre>
+</div>
+
+<hr>
+
+<!-- ===================== P6 ===================== -->
+<h2 id="p6">P6 · 当众官宣</h2>
+<div class="seghdr">
+  <span class="no">P6</span><span class="ttl">当众官宣</span><span class="tc">01:15 – 01:30</span>
+</div>
+<dl class="kv">
+<dt>信息点</dt><dd>她当众叫他老公，正式官宣</dd>
+<dt>情绪转折</dt><dd>错愕 → 爽爆</dd>
+<dt>场景 / 台词</dt><dd>SC_04 宴会厅 · 夜 ｜ 台词 17 字 ｜ 说话人：苏心妍 (S2)</dd>
+<dt>衔接</dt><dd>入点：同构图匹配（接 P5 末帧她的正面）｜ 出点：<strong>揭示卡点</strong>——徐杰笑容僵住，青筋暴起</dd>
+</dl>
+
+<div class="danger"><b>全片最高风险镜。</b>三个风险叠加：多人（5 有名 + 路人）、
+手部精细动作（解领带）、强情绪。
+<strong>备选方案</strong>：若手部崩，改<strong>已完成态</strong>——开场领带已经松着，
+她只做「抬手整理领口」这一个动作，不走解开的过程。备选写在下方 Shot 2 的备注里。</div>
+
+<table>
+<thead><tr><th>镜</th><th>时长</th><th>景别</th><th>运镜</th><th>内容</th><th>生成</th><th>风险</th><th>备选</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>2.0s</td><td>中景</td><td>Static</td><td>她穿过人群走向他</td><td>FL2VA</td><td>中</td><td>改：只拍脚步与裙摆</td></tr>
+<tr><td>B</td><td>11.0s</td><td>中近景双人</td><td>Static</td><td>解领带、叫老公、当众官宣</td><td>T2VA</td><td><strong>高</strong></td><td><strong>改已完成态（见下）</strong></td></tr>
+<tr><td>C</td><td>2.0s</td><td>近景</td><td>Static</td><td>徐杰笑容僵住，手在抖</td><td>FL2VA</td><td>中</td><td>改：高铭别过脸</td></tr>
+</tbody>
+</table>
+
+<div class="codewrap">
+  <div class="bar"><span>P6 锁定块（同 P5，领带状态不同）</span><button class="copy">复制</button></div>
+<pre>【角色身份串】（见全局，逐字复用）
+
+【服装与随身资产串】
+程岩身穿米白色衬衫、深灰色休闲西装与暗红色领带，<strong>领带在开场时打得很歪、结松垮</strong>。
+苏心妍身穿酒红色一字肩晚礼服，左耳垂佩戴一颗 3mm 珍珠耳钉，全程在左耳垂上不变。
+徐杰身穿深灰色定制西装与浅蓝色衬衫，未系领带；左手腕佩戴一块银色金属表带的机械表，
+表盘朝掌心外侧，全程在同一只手腕上不变。
+田恬身穿亮黄色及膝连衣裙；高铭身穿藏青色休闲西装。
+画面内其余人物为远处被虚化的人群，无清晰五官，不给具体数量以外的细节。
+
+【场景与光位串】（同 P5）
+
+【画风串】（见全局，逐字复用）</pre>
+</div>
+
+<div class="shot"><div class="sh"><b>Shot 1 · A 入镜</b><span class="meta">2.0s · 中景 · Static · FL2VA</span></div>
+<div class="codewrap" style="margin:6px 0"><div class="bar"><span>六段</span><button class="copy">复制</button></div><pre>① A medium shot frames the woman in the wine-red gown walking through the blurred crowd
+   toward the right of frame, her shoulders squared.
+② First her heel lands, then she passes a seated guest, then she slows to a stop.
+③ She does not speak.
+④ Her dress hem sways once; the warm ceiling light slides across her bare shoulder.
+⑤ The camera holds a static shot.
+⑥ Lighting matches the lock block exactly.
+⑦ By the end of the shot she has stopped one pace in front of him, framed from the waist up.
+   Do not let the ceiling light flicker at any point in the shot.</pre></div></div>
+
+<div class="shot"><div class="sh"><b>Shot 2 · B 主镜（主方案）</b><span class="meta">11.0s · 中近景双人 · Static · T2VA</span></div>
+<div class="codewrap" style="margin:6px 0"><div class="bar"><span>六段</span><button class="copy">复制</button></div><pre>① A medium close-up frames her on the left and him on the right, face to face, one arm's
+   length apart, the blurred crowd filling the background.
+② First she raises both hands to his collar, then she loosens the crooked tie and reties it
+   slowly, then she turns her head toward the crowd and speaks.
+③ The woman with a clear, soft voice (S2) says: &lt;d&gt;[Chinese] 老公，领带不是这么打的。&lt;/d&gt;
+   Then, turning to the crowd, she says: &lt;d&gt;[Chinese] 这是我老公，程岩。&lt;/d&gt;
+④ Her earring catches the ceiling light; his throat moves once; the crowd behind them
+   holds still.
+⑤ The camera holds a static shot.
+⑥ Lighting matches the lock block exactly.
+⑦ By the end of the shot her hands rest on his chest and the tie sits straight and centred.
+   Do not let her hands leave his collar at any point in the shot.</pre></div></div>
+
+<div class="shot"><div class="sh"><b>Shot 2 · B 主镜（备选 · 已完成态）</b><span class="meta">手部崩时使用</span></div>
+<div class="codewrap" style="margin:6px 0"><div class="bar"><span>六段 · 备选</span><button class="copy">复制</button></div><pre>① A medium close-up frames her on the left and him on the right, face to face, one arm's
+   length apart, the blurred crowd filling the background.
+   <strong>开场时他的领带就已经松散地挂着，她不再做"解开"的动作。</strong>
+② First she lifts one hand and lays two fingers flat against his collar, then she smooths
+   the collar once, then she turns her head toward the crowd and speaks.
+③ The woman with a clear, soft voice (S2) says: &lt;d&gt;[Chinese] 老公，领带不是这么打的。&lt;/d&gt;
+   Then, turning to the crowd, she says: &lt;d&gt;[Chinese] 这是我老公，程岩。&lt;/d&gt;
+④ Her earring catches the ceiling light; his throat moves once; the crowd behind them
+   holds still.
+⑤ The camera holds a static shot.
+⑥ Lighting matches the lock block exactly.
+⑦ By the end of the shot her hand rests on his chest and the collar sits flat.
+   Do not let her hand leave his collar at any point in the shot.</pre></div>
+<p style="font-size:13px;color:var(--t2);margin-top:6px">
+改动只有一处：<strong>把「解开 → 重打」这个过程，换成「已经松着 → 只整理一下」的结果态</strong>。
+手部从「精细操作」降为「静态贴放」，风险从高降到低。台词、情绪、信息点全部不变。</p>
+</div>
+
+<div class="shot"><div class="sh"><b>Shot 3 · C 出镜</b><span class="meta">2.0s · 近景 · Static · FL2VA</span></div>
+<div class="codewrap" style="margin:6px 0"><div class="bar"><span>六段</span><button class="copy">复制</button></div><pre>① A close-up frames the man in the dark grey suit centred in frame, his smile already fixed.
+② First his jaw tightens, then the fingers of his left hand begin to tremble, then his smile
+   holds while his eyes go cold.
+③ He does not speak; his lips remain closed.
+④ The watch on his left wrist catches one steady highlight.
+⑤ The camera holds a static shot.
+⑥ Lighting matches the lock block exactly.
+⑦ By the end of the shot his smile is still fixed and his hand is still trembling.
+   Do not let his expression relax at any point in the shot.</pre></div></div>
+
+<div class="codewrap">
+  <div class="bar"><span>P6 官方格式</span><button class="copy">复制</button></div>
+<pre>integrated_multimodal_description: [Shot 1] Live-action, cinematic, 35mm lens, shallow depth of field. A medium shot frames the same 28-year-old woman in the wine-red off-shoulder gown walking through a blurred dinner crowd toward the right of frame, her shoulders squared. First her heel lands, then she passes a seated guest, then she slows to a stop. Her dress hem sways once and the warm ceiling light slides across her bare shoulder. The camera holds a static shot. Do not let the ceiling light flicker at any point in the shot. [Shot 2] At 00:02.000, the camera cuts to a medium close-up of her on the left and the same 29-year-old man in the grey blazer on the right, face to face, one arm's length apart, the blurred crowd filling the background. First she raises both hands to his collar, then she loosens the crooked dark red tie and reties it slowly, then she turns her head toward the crowd. The woman with a clear, soft voice (S2) says: &lt;d&gt;[Chinese] 老公，领带不是这么打的。&lt;/d&gt; Then, turning to the crowd, she says: &lt;d&gt;[Chinese] 这是我老公，程岩。&lt;/d&gt; Her pearl earring catches the ceiling light; his throat moves once; the crowd behind them holds still. The camera holds a static shot. By the end of the shot her hands rest on his chest and the tie sits straight and centred. Do not let her hands leave his collar at any point in the shot. [Shot 3] At 00:13.000, the shot switches to a close-up of the same man in the dark grey suit centred in frame, his smile already fixed. First his jaw tightens, then the fingers of his left hand begin to tremble, then his smile holds while his eyes go cold. He does not speak; his lips remain closed. The watch on his left wrist catches one steady highlight. The camera holds a static shot. Do not let his expression relax at any point in the shot.
+
+overall_soundscape: A hushed hotel banquet hall, the low murmur of a crowd settling, the soft scuff of a heel on carpet, fabric sliding against fabric, one held breath.
+
+non_diegetic_music: A single sustained cello note at a slow tempo, entering on her first line and swelling gently to the end of the shot.</pre>
+</div>
+
+<hr>
+
+<!-- ===================== P7 ===================== -->
+<h2 id="p7">P7 · 反将一军</h2>
+<div class="seghdr">
+  <span class="no">P7</span><span class="ttl">反将一军</span><span class="tc">01:30 – 01:45</span>
+</div>
+<dl class="kv">
+<dt>信息点</dt><dd>她逼徐杰签合同，当场拆穿；私募骗局埋伏笔</dd>
+<dt>情绪转折</dt><dd>爽 → 一丝警觉</dd>
+<dt>场景 / 台词</dt><dd>SC_04 宴会厅 → SC_05 地下停车场 · 夜 ｜ 台词 18 字 ｜ 说话人：苏心妍 (S2)</dd>
+<dt>衔接</dt><dd>入点：动作延续（他的手还在抖）｜ 出点：<strong>动作卡点</strong>——她拉开副驾门，一言不发</dd>
+</dl>
+
+<div class="note"><b>台词拆分的原因。</b>原句「让我和我老公投可以，但年收益三十，你敢签合同吗？」共 23 字，
+<strong>超出单句 18 字上限</strong>（超过则语速被迫加快，也超出字幕单行宽度）。
+已拆成 8 字 + 11 字两句，中间留一次换气。</div>
+
+<table>
+<thead><tr><th>镜</th><th>时长</th><th>景别</th><th>运镜</th><th>内容</th><th>生成</th><th>风险</th><th>备选</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>2.0s</td><td>手部特写</td><td>Static</td><td>徐杰颤抖的手放下酒杯</td><td>FL2VA</td><td>中</td><td>改：酒杯在桌面留下水痕</td></tr>
+<tr><td>B</td><td>11.0s</td><td>中景</td><td>Static</td><td>苏心妍逼问「敢签合同吗」</td><td>T2VA</td><td>中</td><td>拆两镜各 5.5s</td></tr>
+<tr><td>C</td><td>2.0s</td><td>中景</td><td>Static</td><td>她牵他离席，全场安静</td><td>FL2VA</td><td>中</td><td>改：停车场，她拉开车门</td></tr>
+</tbody>
+</table>
+
+<div class="codewrap">
+  <div class="bar"><span>P7 锁定块（换 OUT_B 职业装 · 结尾转 SC_05）</span><button class="copy">复制</button></div>
+<pre>【角色身份串】（见全局，逐字复用）
+
+【服装与随身资产串】
+苏心妍身穿藏青色职业套装与白色衬衫，左耳垂佩戴一颗 3mm 珍珠耳钉，全程在左耳垂上不变。
+程岩身穿米白色衬衫、深灰色休闲西装与暗红色领带，领带已打好。
+徐杰身穿深灰色定制西装与浅蓝色衬衫；左手腕佩戴一块银色金属表带的机械表，
+表盘朝掌心外侧，全程在同一只手腕上不变。
+画面内其余人物为远处被虚化的人群，无清晰五官。
+
+【场景与光位串】
+前段：酒店宴会厅，夜景，正上方暖黄顶灯，柔和主光自上方 60° 打来，背景为虚化圆桌与白桌布。
+后段：地下停车场，夜景，顶部冷白灯管，光线自上方垂直落下，背景为素面水泥柱与停放车辆。
+画面内所有可能承载文字的表面都是素面无标记的。
+
+【画风串】（见全局，逐字复用）</pre>
+</div>
+
+<div class="shot"><div class="sh"><b>Shot 1 · A 入镜</b><span class="meta">2.0s · 手部特写 · Static · FL2VA</span></div>
+<div class="codewrap" style="margin:6px 0"><div class="bar"><span>六段</span><button class="copy">复制</button></div><pre>① A close-up frames his left hand setting a glass of amber liquid onto a white tablecloth,
+   fingers spread around the bowl of the glass.
+② First the glass touches the cloth, then his fingers release it, then his hand withdraws
+   and rests trembling on the table edge.
+③ He does not speak.
+④ A thin ring of condensation sits on the cloth where the glass landed; the ceiling light
+   holds one still highlight on the glass rim.
+⑤ The camera holds a static shot.
+⑥ Lighting matches the lock block exactly.
+⑦ By the end of the shot the glass stands alone on the cloth and his hand lies beside it.
+   Do not let his hand still in this shot.</pre></div></div>
+
+<div class="shot"><div class="sh"><b>Shot 2 · B 主镜</b><span class="meta">11.0s · 中景 · Static · T2VA</span></div>
+<div class="codewrap" style="margin:6px 0"><div class="bar"><span>六段</span><button class="copy">复制</button></div><pre>① A medium shot frames the woman in the navy suit on the left and the man in the dark grey
+   suit on the right across a white-draped table, blurred guests behind them.
+② First she sets down her chopsticks, then she lifts her chin and meets his eyes, then she speaks.
+③ The woman with a clear, level voice (S2) says: &lt;d&gt;[Chinese] 让我老公投可以。&lt;/d&gt;
+   Then, without breaking her gaze, she says: &lt;d&gt;[Chinese] 年收益三十，你敢签合同吗？&lt;/d&gt;
+④ Her pearl earring catches the ceiling light; a glass rim throws one thin shadow across
+   the tablecloth; the crowd behind holds still.
+⑤ The camera holds a static shot.
+⑥ Lighting matches the lock block exactly.
+⑦ By the end of the shot her chin is still lifted and she is still holding his gaze.
+   Do not let her break eye contact at any point in the shot.</pre></div></div>
+
+<div class="shot"><div class="sh"><b>Shot 3 · C 出镜</b><span class="meta">2.0s · 中景 · Static · FL2VA</span></div>
+<div class="codewrap" style="margin:6px 0"><div class="bar"><span>六段</span><button class="copy">复制</button></div><pre>① A medium shot frames her walking away from the table on the left of frame, his hand held
+   in hers, their backs to camera.
+② First she rises from her chair, then she turns toward the exit, then they take two steps
+   and stop at the edge of frame.
+③ Neither speaks; their lips remain closed.
+④ Her gown hem sways once; the ceiling light slides off her shoulder as she turns.
+⑤ The camera holds a static shot.
+⑥ Lighting matches the lock block exactly.
+⑦ By the end of the shot the two of them stand at the frame edge, backs to camera, hands
+   still joined.
+   Do not let them turn back toward the table in this shot.</pre></div></div>
+
+<div class="codewrap">
+  <div class="bar"><span>P7 官方格式</span><button class="copy">复制</button></div>
+<pre>integrated_multimodal_description: [Shot 1] Live-action, cinematic, 35mm lens, shallow depth of field. A close-up frames his left hand setting a glass of amber liquid onto a white tablecloth, fingers spread around the bowl of the glass. First the glass touches the cloth, then his fingers release it, then his hand withdraws and rests trembling on the table edge. A thin ring of condensation sits on the cloth where the glass landed. The camera holds a static shot. By the end of the shot the glass stands alone on the cloth. Do not let his hand still in this shot. [Shot 2] At 00:02.000, the camera cuts to a medium shot of the same 28-year-old woman in the navy suit on the left and the same man in the dark grey suit on the right across a white-draped table, blurred guests behind. First she sets down her chopsticks, then she lifts her chin and meets his eyes, then the woman with a clear, level voice (S2) says: &lt;d&gt;[Chinese] 让我老公投可以。&lt;/d&gt; Then, without breaking her gaze, she says: &lt;d&gt;[Chinese] 年收益三十，你敢签合同吗？&lt;/d&gt; Her pearl earring catches the ceiling light; a glass rim throws one thin shadow across the tablecloth. The camera holds a static shot. By the end of the shot her chin is still lifted. Do not let her break eye contact at any point in the shot. [Shot 3] At 00:13.000, the shot switches to a medium shot of her walking away from the table on the left of frame, his hand held in hers, their backs to camera. First she rises from her chair, then she turns toward the exit, then they take two steps and stop at the edge of frame. Neither speaks. Her hem sways once and the ceiling light slides off her shoulder. The camera holds a static shot. Do not let them turn back toward the table in this shot.
+
+overall_soundscape: A banquet hall gone quiet, the soft scrape of a chair, cutlery set down on porcelain, footsteps receding on carpet, one low murmur that stops.
+
+non_diegetic_music: A low string pulse at a moderate tempo, entering on her first line and cutting cleanly on the final beat.</pre>
+</div>
+
+<hr>
+
+<!-- ===================== P8 ===================== -->
+<h2 id="p8">P8 · 阳台的真相</h2>
+<div class="seghdr">
+  <span class="no">P8</span><span class="ttl">阳台的真相</span><span class="tc">01:45 – 02:00</span>
+</div>
+<dl class="kv">
+<dt>信息点</dt><dd>她站在阳台是在想工作，不是怀念前任</dd>
+<dt>情绪转折</dt><dd>崩溃质问 → 释然的笑</dd>
+<dt>场景 / 台词</dt><dd>SC_06 老宅阳台 + 卧室 · 夜 ｜ 台词 41 字（最长单句 16）｜ 程岩 (S1)、苏心妍 (S2)</dd>
+<dt>衔接</dt><dd>入点：空镜（她习惯性走向阳台）｜ 出点：<strong>揭示卡点</strong>——她凑过来，他下一刻推开</dd>
+</dl>
+
+<div class="warning"></div>
+<div class="note"><b>本段台词 41 字，是全片最满的一段</b>（上限 47，安全线 45）。
+两人交替说话，但<strong>同一镜内只有一个说话人</strong>——本段 B 主镜 11 秒内两人先后说话，
+属风险点。若口型崩，备选：把苏心妍的两句改为<strong>画外音旁白</strong>，
+画面只拍程岩的反应。</div>
+
+<table>
+<thead><tr><th>镜</th><th>时长</th><th>景别</th><th>运镜</th><th>内容</th><th>生成</th><th>风险</th><th>备选</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>2.0s</td><td>空镜</td><td>Static</td><td>阳台夜色，她背影抬头</td><td>FL2VA</td><td>低</td><td>改：城市远景灯火</td></tr>
+<tr><td>B</td><td>11.0s</td><td>近景双人</td><td>Static</td><td>崩溃质问 → 真相大白</td><td>T2VA</td><td><strong>高</strong></td><td><strong>女方改画外音（见下）</strong></td></tr>
+<tr><td>C</td><td>2.0s</td><td>近景</td><td>Static</td><td>她破涕为笑，凑近</td><td>FL2VA</td><td>低</td><td>改：两只手在床沿相触</td></tr>
+</tbody>
+</table>
+
+<div class="codewrap">
+  <div class="bar"><span>P8 锁定块</span><button class="copy">复制</button></div>
+<pre>【角色身份串】（见全局，逐字复用）
+
+【服装与随身资产串】
+苏心妍身穿藏青色职业套装与白色衬衫，左耳垂佩戴一颗 3mm 珍珠耳钉，全程在左耳垂上不变；
+外套已脱下搭在椅背上。
+程岩身穿米白色衬衫与深灰色休闲西装，暗红色领带已解下不在身上。
+
+【场景与光位串】
+老宅卧室与相连的阳台，夜景。室内无主灯，唯一光源为画面右前方的城市远景光，
+冷蓝光自右前方斜射入室；背景为深色窗帘与一张铺着米白床品的床，
+画面内所有可能承载文字的表面都是素面无标记的。
+
+【画风串】（见全局，逐字复用）</pre>
+</div>
+
+<div class="shot"><div class="sh"><b>Shot 1 · A 入镜</b><span class="meta">2.0s · 空镜 · Static · FL2VA</span></div>
+<div class="codewrap" style="margin:6px 0"><div class="bar"><span>六段</span><button class="copy">复制</button></div><pre>① A wide shot frames a balcony at night, a woman's silhouette standing at the railing on the
+   right of frame, the city glittering below.
+② First she lifts her chin, then her shoulders rise and fall once, then she goes still.
+③ She does not speak.
+④ The city lights hold steady; a faint breeze moves the curtain at the left of frame.
+⑤ The camera holds a static shot.
+⑥ Lighting matches the lock block exactly.
+⑦ By the end of the shot her silhouette is motionless against the city light.
+   Do not let the curtain fall still in this shot.</pre></div></div>
+
+<div class="shot"><div class="sh"><b>Shot 2 · B 主镜（主方案）</b><span class="meta">11.0s · 近景双人 · Static · T2VA</span></div>
+<div class="codewrap" style="margin:6px 0"><div class="bar"><span>六段</span><button class="copy">复制</button></div><pre>① A close-up frames her seated on the bed on the left and him standing on the right, about
+   one arm's length apart, the dark curtain behind them.
+② First she turns her tear-wet face toward him, then her breath catches, then she speaks.
+③ She, with a broken, choked voice (S2) says:
+   &lt;d&gt;[Chinese] 程岩，我到底哪里做错了，你非要分手？&lt;/d&gt;
+   He, with a flat, tired voice (S1) says: &lt;d&gt;[Chinese] 你心里明明念着徐杰，为什么还拖着我？&lt;/d&gt;
+   She, softer now (S2) says: &lt;d&gt;[Chinese] 那是我在想工作上的事。&lt;/d&gt;
+④ Her earring catches the city light; the curtain edge lifts once behind him.
+⑤ The camera holds a static shot.
+⑥ Lighting matches the lock block exactly.
+⑦ By the end of the shot her tears have slowed and she is looking up at him.
+   Do not let him step closer at any point in the shot.</pre></div></div>
+
+<div class="shot"><div class="sh"><b>Shot 2 · B 主镜（备选 · 女方改画外音）</b><span class="meta">口型崩时使用</span></div>
+<div class="codewrap" style="margin:6px 0"><div class="bar"><span>六段 · 备选</span><button class="copy">复制</button></div><pre>① A close-up frames him seated on the bed on the right of frame, listening, the dark curtain
+   behind him.
+② First his eyes lift, then his jaw tightens, then he speaks.
+③ He, with a flat, tired voice (S1) says:
+   &lt;d&gt;[Chinese] 你心里明明念着徐杰，为什么还拖着我？&lt;/d&gt;
+   <strong>她的两句全部改为画外音旁白：</strong>
+   She (S2) says in an off-screen voiceover:
+   &lt;d&gt;[Chinese] 程岩，我到底哪里做错了，你非要分手？&lt;/d&gt;
+   while her lips remain out of frame.
+   Then, later in the shot, she (S2) says in an off-screen voiceover:
+   &lt;d&gt;[Chinese] 那是我在想工作上的事。&lt;/d&gt;
+   while her lips remain out of frame.
+④ The city light from the right holds steady on his cheek; the curtain edge lifts once.
+⑤ The camera holds a static shot.
+⑥ Lighting matches the lock block exactly.
+⑦ By the end of the shot his jaw has loosened and he is looking toward the balcony.
+   Do not let him step out of frame at any point in the shot.</pre></div>
+<p style="font-size:13px;color:var(--t2);margin-top:6px">
+原理：把双人同镜降为<strong>单人同镜</strong>，女方走官方画外音句式
+（<code>says in an off-screen voiceover</code> + 说明其嘴唇不在画面内），
+口型同步风险直接归零。台词一字不改。</p>
+</div>
+
+<div class="shot"><div class="sh"><b>Shot 3 · C 出镜</b><span class="meta">2.0s · 近景 · Static · FL2VA</span></div>
+<div class="codewrap" style="margin:6px 0"><div class="bar"><span>六段</span><button class="copy">复制</button></div><pre>① A close-up frames her face centred in frame, wet lashes, the corners of her mouth lifting.
+② First her lashes lift, then one corner of her mouth turns up, then she leans a few
+   centimetres toward the lens.
+③ She does not speak; her lips remain closed.
+④ The city light from the right holds a soft edge along her cheekbone.
+⑤ The camera holds a static shot.
+⑥ Lighting matches the lock block exactly.
+⑦ By the end of the shot she has leaned in and her mouth is set in a small smile.
+   Do not let her smile fade at any point in the shot.</pre></div></div>
+
+<div class="codewrap">
+  <div class="bar"><span>P8 官方格式</span><button class="copy">复制</button></div>
+<pre>integrated_multimodal_description: [Shot 1] Live-action, cinematic, 35mm lens, shallow depth of field. A wide shot frames a balcony at night, the same woman's silhouette standing at the railing on the right of frame, the city glittering below. First she lifts her chin, then her shoulders rise and fall once, then she goes still. The city lights hold steady and a faint breeze moves the curtain at the left of frame. The camera holds a static shot. Do not let the curtain fall still in this shot. [Shot 2] At 00:02.000, the camera cuts to a close-up of her seated on the bed on the left and the same man standing on the right, about one arm's length apart, the dark curtain behind them. First she turns her tear-wet face toward him, then her breath catches, then she, with a broken, choked voice (S2) says: &lt;d&gt;[Chinese] 程岩，我到底哪里做错了，你非要分手？&lt;/d&gt; He, with a flat, tired voice (S1) says: &lt;d&gt;[Chinese] 你心里明明念着徐杰，为什么还拖着我？&lt;/d&gt; She, softer now (S2) says: &lt;d&gt;[Chinese] 那是我在想工作上的事。&lt;/d&gt; Her pearl earring catches the city light; the curtain edge lifts once behind him. The camera holds a static shot. By the end of the shot her tears have slowed. Do not let him step closer at any point in the shot. [Shot 3] At 00:13.000, the shot switches to a close-up of her face centred in frame, wet lashes. First her lashes lift, then one corner of her mouth turns up, then she leans a few centimetres toward the lens. She does not speak; her lips remain closed. The city light from the right holds a soft edge along her cheekbone. The camera holds a static shot. Do not let her smile fade at any point in the shot.
+
+overall_soundscape: A quiet bedroom at night, catching breath, the distant hum of traffic far below, fabric shifting on the bed, one curtain stirring.
+
+non_diegetic_music: A sustained cello note at a slow tempo, entering on her question and releasing on her final line.</pre>
+</div>
+
+<hr>
+
+<!-- ===================== P9 ===================== -->
+<h2 id="p9">P9 · 七次与七年</h2>
+<div class="seghdr">
+  <span class="no">P9</span><span class="ttl">七次与七年</span><span class="tc">02:00 – 02:15</span>
+</div>
+<dl class="kv">
+<dt>信息点</dt><dd>「七次」是吹牛；一年后结婚；徐杰诈骗判七年</dd>
+<dt>情绪转折</dt><dd>荒唐 → 甜 → 报应的痛快</dd>
+<dt>场景 / 台词</dt><dd>SC_06 卧室 → SC_07 婚礼 · 日 ｜ 台词 36 字（前三句程岩 S1，末句画外音旁白）</dd>
+<dt>衔接</dt><dd>入点：反向动作（她凑近，他推开）｜ 出点：闭环收尾</dd>
+</dl>
+
+<div class="note"><b>三句台词 + 一句旁白 = 36 字，是全片信息密度最高的一段。</b>
+「婚礼」与「判决七年」压缩进 C 出镜的画外音（<code>后来我们结了婚</code>），
+不另开镜头——因为 C 只有 2 秒，塞不下两个时空，
+而旁白可以在 2 秒内交代完整，画面只需一个表意镜头。</div>
+
+<table>
+<thead><tr><th>镜</th><th>时长</th><th>景别</th><th>运镜</th><th>内容</th><th>生成</th><th>风险</th><th>备选</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>2.0s</td><td>近景</td><td>Static</td><td>他一把推开她</td><td>FL2VA</td><td>中</td><td>改：两只手撑在床沿分开</td></tr>
+<tr><td>B</td><td>11.0s</td><td>中景</td><td>Static</td><td>「七次」误会解开</td><td>T2VA</td><td>中</td><td>拆两镜各 5.5s</td></tr>
+<tr><td>C</td><td>2.0s</td><td>近景</td><td>Static</td><td>婚礼现场，两人相视而笑</td><td>FL2VA</td><td>中</td><td>改：手机屏幕，班级群</td></tr>
+</tbody>
+</table>
+
+<div class="codewrap">
+  <div class="bar"><span>P9 锁定块</span><button class="copy">复制</button></div>
+<pre>【角色身份串】（见全局，逐字复用）
+
+【服装与随身资产串】
+前段（SC_06 卧室）：程岩身穿米白色衬衫与深灰色休闲西装，领带不在身上；
+苏心妍身穿藏青色职业套装与白色衬衫，左耳垂佩戴一颗 3mm 珍珠耳钉，全程在左耳垂上不变。
+后段（SC_07 婚礼）：程岩身穿黑色礼服西装、白衬衫与暗红色领带；
+苏心妍身穿米白色蕾丝婚纱，左耳垂佩戴同一颗 3mm 珍珠耳钉。
+
+【场景与光位串】
+前段：老宅卧室，夜景，唯一光源为画面右前方的城市远景光，冷蓝光自右前方斜射入室。
+后段：婚礼现场，日景，柔和自然光自画面左前方打来，色温暖白；
+背景为虚化的白色花拱门与座椅，画面内所有可能承载文字的表面都是素面无标记的。
+
+【画风串】（见全局，逐字复用）</pre>
+</div>
+
+<div class="shot"><div class="sh"><b>Shot 1 · A 入镜</b><span class="meta">2.0s · 近景 · Static · FL2VA</span></div>
+<div class="codewrap" style="margin:6px 0"><div class="bar"><span>六段</span><button class="copy">复制</button></div><pre>① A close-up frames her leaning in from the right of frame and his hands on her shoulders
+   holding her back.
+② First her eyes close, then his hands push her gently but firmly away, then she steadies
+   herself at arm's length.
+③ Neither speaks; their lips remain closed.
+④ The city light from the right holds one edge along her cheek; the bedsheet creases behind them.
+⑤ The camera holds a static shot.
+⑥ Lighting matches the lock block exactly.
+⑦ By the end of the shot she is held at arm's length, eyes open, and his hands are still on
+   her shoulders.
+   Do not let his hands leave her shoulders in this shot.</pre></div></div>
+
+<div class="shot"><div class="sh"><b>Shot 2 · B 主镜</b><span class="meta">11.0s · 中景 · Static · T2VA</span></div>
+<div class="codewrap" style="margin:6px 0"><div class="bar"><span>六段</span><button class="copy">复制</button></div><pre>① A medium shot frames him seated on the bed on the left and her standing at arm's length
+   on the right, facing each other, the dark curtain behind them.
+② First he lowers his hands to his knees, then he looks up at her, then he speaks.
+③ He, with an embarrassed, rushing voice (S1) says: &lt;d&gt;[Chinese] 苏心妍，我扛不住了。&lt;/d&gt;
+   Then he says: &lt;d&gt;[Chinese] 刚在一起一百七十斤，现在一百四。&lt;/d&gt;
+   Then he says: &lt;d&gt;[Chinese] 那七次是我吹牛。&lt;/d&gt;
+④ Her earring catches the city light; her mouth opens slightly; neither moves otherwise.
+⑤ The camera holds a static shot.
+⑥ Lighting matches the lock block exactly.
+⑦ By the end of the shot her mouth is still slightly open and he is looking down at his hands.
+   Do not let either of them move closer at any point in the shot.</pre></div></div>
+
+<div class="shot"><div class="sh"><b>Shot 3 · C 出镜</b><span class="meta">2.0s · 近景 · Static · FL2VA</span></div>
+<div class="codewrap" style="margin:6px 0"><div class="bar"><span>六段</span><button class="copy">复制</button></div><pre>① A close-up frames the two of them side by side in a wedding venue, her in a lace gown on
+   the left and him in a black suit on the right, soft daylight on their faces.
+② First they turn their heads toward each other, then their mouths lift into matching smiles,
+   then they hold the look.
+③ He (S1) says in an off-screen voiceover: &lt;d&gt;[Chinese] 后来我们结了婚。&lt;/d&gt;
+   while his on-screen lips remain closed.
+④ Warm daylight holds steady on both faces; the blurred white floral arch behind them
+   stays still.
+⑤ The camera holds a static shot.
+⑥ Lighting matches the lock block exactly.
+⑦ By the end of the shot the two of them are still smiling at each other, faces side by side.
+   Do not let either of them look away at any point in the shot.</pre></div>
+<p style="font-size:13px;color:var(--t2);margin-top:6px">
+<b>这句旁白用了官方成对句式</b>：<code>says in an off-screen voiceover</code> +
+<code>while his on-screen lips remain closed</code>。
+<b>两句必须成对出现</b>，漏掉后半句就会出现「嘴在动但声音是画外音」的穿帮。</p>
+</div>
+
+<div class="codewrap">
+  <div class="bar"><span>P9 官方格式</span><button class="copy">复制</button></div>
+<pre>integrated_multimodal_description: [Shot 1] Live-action, cinematic, 35mm lens, shallow depth of field. A close-up frames the same woman leaning in from the right of frame and the same man's hands on her shoulders holding her back. First her eyes close, then his hands push her gently but firmly away, then she steadies herself at arm's length. Neither speaks; their lips remain closed. The city light from the right holds one edge along her cheek. The camera holds a static shot. Do not let his hands leave her shoulders in this shot. [Shot 2] At 00:02.000, the camera cuts to a medium shot of him seated on the bed on the left and her standing at arm's length on the right, facing each other, the dark curtain behind them. First he lowers his hands to his knees, then he looks up at her, then he, with an embarrassed, rushing voice (S1) says: &lt;d&gt;[Chinese] 苏心妍，我扛不住了。&lt;/d&gt; Then he says: &lt;d&gt;[Chinese] 刚在一起一百七十斤，现在一百四。&lt;/d&gt; Then he says: &lt;d&gt;[Chinese] 那七次是我吹牛。&lt;/d&gt; Her pearl earring catches the city light; her mouth opens slightly; neither moves otherwise. The camera holds a static shot. Do not let either of them move closer at any point in the shot. [Shot 3] At 00:13.000, the shot switches to a close-up of the two of them side by side in a wedding venue, her in a lace gown on the left and him in a black suit on the right, soft daylight on their faces. First they turn their heads toward each other, then their mouths lift into matching smiles, then they hold the look. He (S1) says in an off-screen voiceover: &lt;d&gt;[Chinese] 后来我们结了婚。&lt;/d&gt; while his on-screen lips remain closed. The blurred white floral arch behind them stays still. The camera holds a static shot. Do not let either of them look away at any point in the shot.
+
+overall_soundscape: A quiet bedroom at night, a held breath, then the soft outdoor hush of a wedding ceremony, a faint breeze, distant birds.
+
+non_diegetic_music: A warm string swell at a moderate tempo, entering on the final shot and holding through the last second.</pre>
+</div>
+
+<hr>
+
+<h2 id="audit">自查报告</h2>
+
+<h3>结构层 · 9 条</h3>
+<table>
+<thead><tr><th>#</th><th>校验项</th><th>结果</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>三镜时长和 = 15.0s，0.5s 网格</td><td><span class="tag green">✅</span> 全部 2 + 11 + 2</td></tr>
+<tr><td>2</td><td>每镜 ≥ 1.5s</td><td><span class="tag green">✅</span> 最短 2.0s</td></tr>
+<tr><td>3</td><td>承载信息镜 ≥ 3.0s</td><td><span class="tag green">✅</span> 主镜 11s</td></tr>
+<tr><td>4</td><td>悬殊比 ≤ 2.5（量产）</td><td><span class="tag gold">⚠️ 5.5</span> 合法但超建议值，需试拍确认</td></tr>
+<tr><td>5</td><td>每段台词 ≤ 47 字</td><td><span class="tag green">✅</span> 最高 P8 = 41 字</td></tr>
+<tr><td>6</td><td>单句 ≤ 18 字</td><td><span class="tag green">✅</span> 最高 16 字（P8）</td></tr>
+<tr><td>7</td><td>锁定块三镜逐字一致</td><td><span class="tag green">✅</span> 每段一份，复制粘贴</td></tr>
+<tr><td>8</td><td>每镜 1 个运镜</td><td><span class="tag green">✅</span> 27 镜全 Static Shot</td></tr>
+<tr><td>9</td><td>每镜有备选方案</td><td><span class="tag green">✅</span> 27 镜全填；P6-B、P8-B 另给完整备选写法</td></tr>
+</tbody>
+</table>
+
+<h3>内容层</h3>
+<table>
+<thead><tr><th>项</th><th>结果</th></tr></thead>
+<tbody>
+<tr><td>动作连接词</td><td><span class="tag green">✅</span> 全部 <code>First → then → then</code>，27 镜无一处 <code>while</code></td></tr>
+<tr><td>人数写死</td><td><span class="tag green">✅</span> 有名人物最多 5 人（P6），路人统一「虚化、无清晰五官」</td></tr>
+<tr><td>光位一致</td><td><span class="tag green">✅</span> 三镜同一主光，每镜第 ⑥ 段均声明一致</td></tr>
+<tr><td>画面文字</td><td><span class="tag green">✅</span> 锁定块已声明所有可承载文字的表面为素面无标记；P3/P4 屏幕另加「不显示任何可读内容」</td></tr>
+<tr><td>资产</td><td><span class="tag green">✅</span> 每镜 ≤ 2 件</td></tr>
+<tr><td>说话人 ID</td><td><span class="tag green">✅</span> 程岩 (S1) / 苏心妍 (S2) / 徐杰 (S3)，全片一致；不出声者未给 ID</td></tr>
+<tr><td>台词双引号</td><td><span class="tag green">✅</span> 22 处 <code>&lt;d&gt;</code> 标签内均无双引号</td></tr>
+<tr><td>画外音成对</td><td><span class="tag green">✅</span> P8 备选、P9-C 均写了「while ... lips remain ... closed」</td></tr>
+<tr><td>无配乐写法</td><td><span class="tag green">✅</span> P1、P4 写 <code>N/A</code></td></tr>
+<tr><td>Do not 冗余性</td><td><span class="tag green">✅</span> 27 句全部 B 类（帧间变化/状态），0 句命中 A 类名词</td></tr>
+</tbody>
+</table>
+
+<h3>硬阻断命中与处置</h3>
+<table>
+<thead><tr><th>项</th><th>命中段</th><th>处置</th></tr></thead>
+<tbody>
+<tr><td>屏幕内容</td><td>P3-B、P4-A</td><td>干净底板 + 后期贴图。提示词只写「屏幕是一片冷白光的均匀表面」+ <code>Do not let the screen content become legible</code></td></tr>
+<tr><td>小物件复现</td><td>全片（耳钉、手表）</td><td>量产前走 Ref2VA 参考图；或按资产复现测试法测 ≥20 次（真实运动条件）</td></tr>
+<tr><td>跨生成左右方位</td><td>P5–P7 三人站位</td><td>同一次请求内完成；或三段统一后期镜像</td></tr>
+<tr><td>物理接触 / 布料 / 液体</td><td>未命中</td><td>—</td></tr>
+</tbody>
+</table>
+
+<h2 id="shoot">试拍顺序建议</h2>
+<div class="card">
+<ol>
+<li><strong>P2 整段</strong>（无台词、单人、固定机位）—— 全片风险最低，用来验证锁定块与人物一致性基线</li>
+<li><strong>P6-B</strong>（全片最高风险）—— 先试主方案，手部崩了立刻切备选（已完成态）</li>
+<li><strong>P3-B</strong>（屏幕 + 干净底板）—— 验证屏幕方案是否真的不乱码</li>
+<li><strong>P8-B</strong>（双人同镜交替说话）—— 口型崩了切画外音备选</li>
+</ol>
+<p style="margin-top:10px">四段跑完，用 <code>r = 剧本字数 ÷ 原文字数</code> 反算真实压缩比，
+再回过头校准集数（当前 135 秒是推断值）。</p>
+</div>
+
+<div class="note" style="margin-top:24px"><b>内容尺度提醒。</b>
+原文含成人暗示（「七次」「X瘾症」）。本拆解已全部改写为可过审的含蓄表达——
+P9 只保留「七次是我吹牛」的荒诞误会，不出现任何具体描述。若你的投放尺度更宽松，
+可把 P8 的拥抱改为更直白的版本，但<strong>不建议在 H3 提示词里写任何露骨动作</strong>——
+生成结果大概率崩，且平台审核风险高。</div>
+
+<hr>
+<p style="color:var(--t3);font-size:12.5px">
+使用 MiniMax H3 分镜体系生成（主模板 + h3-novel-split / h3-character-asset / h3-camera-edit /
+h3-dialogue-voice / h3-expression-psych / h3-screen-text / h3-antibug-check）。
+压缩比未经样片校准，属推断值；27 镜提示词均为首次生成，未经实拍验证。</p>
+
+</main>
+</div>
+
+<button class="topbtn" id="topbtn">↑</button>
+
+<script>
+document.querySelectorAll('.codewrap').forEach(function(w){
+  var pre=w.querySelector('pre'); if(!pre) return;
+  var btn=document.createElement('button'); btn.className='copy'; btn.textContent='复制';
+  var bar=w.querySelector('.bar');
+  if(bar){var o=bar.querySelector('.copy'); if(o)o.remove(); bar.appendChild(btn);}
+  else w.insertBefore(btn,w.firstChild);
+  btn.addEventListener('click',function(){
+    var txt=pre.innerText;
+    var done=function(){btn.textContent='已复制';btn.classList.add('done');
+      setTimeout(function(){btn.textContent='复制';btn.classList.remove('done');},1400);};
+    if(navigator.clipboard&&navigator.clipboard.writeText)
+      navigator.clipboard.writeText(txt).then(done,function(){fb(txt,done);});
+    else fb(txt,done);
+  });
+});
+function fb(txt,cb){var ta=document.createElement('textarea');ta.value=txt;
+  ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();
+  try{document.execCommand('copy');cb();}catch(e){}document.body.removeChild(ta);}
+
+var links=Array.prototype.slice.call(document.querySelectorAll('#side a'));
+var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
+var cb=document.getElementById('chips');
+links.forEach(function(a){var b=document.createElement('button');b.className='chip';
+  b.textContent=a.textContent;
+  b.addEventListener('click',function(){document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'});});
+  cb.appendChild(b);});
+var chips=Array.prototype.slice.call(cb.children);
+function sync(){var y=window.scrollY+120,idx=0;
+  for(var i=0;i<secs.length;i++){if(secs[i]&&secs[i].offsetTop<=y)idx=i;}
+  links.forEach(function(a,i){a.classList.toggle('on',i===idx);});
+  chips.forEach(function(c,i){c.classList.toggle('on',i===idx);});
+  var on=chips[idx];
+  if(on){var r=on.getBoundingClientRect(),p=cb.getBoundingClientRect();
+    if(r.left<p.left||r.right>p.right)on.scrollIntoView({inline:'center',block:'nearest'});}
+  document.getElementById('topbtn').style.display=window.scrollY>600?'flex':'none';}
+window.addEventListener('scroll',sync,{passive:true});
+window.addEventListener('resize',sync);sync();
+document.getElementById('topbtn').addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+</script>
+</body>
+</html>

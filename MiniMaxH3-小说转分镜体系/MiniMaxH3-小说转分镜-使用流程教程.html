@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MiniMax H3 分镜体系 · 使用流程教程</title>
+<style>
+  :root{
+    --bg:#0F0E0E; --bg2:#161514; --panel:rgba(255,255,255,0.045);
+    --line:rgba(255,255,255,0.12); --line2:rgba(255,255,255,0.22);
+    --t1:#F2F2F2; --t2:#A8A8A8; --t3:#7A7A7A;
+    --gold:#E8C268; --gold-dim:rgba(232,194,104,0.14);
+    --green:#7FC99A; --red:#E8836B; --blue:#7FB3D9;
+    --mono:"Space Mono","JetBrains Mono","Consolas",monospace;
+    --sans:"Inter","Noto Sans SC",system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--t1);font-family:var(--sans);
+       -webkit-font-smoothing:antialiased;line-height:1.7;font-size:14.5px}
+
+  /* ---------- layout ---------- */
+  .topbar{position:fixed;top:0;left:0;right:0;height:56px;z-index:50;
+    background:rgba(15,14,14,0.92);backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);display:flex;align-items:center;
+    gap:14px;padding:0 20px}
+  .brand{font-weight:700;font-size:15px;white-space:nowrap}
+  .brand span{color:var(--gold)}
+  .topbar .sp{flex:1}
+  .chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{flex:0 0 auto;font-size:11.5px;color:var(--t2);border:1px solid var(--line);
+    background:transparent;padding:4px 10px;cursor:pointer;white-space:nowrap;
+    font-family:var(--sans);border-radius:2px}
+  .chip:hover{color:var(--t1);border-color:var(--line2)}
+  .chip.on{color:var(--gold);border-color:var(--gold);background:var(--gold-dim)}
+
+  .wrap{display:flex;margin-top:56px}
+  aside{width:250px;flex:0 0 250px;position:sticky;top:56px;height:calc(100vh - 56px);
+    overflow-y:auto;border-right:1px solid var(--line);padding:20px 14px 60px}
+  aside h4{font-size:10.5px;letter-spacing:.14em;color:var(--t3);font-weight:600;
+    margin:16px 0 8px;padding-left:8px}
+  aside h4:first-child{margin-top:0}
+  aside a{display:block;font-size:13px;color:var(--t2);text-decoration:none;
+    padding:5px 8px;border-left:2px solid transparent;line-height:1.45}
+  aside a:hover{color:var(--t1)}
+  aside a.on{color:var(--gold);border-left-color:var(--gold);background:rgba(255,255,255,0.03)}
+
+  main{flex:1;min-width:0;padding:36px 44px 100px;max-width:1000px}
+
+  /* ---------- typography ---------- */
+  h1{font-size:30px;font-weight:700;letter-spacing:-.01em;margin-bottom:10px}
+  h2{font-size:21px;font-weight:700;margin:52px 0 6px;padding-top:14px;scroll-margin-top:76px;
+     border-top:1px solid var(--line)}
+  h2:first-child{border-top:0;margin-top:0}
+  h3{font-size:16.5px;font-weight:600;margin:28px 0 10px;scroll-margin-top:76px}
+  h4{font-size:14px;font-weight:600;margin:20px 0 8px;scroll-margin-top:76px}
+  p{margin:10px 0;color:#DCDCDC}
+  .lead{font-size:15px;color:var(--t2)}
+  ul,ol{margin:10px 0 10px 22px;color:#DCDCDC}
+  li{margin:5px 0}
+  code{font-family:var(--mono);font-size:12.5px;background:rgba(255,255,255,0.07);
+    padding:1px 5px;border-radius:2px;color:#E8DCC0}
+  a{color:var(--blue)}
+  strong{color:#fff;font-weight:600}
+  hr{border:0;border-top:1px solid var(--line);margin:36px 0}
+
+  /* ---------- components ---------- */
+  .card{border:1px solid var(--line);background:var(--panel);padding:18px 20px;margin:14px 0;border-radius:3px}
+  .card.hi{border-color:rgba(232,194,104,0.4);background:rgba(232,194,104,0.05)}
+  .card.warn{border-color:rgba(232,131,107,0.4);background:rgba(232,131,107,0.06)}
+  .card.ok{border-color:rgba(127,201,154,0.35);background:rgba(127,201,154,0.05)}
+
+  .note{border-left:2px solid var(--gold);padding:10px 14px;margin:14px 0;
+    background:rgba(232,194,104,0.05);font-size:13.5px;color:var(--t2)}
+  .note b{color:var(--gold)}
+  .danger{border-left:2px solid var(--red);padding:10px 14px;margin:14px 0;
+    background:rgba(232,131,107,0.06);font-size:13.5px;color:var(--t2)}
+  .danger b{color:var(--red)}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.3px}
+  th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:11px;letter-spacing:.1em;color:var(--t3);font-weight:600;text-transform:uppercase}
+  td code{font-size:12px}
+  tbody tr:hover{background:rgba(255,255,255,0.02)}
+
+  .codewrap{position:relative;margin:12px 0;border:1px solid var(--line);border-radius:3px;background:#0B0A0A}
+  .codewrap .bar{display:flex;justify-content:space-between;align-items:center;
+    padding:6px 10px;border-bottom:1px solid var(--line);font-size:11px;color:var(--t3);
+    letter-spacing:.08em;text-transform:uppercase}
+  pre{white-space:pre-wrap;word-break:break-word;font-family:var(--mono);font-size:12.3px;
+    line-height:1.72;color:#DCDCDC;padding:14px 16px;margin:0;overflow-x:auto}
+  .copy{font-size:11px;color:var(--t2);border:1px solid var(--line2);background:transparent;
+    padding:3px 10px;cursor:pointer;font-family:var(--sans);border-radius:2px}
+  .copy:hover{color:var(--gold);border-color:var(--gold)}
+  .copy.done{color:var(--green);border-color:var(--green)}
+
+  .steps{counter-reset:s;margin:16px 0}
+  .step{position:relative;padding:0 0 22px 44px;border-left:1px solid var(--line);margin-left:14px}
+  .step:last-child{border-left-color:transparent;padding-bottom:0}
+  .step::before{counter-increment:s;content:counter(s);position:absolute;left:-14px;top:0;
+    width:28px;height:28px;border-radius:50%;background:var(--bg2);border:1px solid var(--gold);
+    color:var(--gold);font-size:12.5px;font-weight:700;display:flex;align-items:center;
+    justify-content:center;font-family:var(--mono)}
+  .step h3{margin-top:0}
+
+  .kv{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-size:13.3px;margin:10px 0}
+  .kv dt{color:var(--t3);white-space:nowrap}
+  .kv dd{color:#DCDCDC}
+
+  .tag{display:inline-block;font-size:11px;padding:2px 8px;border:1px solid var(--line2);
+    color:var(--t2);border-radius:2px;margin-right:6px}
+  .tag.gold{color:var(--gold);border-color:var(--gold);background:var(--gold-dim)}
+  .tag.green{color:var(--green);border-color:var(--green)}
+  .tag.red{color:var(--red);border-color:var(--red)}
+
+  .checks label{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;
+    color:#DCDCDC;padding:5px 0;cursor:pointer}
+  .checks input{margin-top:5px;accent-color:var(--gold);flex:0 0 auto}
+  .checks label.done{color:var(--t3);text-decoration:line-through}
+
+  .btn{display:inline-block;font-size:13px;padding:8px 16px;border:1px solid var(--line2);
+    background:transparent;color:var(--t1);cursor:pointer;font-family:var(--sans);border-radius:2px}
+  .btn:hover{border-color:var(--gold);color:var(--gold)}
+  .btn.gold{background:var(--gold);color:#1a1405;border-color:var(--gold);font-weight:600}
+  .btn.gold:hover{opacity:.86;color:#1a1405}
+
+  .rowbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:14px 0}
+
+  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:16px 0;font-size:12.5px}
+  .flow .n{border:1px solid var(--line);background:var(--panel);padding:6px 12px;color:var(--t2);border-radius:2px}
+  .flow .n b{color:var(--t1);font-weight:600}
+  .flow .ar{color:var(--t3)}
+
+  .topbtn{position:fixed;right:22px;bottom:22px;width:40px;height:40px;border-radius:50%;
+    border:1px solid var(--line2);background:rgba(15,14,14,.9);color:var(--t2);cursor:pointer;
+    font-size:16px;display:none;align-items:center;justify-content:center;z-index:60}
+  .topbtn:hover{color:var(--gold);border-color:var(--gold)}
+
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:1080px){ .twocol{grid-template-columns:1fr} }
+
+  @media(max-width:900px){
+    aside{display:none}
+    main{padding:24px 20px 80px}
+    h1{font-size:24px}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">MiniMax H3 分镜体系 · <span>使用流程教程</span></div>
+  <div class="sp"></div>
+  <div class="chips" id="chips"></div>
+</div>
+
+<div class="wrap">
+<aside id="side">
+  <h4>开始之前</h4>
+  <a href="#what">这套体系是什么</a>
+  <a href="#pick">我该从哪进入</a>
+  <a href="#quick">五分钟最小路径</a>
+  <h4>完整八步</h4>
+  <a href="#s1">1 · 拆集数</a>
+  <a href="#s2">2 · 写大纲</a>
+  <a href="#s3">3 · 排 15 秒 3 镜</a>
+  <a href="#s4">4 · 控台词容量</a>
+  <a href="#s5">5 · 建角色卡与资产表</a>
+  <a href="#s6">6 · 写中文详版提示词</a>
+  <a href="#s7">7 · 转官方格式</a>
+  <a href="#s8">8 · 漏洞检查与出片</a>
+  <h4>实战</h4>
+  <a href="#case-a">场景 A：新书从零开始</a>
+  <a href="#case-b">场景 B：只做一段 15 秒</a>
+  <a href="#case-c">场景 C：画面崩了怎么修</a>
+  <h4>参考</h4>
+  <a href="#hard">硬参数速查</a>
+  <a href="#rules">六条铁律</a>
+  <a href="#pitfall">五个最容易踩的坑</a>
+  <a href="#tools">维护工具</a>
+</aside>
+
+<main>
+
+<h1 id="what">这套体系是什么</h1>
+<p class="lead">把一本长篇小说，稳定地变成 MiniMax 海螺 H3 能直接吃的视频提示词。全流程八步，每一步都有模板、校验点和兜底方案。</p>
+
+<div class="flow">
+  <span class="n"><b>小说</b></span><span class="ar">→</span>
+  <span class="n"><b>拆集数</b></span><span class="ar">→</span>
+  <span class="n"><b>大纲</b></span><span class="ar">→</span>
+  <span class="n"><b>15秒3镜</b></span><span class="ar">→</span>
+  <span class="n"><b>角色卡</b></span><span class="ar">→</span>
+  <span class="n"><b>中文详版</b></span><span class="ar">→</span>
+  <span class="n"><b>官方格式</b></span><span class="ar">→</span>
+  <span class="n"><b>检查出片</b></span>
+</div>
+
+<div class="card hi">
+  <h4>核心思路：写完中文，再转英文</h4>
+  <p>中文详版是<strong>给人看的创作稿</strong>——你在这里把控剧情、细节、人物一致性。官方格式是<strong>给模型的</strong>——三字段结构，英文。</p>
+  <p><strong>转译不是翻译，是换结构。</strong>同一份内容，按官方字段名重新分区，模型才知道哪句是脸、哪句是光、哪句是声音。</p>
+</div>
+
+<h2 id="pick">我该从哪进入</h2>
+
+<table>
+<thead><tr><th>你的情况</th><th>从这里开始</th><th>用哪个文件</th></tr></thead>
+<tbody>
+<tr><td>有一本小说，要从头做到尾</td><td><a href="#s1">第 1 步</a>，按顺序走到第 8 步</td><td>主模板 + 各 skill</td></tr>
+<tr><td>只要做一段 15 秒</td><td><a href="#case-b">场景 B</a>，跳过拆书直接做</td><td>主模板模块三 · 六 · 七</td></tr>
+<tr><td>提示词已经写好了，要检查</td><td><a href="#s8">第 8 步</a>，跑三层检查</td><td><code>h3-antibug-check</code></td></tr>
+<tr><td>生成出来崩了，要返工</td><td><a href="#case-c">场景 C</a>，先看采样步数</td><td><code>h3-antibug-check</code> §8.1</td></tr>
+<tr><td>想知道 H3 到底支持什么</td><td><a href="#hard">硬参数速查</a></td><td>主模板模块七 §7.11</td></tr>
+</tbody>
+</table>
+
+<h2 id="quick">五分钟最小路径</h2>
+<p>如果你想先跑通一遍看看效果，只做这四件事：</p>
+
+<div class="steps">
+  <div class="step">
+    <h3>定一个 15 秒段落</h3>
+    <p>从小说里挑一个<strong>有动作、有情绪转折</strong>的片段。别挑大场面，别挑多人对话。</p>
+  </div>
+  <div class="step">
+    <h3>拆成 3 镜</h3>
+    <p>按 <code>5s / 5s / 5s</code> 切。三镜分别是：<strong>A 入镜</strong>（接上一段）、<strong>B 主镜</strong>（叙事主力）、<strong>C 出镜</strong>（卡点交棒）。</p>
+  </div>
+  <div class="step">
+    <h3>写锁定块 + 每镜六段</h3>
+    <p>锁定块（角色 + 服装 + 场景光位 + 画风）三镜<strong>逐字复制</strong>。每镜按六段写：主体构图 → 动作节拍 → 对白 → 环境反应 → 运镜 → 收尾状态。</p>
+  </div>
+  <div class="step">
+    <h3>转官方格式，抬采样步数到 6–8，出片</h3>
+    <p>三字段：<code>integrated_multimodal_description</code> / <code>overall_soundscape</code> / <code>non_diegetic_music</code>。</p>
+  </div>
+</div>
+
+<div class="note"><b>先跑一遍再谈优化。</b>第一次不要追求完美，目的是让整条链路跑通、知道每个环节长什么样。崩了很正常——看<a href="#case-c">场景 C</a>。</div>
+
+<hr>
+
+<h2 id="s1">第 1 步 · 拆集数</h2>
+<p><span class="tag gold">用</span> <code>h3-novel-split</code></p>
+
+<h3>做什么</h3>
+<p>决定「一集多长 × 总共几集」，把小说切成可拍的单元。</p>
+
+<h3>关键公式</h3>
+<div class="codewrap">
+  <div class="bar"><span>集数测算</span><button class="copy">复制</button></div>
+<pre>单集时长 T（秒）必须能被 15 整除。
+
+每集段落数   S = T ÷ 15
+每集镜数     N = S × 3 = T ÷ 5
+全剧总镜数   N_total = M × T ÷ 5
+
+例：T=120s，M=60 集  →  S=8 段/集，N=24 镜/集，总 1440 镜，总时长 120 分钟</pre>
+</div>
+
+<h3>压缩比——这里有个大坑</h3>
+<div class="danger"><b>不要拿粗算压缩比直接排产。</b>
+「每 8000–12000 字原文 = 1 集」这个数字是<strong>推断值，误差可能 ±50%</strong>。
+正确做法：<strong>先做 3 集样片</strong>，测出你这部书的真实压缩比，再重排全剧。
+公式：<code>r = 剧本字数 ÷ 原文小说字数</code>。</div>
+
+<h3>校验点</h3>
+<ul>
+  <li>✅ 单集时长能被 15 整除</li>
+  <li>✅ 已用 3 集样片校准压缩比（不是直接套推断值）</li>
+</ul>
+
+<hr>
+
+<h2 id="s2">第 2 步 · 写大纲</h2>
+<p><span class="tag gold">用</span> <code>h3-novel-split</code></p>
+
+<h3>做什么</h3>
+<p>分两层：<strong>集级大纲</strong>（这一集讲什么、在哪卡点）和<strong>段级大纲</strong>（每个 15 秒段落讲什么）。</p>
+
+<h3>段落的铁律</h3>
+<div class="card">
+  <p><strong>15 秒 = 1 个叙事节拍 = 1 个信息点 <em>或</em> 1 个情绪转折，二者不可兼得。</strong></p>
+  <p>如果一段里既要给信息又要转情绪：信息交给<strong>台词</strong>，转折交给<strong>画面</strong>（或反过来），不要都压在台词上。</p>
+</div>
+
+<h3>单集节奏骨架（120 秒 / 8 段）</h3>
+<table>
+<thead><tr><th>段</th><th>时间码</th><th>任务</th><th>情绪</th></tr></thead>
+<tbody>
+<tr><td>P1</td><td>0–15</td><td><strong>黄金 3 秒钩子</strong>——直接见血，禁止慢开场</td><td>冲击</td></tr>
+<tr><td>P2</td><td>15–30</td><td>建矛盾：谁 / 在哪 / 遇到什么 / 要什么</td><td>紧张</td></tr>
+<tr><td>P3</td><td>30–45</td><td><strong>第一次反转或爽点</strong>——前 30 秒必须给一次情绪释放</td><td>释放</td></tr>
+<tr><td>P4</td><td>45–60</td><td>推进主线，埋伏笔</td><td>缓</td></tr>
+<tr><td>P5</td><td>60–75</td><td>矛盾升级</td><td>紧</td></tr>
+<tr><td>P6</td><td>75–90</td><td>二次危机</td><td>压</td></tr>
+<tr><td>P7</td><td>90–105</td><td>高潮前夕，底牌将亮未亮</td><td>憋</td></tr>
+<tr><td>P8</td><td>105–120</td><td><strong>强钩子卡点</strong> + 黑屏</td><td>悬</td></tr>
+</tbody>
+</table>
+
+<h3>卡点五型</h3>
+<table>
+<thead><tr><th>类型</th><th>切断位置</th><th>下一段开口</th></tr></thead>
+<tbody>
+<tr><td><strong>动作卡点</strong></td><td>动作<em>完成前</em> 0.3–0.5 秒（扬起未落的巴掌）</td><td>动作完成 + 后果</td></tr>
+<tr><td><strong>台词卡点</strong></td><td>关键词<em>之前</em>（「其实我早就知——」切黑）</td><td>承接补全</td></tr>
+<tr><td><strong>揭示卡点</strong></td><td>揭示<em>瞬间</em>（门开一线、信封撕开一角）</td><td>揭示内容全景</td></tr>
+<tr><td><strong>视线卡点</strong></td><td>人物看向画外</td><td>他「所见」即下一镜</td></tr>
+<tr><td><strong>危机倒计时</strong></td><td>数字归零前</td><td>爆点</td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2 id="s3">第 3 步 · 排 15 秒 3 镜</h2>
+<p><span class="tag gold">用</span> <code>h3-camera-edit</code></p>
+
+<h3>三个镜头功能完全不同，别套同一套模板</h3>
+<table>
+<thead><tr><th>镜位</th><th>名称</th><th>职责</th></tr></thead>
+<tbody>
+<tr><td>A</td><td><strong>入镜</strong></td><td>接上一段：确立时空、承接情绪、给「入口」</td></tr>
+<tr><td>B</td><td><strong>主镜</strong></td><td>叙事主力，承载本段唯一信息点</td></tr>
+<tr><td>C</td><td><strong>出镜</strong></td><td>接下一段：卡点、留白、交棒——是下一段的<strong>预告片</strong></td></tr>
+</tbody>
+</table>
+
+<h3>时长怎么定：先看衔接镜要干什么</h3>
+<table>
+<thead><tr><th>衔接镜的任务</th><th>建议时长</th></tr></thead>
+<tbody>
+<tr><td>动作延续（承接 / 交出一个未完成的动作）</td><td>2–3s</td></tr>
+<tr><td>空镜 / 环境氛围过渡</td><td>2–3s</td></tr>
+<tr><td>道具 / 手机屏特写</td><td>2–3s</td></tr>
+<tr><td>眼神 / 面部反应镜</td><td>2–3s</td></tr>
+<tr><td>局部 → 整体揭示</td><td>4–5s</td></tr>
+<tr><td>超长运镜衔接</td><td>4–5s</td></tr>
+</tbody>
+</table>
+
+<h3>硬校验（不过不许提交）</h3>
+<div class="codewrap">
+  <div class="bar"><span>时长校验公式</span><button class="copy">复制</button></div>
+<pre>① 硬下限     每镜 ≥ 1.5s        （低于此模型帧数不够，生成必崩）
+② 设计下限   每镜 ≥ 2.0s        （日常建议，留安全余量）
+③ 信息下限   承载信息的镜 ≥ 3.0s
+④ 悬殊上限   最长镜 ≤ 最短镜 × 2.5（量产建议值）
+⑤ 总和       A + B + C = 15.0s</pre>
+</div>
+
+<div class="note"><b>「11 秒主镜 + 2 + 2」是合法的。</b>官方文档没有"各镜必须均衡"这条约束——真实约束只有每镜最短 1.5 秒。
+但悬殊切分有代价：单次请求出三镜时，<strong>若第 2 镜崩了，重生成会把第 1、3 镜一起重新采样</strong>，可能修好一个弄坏两个。量产阶段把悬殊比压在 2.5 以内。</div>
+
+<h3>衔接镜类型库（10 种，按需选）</h3>
+<p>空镜氛围 · 手部特写 · 道具特写 · 眼神反应 · 遮挡黑场 · 同构图匹配 · 局部→整体揭示 · 过肩虚化 · 声音先导 · 时间流逝。
+每种的景别、运镜、与前后段对齐方式，见 <code>h3-camera-edit</code> §6。</p>
+
+<h3>动作延续衔接法（最实用的一招）</h3>
+<p>把完整动作<strong>跨段落拆开执行</strong>，衔接镜承载「动作未完成态」：</p>
+<div class="codewrap">
+  <div class="bar"><span>上一段 C 出镜 → 本段 A 入镜</span><button class="copy">复制</button></div>
+<pre>上一段 C 出镜（交出未完成动作）：
+  ...then she stops in this half-risen pose. By the end of the shot she is held
+  mid-rise, knees bent at roughly 120 degrees, the motion deliberately unfinished.
+
+本段 A 入镜（承接中间态）：
+  A medium shot frames her already mid-rise, knees bent at roughly 120 degrees,
+  torso leaning forward — resuming exactly the pose held at the end of the previous shot.
+  First her shoulders settle, then she continues straightening her legs, then she
+  rises fully to standing.</pre>
+</div>
+<p><strong>三条铁律</strong>：① 姿态参数必须可量化（写「膝盖约 120 度」而不是「半蹲着」）；② 衔接动作只用简单、单向、慢速的；③ 上下两段用<strong>同一套姿态参数</strong>。</p>
+
+<hr>
+
+<h2 id="s4">第 4 步 · 控台词容量</h2>
+<p><span class="tag gold">用</span> <code>h3-dialogue-voice</code></p>
+
+<h3>三档口径（别混用）</h3>
+<table>
+<thead><tr><th>档</th><th>值</th><th>来源</th><th>用途</th></tr></thead>
+<tbody>
+<tr><td>写作目标</td><td><strong>38 字</strong>（区间 30–40）</td><td>官方舒适值 20 词/10s 折算</td><td>正常照这个写</td></tr>
+<tr><td>常规判据</td><td><strong>≤ 45 字</strong></td><td><strong>工程安全边，非推导值</strong></td><td>结构检查按这条判</td></tr>
+<tr><td>硬红线</td><td><strong>47 字</strong></td><td>时长公式与官方 25 词天花板同解</td><td>超过必返工</td></tr>
+</tbody>
+</table>
+
+<div class="danger"><b>不要把 45 说成官方推导值。</b>它只是 47 减约 4% 的工程安全边，<strong>对应不上官方任何数字</strong>。
+对外宣称 45 有官方依据属虚假置信。
+另外：「30% 余量」指的是 <code>ρ=0.70</code> 占用率本身（留停顿与呼吸），<strong>不是 47→45 这一步</strong>。</div>
+
+<h3>各时长容量速查</h3>
+<table>
+<thead><tr><th>时长</th><th>2s</th><th>4s</th><th>5s</th><th>7s</th><th>7.5s</th><th>11s</th><th>15s</th></tr></thead>
+<tbody>
+<tr><td>台词上限</td><td>7 字</td><td>13 字</td><td>16 字</td><td>22 字</td><td>24 字</td><td>35 字</td><td>47 字</td></tr>
+</tbody>
+</table>
+
+<p><strong>单句上限 18 字</strong>（硬），建议 12–15 字——超过则语速被迫加快，且超出字幕单行宽度。</p>
+
+<h3>对白写法（最容易写错）</h3>
+<div class="codewrap">
+  <div class="bar"><span>官方格式</span><button class="copy">复制</button></div>
+<pre>说话人描述与语气放标签【外】，语言标签 + 原话放标签【内】，逐字不改标点。
+Speaker ID 跨镜头保持不变；不出声的角色不给 ID。
+
+The young woman with a quiet, breathy voice (S1) says:
+&lt;d&gt;[Chinese] 我早就知道了。&lt;/d&gt;
+
+画外音旁白（两句必须成对出现）：
+The man (S1) says in an off-screen voiceover:
+&lt;d&gt;[English] I still remember that road.&lt;/d&gt; While his lips remain completely closed.</pre>
+</div>
+
+<div class="note"><b>台词里默认不加双引号</b>——官方 <code>base-en.txt</code> 把英文双引号专属定义给「画面内可见文字」（招牌 / 字幕 / 霓虹）。
+但<strong>存在官方口径冲突</strong>：MiniMax × ComfyUI 官方直播建议"用引号写台词"。
+当前处理：默认不加；若用直播那条技巧，引号只写在<strong>镜头描述</strong>里，<strong>不要写进 <code>&lt;d&gt;</code> 内</strong>。</div>
+
+<hr>
+
+<h2 id="s5">第 5 步 · 建角色卡与资产表</h2>
+<p><span class="tag gold">用</span> <code>h3-character-asset</code></p>
+
+<div class="card hi">
+  <p><strong>这一步是整个体系的地基。</strong>不做这一步，第 3 集的主角会长得跟第 1 集不一样，返工量会以集数为指数增长。</p>
+</div>
+
+<h3>角色卡必备字段</h3>
+<dl class="kv">
+  <dt>基础</dt><dd>角色 ID、姓名、年龄、性别、身份、人物关系</dd>
+  <dt>外观</dt><dd>脸型 / 发型发色 / 瞳色 / 肤色 / 五官 / 体型 + <strong>一项可辨识的独有特征</strong>（逐项写死）</dd>
+  <dt>穿搭</dt><dd>上装 / 下装 / 鞋 / 外套 + <strong>服装版本 ID</strong>（换装即换 ID）</dd>
+  <dt>行为锚点</dt><dd>专属小动作（推眼镜 / 捏衣角 / 抿唇）、口头禅</dd>
+  <dt>画风串</dt><dd>全剧复用，禁止临场改写</dd>
+  <dt>声音</dt><dd>voice_id、语速、情绪基线</dd>
+  <dt>参考图集</dt><dd>正面定妆 / 侧面 / 全身 / 表情集（含图 ID）</dd>
+</dl>
+
+<h3>资产锁定四要素</h3>
+<div class="codewrap">
+  <div class="bar"><span>四要素 + 接触阴影</span><button class="copy">复制</button></div>
+<pre>【四要素】颜色 + 材质 + 固定位置 + 不变量声明
+
+A small matte-gold signet ring on her RIGHT ring finger (worn on the right hand,
+not the left). The ring stays on the same finger for the entire shot, unchanged in
+size, colour and shape; it is never removed, never duplicated, never changes hand.
+
+【对抗"消失"最有效的一招——补接触阴影】
+The watch sits flush against her wrist skin, casting a small shadow on the skin beneath it.</pre>
+</div>
+
+<div class="note"><b>一镜内需稳住的小物件 ≤ 2 件。</b>同时写耳环 + 项链 + 戒指 + 手链 + 发卡，几乎必然丢 1–2 件。</div>
+
+<h3>风险排序</h3>
+<p><code>义肢（最高，建议禁用或仅静态中远景）＞ 纹身 ＞ 耳环/戒指 ＞ 手表/手机 ＞ 大面积衣物/围巾（最低）</code></p>
+<p>义肢要单列最高档：它不只是小物件，会改变<strong>肢体轮廓与关节结构</strong>，属「肢体结构崩坏」而非「物件丢失」。</p>
+
+<h3>资产复现测试（量产前必做）</h3>
+<div class="card">
+<ol>
+  <li>列出全部<strong>承载叙事信息</strong>的资产（观众必须认出来才能看懂剧情的）</li>
+  <li>每个资产单独生成 <strong>≥20 次</strong>，<strong>必须在真实运动条件下测</strong>（静止画面测出的成功率无意义）</li>
+  <li>统计成功率，按表处置：</li>
+</ol>
+<table>
+<thead><tr><th>成功率</th><th>处置</th></tr></thead>
+<tbody>
+<tr><td>≥ 90%</td><td>可承载叙事信息，正常使用</td></tr>
+<tr><td>70–90%</td><td>可出现，但<strong>不得承载叙事信息</strong></td></tr>
+<tr><td>&lt; 70%</td><td><strong>砍掉或替换</strong>为更低风险特征（把"耳环识别"改成"红围巾识别"）</td></tr>
+</tbody>
+</table>
+</div>
+
+<hr>
+
+<h2 id="s6">第 6 步 · 写中文详版提示词</h2>
+<p><span class="tag gold">用</span> <code>h3-character-asset</code> / <code>h3-expression-psych</code> / <code>h3-action-body</code> / <code>h3-dialogue-voice</code> / <code>h3-env-scene</code> / <code>h3-screen-text</code>（按镜头内容加载需要的）</p>
+
+<h3>三段式结构</h3>
+<div class="codewrap">
+  <div class="bar"><span>字数预算</span><button class="copy">复制</button></div>
+<pre>① 共用锁定块   400–600 汉字    三镜逐字复制，计 1 次
+② 每镜新增指令 200–350 × 3     每镜 1 次
+③ 声音层       100–200 汉字    计 1 次
+─────────────────────────────
+   全套合计   1,100–1,850 汉字   （H3 上限 7,000 字符，仅用掉约 26%）</pre>
+</div>
+
+<h3>每镜六段（顺序不能乱）</h3>
+<div class="codewrap">
+  <div class="bar"><span>单镜填空模板</span><button class="copy">复制</button></div>
+<pre>【Shot N】
+①  &lt;景别&gt; frames &lt;主体&gt; at &lt;画面位置&gt;，&lt;朝向&gt;，&lt;开场姿态&gt;。
+②  &lt;微小自然运动&gt;，然后&lt;动作 1，有明确终点&gt;，然后&lt;动作 2，有明确终点&gt;。
+③  &lt;说话人外观描述&gt; with &lt;音色与语气&gt; (S1) says: &lt;d&gt;[Chinese] &lt;逐字台词&gt;&lt;/d&gt;
+④  &lt;次级运动：发丝/衣摆/光影/热气&gt;；&lt;画内物理音&gt;。
+⑤  The camera &lt;官方运镜术语&gt; with &lt;small/large&gt; amplitude at &lt;slow/fast&gt; speed，&lt;起点→终点&gt;。
+⑥  &lt;本镜光位差异，无差异则写"光位与共用锁定块一致"&gt;。
+⑦  By the end of the shot, &lt;最终人物状态&gt; + &lt;最终构图&gt;。
+    Do not &lt;最多一句否定收边&gt;。</pre>
+</div>
+
+<h3>⭐ 最高杠杆的一招：时间连接词</h3>
+<div class="note">不写连接词，模型会猜你的三个事件是「顺序还是同时」——<b>而它通常猜「同时」</b>。
+用 <code>First ... then ... as ... finally ...</code> 显式给顺序。<strong>只多 4 个词，性价比最高的一次改写。</strong></div>
+
+<h3>动作连接词判定表</h3>
+<table>
+<thead><tr><th>连接词</th><th>判定</th><th>例</th></tr></thead>
+<tbody>
+<tr><td><code>then</code></td><td><span class="tag green">✅ 推荐</span></td><td><code>She lowers the folder, then straightens her back</code></td></tr>
+<tr><td><code>and</code></td><td><span class="tag green">✅ 合法</span></td><td><code>her jaw tightens and her eyebrows draw together</code>（同一表情的两面）</td></tr>
+<tr><td><code>while</code></td><td><span class="tag red">❌ 禁用</span></td><td><code>She sips while waving</code> → anatomy 崩坏</td></tr>
+<tr><td><code>as</code></td><td><span class="tag green">✅ 合法</span></td><td><code>As she speaks, she blinks once</code>（引导次级运动）</td></tr>
+</tbody>
+</table>
+<p><strong>一句话判据</strong>：两个动作是不是「各做各的」？是 → 必须 <code>then</code>；不是（同一表情的两面）→ 可以 <code>and</code>。</p>
+
+<h3>20 个必填要素（逐项对照，缺哪项补哪项）</h3>
+<p>主角 · 配角 · 路人 · 动作 · 表情 · 语言 · 心理 · 眼睛动作 · 皮肤 · 伤口 · 环境 · 位置 · 语速 · 肢体 · 空间距离 · 运镜 · 剪辑 · 手机短信 · 看手机画面 · 人物资产 · 防出错限制词。</p>
+
+<div class="note"><b>心理不能直接写。</b>心理不可见，必须外化成可见动作或表情。
+想写"她心虚" → 写 <code>her gaze drops to her hands, her thumb picks at her cuticle</code>。</div>
+
+<h3>否定句：正向锚定，不写「不要」</h3>
+<table>
+<thead><tr><th>写法</th><th>判定</th></tr></thead>
+<tbody>
+<tr><td>裸名词否定 <code>no six fingers</code></td><td><span class="tag red">❌ 禁用</span> 名词进条件分布，反向激活</td></tr>
+<tr><td>裸否定句 <code>do not generate six fingers</code></td><td><span class="tag red">❌ 禁用</span> 无正向前置</td></tr>
+<tr><td>正向锚定 <code>five fingers on each hand, fingers gently curved</code></td><td><span class="tag green">✅ 最强</span></td></tr>
+<tr><td>正向锚定 + 末尾一句 B 类 <code>Do not</code></td><td><span class="tag green">✅ H3 最优</span></td></tr>
+</tbody>
+</table>
+
+<div class="card warn">
+<h4>那句 Do not 该写什么：冗余性判据</h4>
+<p><strong>主判据不看词性，看功能</strong>——这句 <code>Do not</code> 是不是在重复正向已经说过的内容？</p>
+<ul>
+<li><strong>重复正向 → 冗余，删掉</strong>（尤其重复 A 类名词时：纯风险、零收益）</li>
+<li><strong>补充正向未覆盖的 → 保留</strong>，优先留给 B 类「帧间属性」</li>
+</ul>
+<div class="codewrap" style="margin-top:10px">
+  <div class="bar"><span>对照</span><button class="copy">复制</button></div>
+<pre>❌ 冗余：... all surfaces that could carry lettering are plain and unmarked ...
+        Do not draw any letters, numbers, logos or captions anywhere in frame.
+        （正向已说"素面无标记"，这句又把四个名词送回条件分布）
+
+✅ 最优：... all surfaces that could carry lettering are plain and unmarked ...
+        Do not let anything on the screen animate, shift or change at any point in the shot.
+        （正向只描述静态外观，"全程不变"是它没覆盖的维度）</pre>
+</div>
+<p style="margin-top:10px"><strong>配套</strong>：混合句就低不就高（含 A 类成分整句判 A 类）；开放量词 <code>anything</code> 按 A 类判；
+<strong>本限制同时适用中文详版</strong>——中文「不要画出文字」转英文后照样违规。</p>
+</div>
+
+<h3>手机屏：三档方案</h3>
+<table>
+<thead><tr><th>档</th><th>风险</th><th>适用</th><th>写法要点</th></tr></thead>
+<tbody>
+<tr><td><strong>A 干净底板 + 后期贴图</strong></td><td>低（推荐）</td><td>内容必须读得出</td><td>屏幕写成一片纯黑均匀表面，只写冷白光映在脸上，后期再贴内容</td></tr>
+<tr><td><strong>B 主动认领不可辨认</strong></td><td>低（最实用）</td><td>只需"有那么回事"</td><td><code>the screen content is softened by motion blur and reflection, illegible</code></td></tr>
+<tr><td><strong>C 参考图锚定</strong></td><td>中</td><td>必须看清内容</td><td>先出静态界面图作参考图，提示词只写「内容全程不变」</td></tr>
+</tbody>
+</table>
+<p><strong>三个硬坑</strong>：① 不要在提示词里写短信原文（写了必乱码）；② 不要用极端特写怼屏幕；③ 手机正反面翻转是已知高发项。</p>
+
+<hr>
+
+<h2 id="s7">第 7 步 · 转官方格式</h2>
+
+<h3>三字段（固定顺序）</h3>
+<div class="codewrap">
+  <div class="bar"><span>结构</span><button class="copy">复制</button></div>
+<pre>[指令首行（T2VA 无）——有参考图时才写]
+&lt;空一行&gt;
+integrated_multimodal_description:  视觉 + 动作 + 运镜 + 说话人 + 对白，沿时间线展开
+overall_soundscape:                 1–4 句，环境音 / 物理动作音 / 非语言人声
+non_diegetic_music:                 1–3 句，乐器 / 速度 / 节奏 / 动态（无配乐写 N/A）</pre>
+</div>
+
+<h3>三处时间戳格式不同（翻车高发区）</h3>
+<table>
+<thead><tr><th>位置</th><th>格式</th></tr></thead>
+<tbody>
+<tr><td>第一个镜头</td><td><strong>不加时间戳</strong></td></tr>
+<tr><td>后续镜头</td><td><code>At 00:SS.mmm</code>（<strong>三位小数</strong>），严格递增</td></tr>
+<tr><td>指令首行锚点</td><td><code>S.SS</code>（<strong>两位小数</strong>，无 MM: 前缀）</td></tr>
+</tbody>
+</table>
+
+<h3>运镜公式</h3>
+<p><code>运动类型 + with small|large amplitude + at slow|fast speed</code>，写成自然英文句，<strong>不要句末堆标签</strong>。中等幅度 / 正常速度省略不写。</p>
+<p><strong>一镜只给一个运镜</strong>——三个以上会被平均成漂移。运镜句要<strong>前置</strong>（模型对靠前 token 权重更高）。</p>
+
+<div class="note"><b>时间戳是软引导，精度 ±0.12 秒，误差不跨段累积。</b>剪辑时按<strong>每段留 0.2 秒冗余</strong>即可，不用按段数累加——10 段也不是 2 秒。</div>
+
+<h3>转译 8 步清单</h3>
+<div class="checks" id="c-s7">
+  <label><input type="checkbox"> 1. 判定任务类型（T2VA / I2VA / FL2VA / L2VA）</label>
+  <label><input type="checkbox"> 2. 有参考图 → 写指令首行（第一行 + 空一行）；T2VA 跳过</label>
+  <label><input type="checkbox"> 3. [Shot 1] 无时间戳，其余 At 00:SS.mmm 严格递增</label>
+  <label><input type="checkbox"> 4. 每镜一个主运镜，用官方术语 + 幅度 + 速度</label>
+  <label><input type="checkbox"> 5. 动作用 First / then / finally 显式给时序</label>
+  <label><input type="checkbox"> 6. 有对白 → (S1) + &lt;d&gt;[语言] 原话&lt;/d&gt;</label>
+  <label><input type="checkbox"> 7. 写 overall_soundscape（不含对白 / 演唱 / 剧情内音乐）</label>
+  <label><input type="checkbox"> 8. 写 non_diegetic_music（不含情绪词；无配乐写 N/A）</label>
+</div>
+
+<hr>
+
+<h2 id="s8">第 8 步 · 漏洞检查与出片</h2>
+<p><span class="tag gold">用</span> <code>h3-antibug-check</code></p>
+
+<h3>⚠️ 返工 SOP：先抬采样步数，再改提示词</h3>
+<div class="danger"><b>这是最容易白费功夫的地方。</b>
+官方口径：人物动作散架或音画对不上时，<strong>第一件该怀疑的是步数太低，不是 prompt 写错</strong>。
+步数一直是 4 却反复改提示词，是纯浪费——你改的每一版都是在低质量采样下评估的，结论不可靠。</div>
+<table>
+<thead><tr><th>阶段</th><th>采样步数（NFE）</th></tr></thead>
+<tbody>
+<tr><td>试拍</td><td>4 步</td></tr>
+<tr><td><strong>出片</strong></td><td><strong>6–8 步</strong></td></tr>
+</tbody>
+</table>
+<p><strong>正确顺序</strong>：① 抬步数到 6–8 重生成 → ② 仍崩则换种子重生成 2–3 次 → ③ 仍崩才动提示词。</p>
+
+<h3>三层检查</h3>
+<div class="twocol">
+<div class="card">
+<h4>第一层 · 结构（提交前，可自动化）</h4>
+<div class="checks" id="c-l1">
+  <label><input type="checkbox"> 三镜时长和 = 15.0s，且都是 0.5s 网格</label>
+  <label><input type="checkbox"> 每镜 ≥ 1.5s（硬下限），建议 ≥ 2.0s</label>
+  <label><input type="checkbox"> 承载信息镜 ≥ 3.0s</label>
+  <label><input type="checkbox"> 悬殊比 ≤ 2.5（量产）</label>
+  <label><input type="checkbox"> 本段台词 ≤ 47 字；主镜 ≤ 35；衔接镜 ≤ 7</label>
+  <label><input type="checkbox"> 三镜锁定块逐字一致（字符串比对，不是人眼看）</label>
+  <label><input type="checkbox"> 每镜只有 1 个运镜术语，且在官方表内</label>
+  <label><input type="checkbox"> 每镜最多 1 句 Do not，且内容只装 B 类</label>
+  <label><input type="checkbox"> 3 个镜头每一个都填了「备选方案」</label>
+</div>
+</div>
+<div class="card">
+<h4>第二层 · 内容（生成前，人工对照）</h4>
+<div class="checks" id="c-l2">
+  <label><input type="checkbox"> 手部：精细持物已改掉，或已用三档降级</label>
+  <label><input type="checkbox"> 动作全用 then 串联，无 while</label>
+  <label><input type="checkbox"> 人数写死并前置；多人外观已拉开差异</label>
+  <label><input type="checkbox"> 每镜一个运镜，运镜句在句首</label>
+  <label><input type="checkbox"> 单一主光 + 固定方向；光位写死</label>
+  <label><input type="checkbox"> 没在提示词里写短信原文 / 招牌文字</label>
+  <label><input type="checkbox"> 一镜内小物件 ≤ 2 件，四要素齐全</label>
+  <label><input type="checkbox"> 说话人 ID 跨镜未重编号</label>
+</div>
+</div>
+</div>
+
+<h3>第三层 · 生成后（看片清单）</h3>
+<div class="checks" id="c-l3">
+  <label><input type="checkbox"> 1. 手部：逐帧数是不是五指，有没有融合 / 穿模</label>
+  <label><input type="checkbox"> 2. 脸：三镜对比是不是同一个人（发型 / 五官 / 年龄）</label>
+  <label><input type="checkbox"> 3. 服装：颜色有没有中途变</label>
+  <label><input type="checkbox"> 4. 小物件：耳环 / 戒指 / 手表在不在，左右有没有换手</label>
+  <label><input type="checkbox"> 5. 光照：三镜主光方向是否一致</label>
+  <label><input type="checkbox"> 6. 运镜：有没有方向反转、速度突变、末帧抖动</label>
+  <label><input type="checkbox"> 7. 口型：对白与口型对不对得上</label>
+  <label><input type="checkbox"> 8. 文字：画面里有没有冒出乱码文字</label>
+  <label><input type="checkbox"> 9. 收尾帧：最后一帧是否稳定（供下一段接）</label>
+</div>
+
+<h3>⛔ 硬阻断：这些提示词解决不了，别死磕</h3>
+<table>
+<thead><tr><th>问题</th><th>唯一可行方案</th></tr></thead>
+<tbody>
+<tr><td>屏幕 / 招牌 / 字幕的可读文字</td><td>干净底板 + 后期贴图</td></tr>
+<tr><td>跨生成的左右方位一致</td><td>后期水平镜像翻转</td></tr>
+<tr><td>跨生成的 180° 轴线 / 正反打朝向</td><td>同一次请求内完成，或后期镜像</td></tr>
+<tr><td>小物件纯文本复现（耳环 / 纹身）</td><td>必须走参考图</td></tr>
+<tr><td>物理接触 / 碰撞 / 液体 / 布料</td><td>改写剧本避开，或实拍 / 3D</td></tr>
+<tr><td>小尺度精确对准（钥匙插锁、指尖点按）</td><td>不给特写 + 多条挑选</td></tr>
+<tr><td>手机正反面翻转</td><td>参考图锚定 + 多条挑选 + 后期</td></tr>
+</tbody>
+</table>
+<p><strong>遇到这几类，第一反应是改分镜，不是改提示词。</strong>把"钥匙插进锁孔"改成"手已经握在门把上"，一秒解决。</p>
+
+<h3>处置四级枚举</h3>
+<p><strong>规避</strong>（改分镜）→ <strong>降级</strong>（降低要求，如手部从"精细持物"降为"静置并拢"）→ <strong>后置</strong>（交给后期）→ <strong>重生成</strong>（抬步数 / 换种子 / 微调词）。不要一上来就重写提示词。</p>
+
+<hr>
+
+<h2 id="case-a">场景 A：有一本新小说，从零开始</h2>
+<div class="steps">
+  <div class="step"><h3>通读并标情节线</h3><p>别急着拆。先标出：主线节拍、人物关系、哪些是必须留的爽点。</p></div>
+  <div class="step"><h3>定集长，做 3 集样片</h3><p>用 <code>h3-novel-split</code> 定集长与集数，<strong>先做 3 集测真实压缩比</strong>，再重排全剧。</p></div>
+  <div class="step"><h3>写集级 + 段级大纲</h3><p>每集按 P1–P8 骨架排，每段严格 15 秒、只承载 1 个信息点。</p></div>
+  <div class="step"><h3>建角色卡与资产表</h3><p>量产前跑资产复现测试（≥20 次 / 真实运动条件），&lt;70% 的砍掉或替换。</p></div>
+  <div class="step"><h3>批量排分镜</h3><p>用 <code>h3-camera-edit</code> 逐段排 3 镜，每镜填备选方案。</p></div>
+  <div class="step"><h3>写提示词 → 转格式 → 检查 → 出片</h3><p>锁定块三镜逐字复制，采样步数出片档抬到 6–8。</p></div>
+</div>
+
+<h2 id="case-b">场景 B：只做一段 15 秒</h2>
+<div class="steps">
+  <div class="step"><h3>定这一段的信息点</h3><p>一句话写清楚：这 15 秒要让观众知道什么 / 感受什么。<strong>只能有一个。</strong></p></div>
+  <div class="step"><h3>按 5/5/5 切三镜</h3><p>A 入镜接上文、B 主镜给信息、C 出镜留钩子。</p></div>
+  <div class="step"><h3>写锁定块（约 120 字）</h3><p>角色 + 服装 + 场景光位 + 画风，四段一次写完，三镜复制。</p></div>
+  <div class="step"><h3>每镜填六段</h3><p>动作用 <code>First / then / finally</code>，运镜只给一个且放在句首。</p></div>
+  <div class="step"><h3>转三字段，检查，出片</h3><p>跑第 8 步的三层检查，采样步数 6–8。</p></div>
+</div>
+
+<h2 id="case-c">场景 C：画面崩了怎么修</h2>
+<div class="card warn">
+<h4>先走这个顺序，别跳步</h4>
+<div class="codewrap" style="margin-top:10px">
+  <div class="bar"><span>返工决策树</span><button class="copy">复制</button></div>
+<pre>画面崩了
+  ↓
+① 采样步数是 4 吗？→ 抬到 6–8，重生成一次
+  ↓ 还崩
+② 换种子重生成 2–3 次，看是不是偶发
+  ↓ 还崩
+③ 是不是硬阻断清单里的项？（可读文字 / 左右方位 / 180° 轴线 /
+   物理接触 / 小尺度对准 / 手机翻转 / 小物件纯文本）
+   是 → 改分镜绕开，不要改提示词
+  ↓ 不是硬阻断
+④ 查三类必查漏洞：
+   人物结构（手部 / 多余肢体 / 关节反折 / 人数 / 身份漂移）
+   镜头流畅（运镜数 / 运镜位置 / 时间连接词 / 末帧抖动）
+   语言文字（&lt;d&gt; 标签 / 说话人 ID / 语种 / 画面文字 / 口型）
+  ↓
+⑤ 按处置四级枚举选：规避 → 降级 → 后置 → 重生成</pre>
+</div>
+</div>
+
+<h3>三类漏洞的修法速查</h3>
+<table>
+<thead><tr><th>症状</th><th>修法</th></tr></thead>
+<tbody>
+<tr><td>多指 / 断指 / 融合</td><td>手部三档降级：① 手出画 <code>both hands tucked in coat pockets</code> → ② 静置 <code>fingers gently curled and held together, five fingers on each hand</code> → ③ 无接触传递 <code>slides the cup across the table</code> 代替 <code>hands her the cup</code></td></tr>
+<tr><td>人物融合</td><td>多人第一句就拉开外观差异。反例 <code>two men in suits</code>；正例 <code>a tall man in a red apron and a short woman in a denim jacket</code></td></tr>
+<tr><td>运镜漂移</td><td>一镜只留一个运镜，删掉其余</td></tr>
+<tr><td>末帧抖动</td><td><code>The camera settles and holds completely still for the final second.</code></td></tr>
+<tr><td>身份漂移</td><td>检查锁定块是否<strong>逐字一致</strong>（做字符串比对）；检查主光方向有没有换边</td></tr>
+<tr><td>画面冒出乱码文字</td><td>改用干净底板 + 后期贴图；或主动写 <code>illegible</code></td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2 id="hard">硬参数速查</h2>
+<table>
+<thead><tr><th>项</th><th>值</th></tr></thead>
+<tbody>
+<tr><td>提示词上限</td><td><strong>7,000 字符</strong>（按字符计，1 汉字 = 1 字符，非 token）</td></tr>
+<tr><td>时长</td><td><strong>4–15 秒整数</strong>（调 API）；本地部署 5–15 秒</td></tr>
+<tr><td>每镜最短</td><td><strong>1.5 秒</strong>（硬下限）</td></tr>
+<tr><td>帧率 / 音频</td><td>24 FPS / <strong>32 kHz 原生立体声</strong>，与画面同次推理生成</td></tr>
+<tr><td>分辨率</td><td>768p / 2K 两档</td></tr>
+<tr><td>画幅</td><td>adaptive / 21:9 / 16:9 / 4:3 / 1:1 / 3:4 / 9:16</td></tr>
+<tr><td>对白语言</td><td>11 种（含中文）</td></tr>
+<tr><td>参考素材</td><td>9 图 + 3 视频 + 3 音频 ≤ 12 文件，请求体 ≤ 64 MB</td></tr>
+<tr><td><strong>互斥</strong></td><td><strong>图生视频（首尾帧）与全能参考不可同时用</strong></td></tr>
+</tbody>
+</table>
+
+<div class="danger"><b>1–2 秒衔接镜必须生成 4 秒再裁</b>（API 下限是 4 秒）。
+这条同样适用于 <strong>T2 单镜重生成</strong>——修一个 2 秒衔接镜时要请求 <code>duration=4</code>，不能填 2。
+分镜表要标「生成时长（≥4s）」和「裁切后时长」<strong>两个数</strong>。</div>
+
+<h2 id="rules">六条铁律</h2>
+<ol>
+<li><strong>H3 ≠ Hailuo 2.3。</strong>2.3 无音频、仅首帧、2000 字符；H3 有原生音频、FL2VA、7000 字符。别混用。</li>
+<li><strong>对白要 <code>&lt;d&gt;...&lt;/d&gt;</strong>，默认不加双引号。</strong>（存在官方口径冲突，默认遵守 <code>base-en.txt</code>）</li>
+<li><strong>一镜一个运镜，运镜句前置。</strong>三镜共用同一术语，堆叠会被平均成漂移。</li>
+<li><strong>每镜最短 1.5 秒</strong>；1–2 秒衔接镜要生成 4 秒再裁。</li>
+<li><strong>崩了先抬采样步数到 6–8，别急着改提示词。</strong></li>
+<li><strong>硬阻断项改分镜绕开</strong>，不要死磕提示词。</li>
+</ol>
+
+<h2 id="pitfall">五个最容易踩的坑</h2>
+<div class="card"><h4>1. 只改正文不改副本</h4><p>同一段提示词在交付物里有<strong>多份副本</strong>：主模板正文 / HTML 速取卡 / HTML 工作区模板 / 各 skill。<strong>改完必须全库 grep → 改所有副本 → 重建 → 再 grep。</strong></p></div>
+<div class="card"><h4>2. 规则对、例句错</h4><p>标题写着"绝对禁写"，下面却是标着"可复制"的违规例句——<strong>比没有这条规则更糟，因为它带着权威背书。</strong>违规几乎都在句库和声明句里，不在模板本身。</p></div>
+<div class="card"><h4>3. 写"额度给谁"不写"能装什么"</h4><p>「把唯一的 1 句 Do not 留给『无文字』」——这条会变成<strong>主动教人违规</strong>。<strong>凡是写额度的句子，必须同时写能装什么。</strong></p></div>
+<div class="card"><h4>4. 拿粗算压缩比直接排产</h4><p>误差可能 ±50%。<strong>先做 3 集样片</strong>测真实压缩比。</p></div>
+<div class="card"><h4>5. 只采信单侧官方证据</h4><p>这套体系已出过三次这类故障：2.3 当 H3、台词双引号、参考标签写法。<strong>落地前先问一句：还有没有另一条官方来源说法不同？</strong></p></div>
+
+<h2 id="tools">维护工具</h2>
+<table>
+<thead><tr><th>脚本</th><th>用途</th></tr></thead>
+<tbody>
+<tr><td><code>make_html.py</code></td><td>从主模板重新生成 <code>MiniMaxH3-模板.html</code>。<strong>改了主模板必须重跑</strong></td></tr>
+<tr><td><code>audit_rules.py</code></td><td>跨全库硬规则自查，自动区分正例 / 反例上下文</td></tr>
+</tbody>
+</table>
+<div class="codewrap">
+  <div class="bar"><span>用法</span><button class="copy">复制</button></div>
+<pre>python audit_rules.py                  # 扫默认文件集（全部 skill + 主模板）
+python audit_rules.py 文件1 文件2      # 扫指定文件</pre>
+</div>
+<p><strong>为什么需要它</strong>：本体系的高频故障是「正面范例违反自己定的硬规则」。人工自查连抓两轮都漏——第二轮又出 3 处，第三轮脚本又抓出第 9 处。</p>
+
+<div class="note" style="margin-top:30px"><b>教程到此结束。</b>完整规范见 <code>MiniMaxH3-小说转分镜-完整模板.md</code> 与 <code>MiniMaxH3-模板.html</code>；
+文件导航见 <code>README-交付索引.md</code>。</div>
+
+</main>
+</div>
+
+<button class="topbtn" id="topbtn">↑</button>
+
+<script>
+// ---------- 复制按钮 ----------
+document.querySelectorAll('.codewrap').forEach(function(w){
+  var pre = w.querySelector('pre');
+  if(!pre) return;
+  var btn = document.createElement('button');
+  btn.className = 'copy';
+  btn.textContent = '复制';
+  var bar = w.querySelector('.bar');
+  if(bar){ var old = bar.querySelector('.copy'); if(old) old.remove(); bar.appendChild(btn); }
+  else { w.insertBefore(btn, w.firstChild); }
+  btn.addEventListener('click', function(){
+    var txt = pre.innerText;
+    var done = function(){
+      btn.textContent = '已复制'; btn.classList.add('done');
+      setTimeout(function(){ btn.textContent='复制'; btn.classList.remove('done'); }, 1400);
+    };
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(done, function(){ fallback(txt, done); });
+    } else { fallback(txt, done); }
+  });
+});
+function fallback(txt, cb){
+  var ta = document.createElement('textarea');
+  ta.value = txt; ta.style.position='fixed'; ta.style.opacity='0';
+  document.body.appendChild(ta); ta.select();
+  try{ document.execCommand('copy'); cb(); }catch(e){}
+  document.body.removeChild(ta);
+}
+
+// ---------- 侧栏高亮 + 顶部 chips ----------
+var links = Array.prototype.slice.call(document.querySelectorAll('#side a'));
+var secs = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+var chipsBox = document.getElementById('chips');
+links.forEach(function(a){
+  var b = document.createElement('button');
+  b.className = 'chip';
+  b.textContent = a.textContent;
+  b.addEventListener('click', function(){ document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'}); });
+  chipsBox.appendChild(b);
+});
+var chips = Array.prototype.slice.call(chipsBox.children);
+
+function sync(){
+  var y = window.scrollY + 120, idx = 0;
+  for(var i=0;i<secs.length;i++){ if(secs[i] && secs[i].offsetTop <= y) idx = i; }
+  links.forEach(function(a,i){ a.classList.toggle('on', i===idx); });
+  chips.forEach(function(c,i){ c.classList.toggle('on', i===idx); });
+  var on = chips[idx];
+  if(on){ var r = on.getBoundingClientRect(), p = chipsBox.getBoundingClientRect();
+    if(r.left < p.left || r.right > p.right) on.scrollIntoView({inline:'center', block:'nearest'}); }
+  document.getElementById('topbtn').style.display = window.scrollY > 600 ? 'flex' : 'none';
+}
+window.addEventListener('scroll', sync, {passive:true});
+window.addEventListener('resize', sync);
+sync();
+document.getElementById('topbtn').addEventListener('click', function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+
+// ---------- 清单记忆 ----------
+document.querySelectorAll('.checks').forEach(function(box){
+  if(!box.id) return;
+  var key = 'h3tut_' + box.id;
+  var saved = {};
+  try{ saved = JSON.parse(localStorage.getItem(key) || '{}'); }catch(e){}
+  Array.prototype.slice.call(box.querySelectorAll('input[type=checkbox]')).forEach(function(cb, i){
+    var lbl = cb.closest('label');
+    cb.checked = !!saved[i];
+    if(lbl) lbl.classList.toggle('done', cb.checked);
+    cb.addEventListener('change', function(){
+      saved[i] = cb.checked;
+      if(lbl) lbl.classList.toggle('done', cb.checked);
+      try{ localStorage.setItem(key, JSON.stringify(saved)); }catch(e){}
+    });
+  });
+});
+</script>
+</body>
+</html>
